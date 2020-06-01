@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 
 @Entity
 public class Project {
@@ -20,19 +21,27 @@ public class Project {
 	@Column(nullable = false, length = 10)
 	private String name;
 	@Column(updatable = false, nullable = false)
-	private LocalDateTime creationTime;
+	private LocalDateTime dataCreazione;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User owner;
 	@ManyToMany
 	private List<User> members;
 	
-	
+	//COSTRUTTORI
 	public Project() {
 		
 	}
+	
+	@PrePersist
+	protected void onPersist() {
+		this.dataCreazione = LocalDateTime.now();
+	}
 
-
+	
+	//GETTERS AND SETTERS
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -53,13 +62,13 @@ public class Project {
 	}
 
 
-	public LocalDateTime getCreationTime() {
-		return creationTime;
+	public LocalDateTime getDataCreazione() {
+		return dataCreazione;
 	}
 
 
-	public void setCreationTime(LocalDateTime creationTime) {
-		this.creationTime = creationTime;
+	public void setDataCreazione(LocalDateTime creationTime) {
+		this.dataCreazione = creationTime;
 	}
 
 
