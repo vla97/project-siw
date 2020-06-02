@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.projectmanager.model.Project;
 import it.uniroma3.siw.projectmanager.model.User;
 import it.uniroma3.siw.projectmanager.repository.UserRepository;
 
@@ -52,6 +53,16 @@ public class UserService {
 				r.add(user);
 			return r;
 		}
+		
+		@Transactional
+		public List<Project> ottieniProgettiCondivisi(User user){
+			List<Project> r = new ArrayList<>();
+			Iterable<Project> i = this.userRepository.findByVisibleProjects(user);
+			for(Project project : i)
+				r.add(project);
+			return r;
+		}
+		
 		
 
 
