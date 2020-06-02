@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="ISO-8859-1" />
-		<link href="main.css" rel="stylesheet" />
-		<title>home</title>
+		<title>Lista progetti</title>
 	</head>
 	<body>
-		<h1>Comandi</h1>
-		<div><a href="inserisci"> Inserisci persona</a></div>
+		<h1>Comandi:</h1>
+		<input type="submit" name="comando" value ="creaProgetto">
+	
+	
+		<h2> Lista Progetti: </h2>
+		<c:forEach var="project" items="${projects}">
+			<li><a href="creaProgetto"> ${project.name} ${project.dataCreazione} ${project.owner}</a></li>
+		</c:forEach>
 	</body>
 </html>
