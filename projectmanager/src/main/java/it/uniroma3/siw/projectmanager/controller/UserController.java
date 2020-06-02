@@ -30,6 +30,7 @@ public class UserController {
 		Project project = (Project) model.getAttribute("project");
 		projectService.salvaProgetto(project);
 		return "index.html";
+		//
 	}
 
 
