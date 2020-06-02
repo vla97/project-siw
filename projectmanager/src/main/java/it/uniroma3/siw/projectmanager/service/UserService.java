@@ -54,14 +54,14 @@ public class UserService {
 			return r;
 		}
 		
-		@Transactional
+		/*@Transactional
 		public List<Project> ottieniProgettiCondivisi(User user){
 			List<Project> r = new ArrayList<>();
 			Iterable<Project> i = this.userRepository.findByVisibleProjects(user);
 			for(Project project : i)
 				r.add(project);
 			return r;
-		}
+		}*/
 		
 		
 
