@@ -1,16 +1,26 @@
 package it.uniroma3.siw.projectmanager.controller;
 
-import java.io.IOException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import it.uniroma3.siw.projectmanager.service.ProjectService;
+import it.uniroma3.siw.projectmanager.service.TagService;
+import it.uniroma3.siw.projectmanager.service.TaskService;
+import it.uniroma3.siw.projectmanager.service.UserService;
 
-@WebServlet("/main")
-public class MainController extends HttpServlet {
-	protected void DoGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{}
-
+@Controller 
+public class MainController{
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private ProjectService projectService;
+	@Autowired
+	private TagService tagService;
+	@Autowired
+	private TaskService taskService;
+	
+	
+	
+	
+	
 }
