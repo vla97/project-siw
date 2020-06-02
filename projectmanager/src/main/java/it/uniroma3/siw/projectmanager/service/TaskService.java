@@ -1,5 +1,7 @@
 package it.uniroma3.siw.projectmanager.service;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +10,19 @@ import org.springframework.stereotype.Service;
 import it.uniroma3.siw.projectmanager.model.Project;
 import it.uniroma3.siw.projectmanager.model.Tag;
 import it.uniroma3.siw.projectmanager.model.Task;
-import it.uniroma3.siw.projectmanager.repository.ProjectRepository;
+
 import it.uniroma3.siw.projectmanager.repository.TaskRepository;
 
 @Service
 public class TaskService {
 	@Autowired
 	private TaskRepository taskRepository;
+	
+	@Transactional
+	public Task ottieniTask(Long id) {
+		Optional<Task> r = this.taskRepository.findById(id);
+		return r.orElse(null);
+	}
 
 	@Transactional
 	public void aggiungiTask(Project progetto, Task task) {
@@ -28,6 +36,11 @@ public class TaskService {
 	@Transactional
 	public void cancellaTask(Task task) {
 		this.taskRepository.delete(task);
+	}
+	
+	@Transactional
+	public Task salvaTask(Task task) {
+		return this.taskRepository.save(task);
 	}
 	
 	@Transactional

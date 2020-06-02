@@ -65,9 +65,9 @@ public class ProjectService {
 	}
 	
 	@Transactional 
-	public void condiviProgetto(Project progetto, User user) {
-		progetto.addMembers(user);
-		projectRepository.save(progetto);
+	public Project condiviProgetto(Project progetto, User user) {
+		progetto.addMember(user);
+		return this.projectRepository.save(progetto);
 		
 	}
 	

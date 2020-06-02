@@ -101,7 +101,7 @@ public class Project {
 		this.members = members;
 	}
 	
-	public void addMembers(User user) {
+	public void addMember(User user) {
 		this.members.add(user);
 	}
 	
