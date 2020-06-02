@@ -116,6 +116,45 @@ public class Task {
 	public void aggiungiTag(Tag tag) {
 		this.tagAssociati.add(tag);
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dataCreazione == null) ? 0 : dataCreazione.hashCode());
+		result = prime * result + ((isCompleto == null) ? 0 : isCompleto.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Task other = (Task) obj;
+		if (dataCreazione == null) {
+			if (other.dataCreazione != null)
+				return false;
+		} else if (!dataCreazione.equals(other.dataCreazione))
+			return false;
+		if (isCompleto == null) {
+			if (other.isCompleto != null)
+				return false;
+		} else if (!isCompleto.equals(other.isCompleto))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
 	
 
 }
