@@ -10,5 +10,5 @@ import it.uniroma3.siw.projectmanager.model.User;
 public interface ProjectRepository extends CrudRepository<Project, Long>{
 	//public List<Project> findByVisibleProjects(User user);
 	//public List<Project> findByName(String name);
-
+	
 }

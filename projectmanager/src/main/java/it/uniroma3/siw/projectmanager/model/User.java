@@ -43,8 +43,7 @@ public class User {
 			cascade = CascadeType.REMOVE)
 	private List<Project> ownedProjects;
 	
-	@ManyToMany(mappedBy = "members",
-			fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "members")
 	private List<Project> visibleProjects;
 	
 	//COSTRUTTORI

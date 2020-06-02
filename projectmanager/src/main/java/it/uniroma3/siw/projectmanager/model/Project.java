@@ -15,10 +15,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.Table;
 
 
 
 @Entity
+@Table(name = "projects")
 public class Project {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
