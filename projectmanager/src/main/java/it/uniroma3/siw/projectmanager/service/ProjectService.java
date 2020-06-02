@@ -45,24 +45,24 @@ public class ProjectService {
 		return r;
 	}
 	
-	@Transactional
+	/*@Transactional
 	public List<Project> ottieniProgettiCondivisi(User user){
 		List<Project> r = new ArrayList<>();
 		Iterable<Project> i = this.projectRepository.findByVisibleProjects(user);
 		for(Project project : i)
 			r.add(project);
 		return r;
-	}
+	}*/
 	
 	
-	@Transactional
-	public void aggiornaProgetto( String nomeVecchio, String nomeNuovo) {
-		 Project r = projectRepository.findByName(nomeVecchio);
-		 r.setName(nomeNuovo);
+	/*@Transactional
+	public Project aggiornaProgetto( String nomeVecchio, String nomeNuovo) {
+		 List<Project> r = projectRepository.findByName(nomeVecchio);
+		 r = setName()
 		 projectRepository.save(r);
 		 
 		
-	}
+	}*/
 	
 	@Transactional 
 	public Project condiviProgetto(Project progetto, User user) {
