@@ -3,6 +3,7 @@ package it.uniroma3.siw.projectmanager.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 
 @Entity
@@ -28,6 +30,14 @@ public class Project {
 	@ManyToMany
 	private List<User> members;
 	
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	private List<Tag> tagProgetti;
+	
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	private List<Task> tasks;
+	
+	
+
 	//COSTRUTTORI
 	public Project() {
 		
@@ -91,6 +101,24 @@ public class Project {
 		this.members = members;
 	}
 	
+	public void addMembers(User user) {
+		this.members.add(user);
+	}
 	
+	public List<Tag> getTagProgetti() {
+		return tagProgetti;
+	}
+
+	public void setTagProgetti(List<Tag> tagProgetti) {
+		this.tagProgetti = tagProgetti;
+	}
+	
+	public void addTag(Tag tag) {
+		this.tagProgetti.add(tag);
+	}
+	
+	public void addTask(Task task) {
+		tasks.add(task);
+	}
 
 }

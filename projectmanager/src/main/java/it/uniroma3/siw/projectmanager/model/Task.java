@@ -22,6 +22,8 @@ public class Task {
 	
 	private String descrizione;
 	
+	private Boolean isCompleto;
+	
 	@Column(nullable = false, updatable=false)
 	private LocalDateTime dataCreazione;
 	private String commento;
@@ -41,6 +43,7 @@ public class Task {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.commento = commento;
+		this.isCompleto = false;
 		
 	}
 	
@@ -98,6 +101,20 @@ public class Task {
 
 	public void setTagAssociati(List<Tag> tagAssociati) {
 		this.tagAssociati = tagAssociati;
+	}
+
+
+	public Boolean getIsCompleto() {
+		return isCompleto;
+	}
+
+
+	public void setIsCompleto(Boolean isCompleto) {
+		this.isCompleto = isCompleto;
+	}
+	
+	public void aggiungiTag(Tag tag) {
+		this.tagAssociati.add(tag);
 	}
 	
 

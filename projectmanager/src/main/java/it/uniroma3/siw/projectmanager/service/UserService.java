@@ -19,9 +19,9 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 		
-		//trova utente per id
+		//trova l'utente per l'id
 		@Transactional
-		public User getUser(long id) {
+		public User ottieniUtentePerId(Long id) {
 			Optional<User> r = this.userRepository.findById(id);
 			return r.orElse(null);
 		}
@@ -30,23 +30,22 @@ public class UserService {
 		
 		
 		@Transactional
-		public User getUser(String username) {
-			
-			Optional<User> r = this.userRepository.findByUserName(username);
+		public User ottieniUtentePerUsername(String username) {
+			Optional<User> r = this.userRepository.findByUsername(username);
 			return r.orElse(null);
 		}
 			
 		// Salva utente nel DB
 		
 		@Transactional
-		public User saveUser(User user) {
+		public User salvaUtente(User user) {
 			return this.userRepository.save(user);
 		}
 		
-		//visualizza tutti i utenti
+		//visualizza tutti gli utenti
 		
 		@Transactional
-		public List<User> getAllUsers(){
+		public List<User> ottieniUtenti(){
 			List<User> r = new ArrayList<>();
 			Iterable<User>  i = this.userRepository.findAll();
 			for(User user : i)
@@ -57,11 +56,11 @@ public class UserService {
 
 
 	
-		//@Transactional
-		//public User signUp(User user) {
-		//	User u = new User();
-		//	userRepository.save(u);
-		//}
+		/*@Transactional
+		public User signUp(User user) {
+			User u = new User();
+			userRepository.save(u);
+		}*/
 	
 
 
