@@ -1,6 +1,7 @@
 package it.uniroma3.siw.projectmanager.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,12 +16,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 
+
+
 @Entity
 public class Project {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false, length = 10)
+	@Column(nullable = false, length = 100)
 	private String name;
 	@Column(updatable = false, nullable = false)
 	private LocalDateTime dataCreazione;
@@ -40,7 +43,15 @@ public class Project {
 
 	//COSTRUTTORI
 	public Project() {
-		
+		this.members = new ArrayList<>();
+		this.tasks = new ArrayList<>();
+		this.tagProgetti = new ArrayList<>();
+	}
+	public Project(Long id, String name, User owner) {
+		this();
+		this.id = id;
+		this.name = name;
+		this.owner = owner;
 	}
 	
 	@PrePersist

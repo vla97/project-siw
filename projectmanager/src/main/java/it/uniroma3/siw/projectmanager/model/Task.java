@@ -11,17 +11,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tasks")
 public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(nullable = false)
 	private String nome;
-	
+	@Column
 	private String descrizione;
-	
+	@Column(nullable = false)
 	private Boolean isCompleto;
 	
 	@Column(nullable = false, updatable=false)
