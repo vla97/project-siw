@@ -19,8 +19,7 @@ public class TaskService {
 	@Transactional
 	public void aggiungiTask(Project progetto, Task task) {
 		progetto.addTask(task);
-
-	}
+		}
 
 	@Transactional
 	public void aggiornaTask() {
