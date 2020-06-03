@@ -1,16 +1,20 @@
+
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 	<head>
 		<title>Lista progetti</title>
 	</head>
 	<body>
 		<h1>Comandi:</h1>
-		<input type="submit" name="comando" value ="creaProgetto">
+		<a href="creaProgetto"><input type="submit" name="comando" value ="creaProgetto"></a>
 	
 	
 		<h2> Lista Progetti: </h2>
-		<c:forEach var="project" items="${projects}">
-			<li><a href="creaProgetto"> ${project.name} ${project.dataCreazione} ${project.owner}</a></li>
-		</c:forEach>
+		<li th:each="project : ${projects}">	
+		<span th:text = "|${project.name} ${project.dataCreazione} ${project.owner}|"> project manager 3/06/2020 and98</span>
+
+		
+		</li>
 	</body>
 </html>

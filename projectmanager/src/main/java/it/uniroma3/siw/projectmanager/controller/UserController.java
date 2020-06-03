@@ -1,10 +1,13 @@
 package it.uniroma3.siw.projectmanager.controller;
 
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,13 +27,16 @@ public class UserController {
 		return "formProgetto.html";
 	}
 	
-	@RequestMapping(value = "/salva", method = RequestMethod.GET)
-	public String salvaProgetto(Model model) {
-		Project project = (Project) model.getAttribute("project");
-		projectService.salvaProgetto(project);
+	@RequestMapping(value = "/salva", method = RequestMethod.POST)
+	public String salvaProgetto(Model model, @ModelAttribute("project") Project project) {
+		project.setName("name");
+		this.projectService.salvaProgetto(project);
+		model.addAttribute("projects", this.projectService.ottieniProgetti());
 		return "index.html";
 		//
 	}
+	
+	
 
 
 }
