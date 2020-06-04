@@ -71,6 +71,16 @@ public class ProjectService {
 		
 	}
 	
+	@Transactional
+	public List<Project> ottieniProgettiProprietari(User owner){
+		List<Project> r = new ArrayList<>();
+		Iterable<Project> i = this.projectRepository.findByOwner(owner);
+		for(Project project : i)
+			r.add(project);
+		return r;
+	}
+	
+	
 	
 	
 }

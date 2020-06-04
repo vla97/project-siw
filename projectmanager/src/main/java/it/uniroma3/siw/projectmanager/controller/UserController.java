@@ -59,7 +59,7 @@ public class UserController {
 		User loggedUser = sessionData.getLoggedUser();
 		project.setOwner(loggedUser);
 		projectService.salvaProgetto(project);
-		model.addAttribute("projects",projectService.ottieniProgetti());
+		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
 		return "progetto.html";
 	}
 
@@ -67,7 +67,7 @@ public class UserController {
 	public String eliminaProgetto(@ModelAttribute("id") Long id, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		projectService.cancellaProgetto(id);
-		model.addAttribute("projects", projectService.ottieniProgetti());
+		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
 		return "progetto.html";
 	}
 
@@ -75,7 +75,7 @@ public class UserController {
 	public String visualizzaProgetto(@ModelAttribute("id") Long id, Model model) {
 		User loggedUser = sessionData.getLoggedUser();;
 		model.addAttribute("project", projectService.ottieniProgetto(id));
-		model.addAttribute("projects", projectService.ottieniProgetti());
+		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
 		return "specificaProgetto.html";
 	}
 

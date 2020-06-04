@@ -33,7 +33,7 @@ public class MainController {
 	public String Progetto(Model model) {
 		 User loggedUser = sessionData.getLoggedUser();
 		 
-		model.addAttribute("projects", projectService.ottieniProgetti());
+		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
 		return "progetto";
 	}
 	

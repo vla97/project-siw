@@ -9,6 +9,8 @@ import it.uniroma3.siw.projectmanager.model.User;
 
 public interface ProjectRepository extends CrudRepository<Project, Long>{
 	public Project findByName(String name);
+	public List<Project> findByOwner(User owner);
+	
 
 
 }
