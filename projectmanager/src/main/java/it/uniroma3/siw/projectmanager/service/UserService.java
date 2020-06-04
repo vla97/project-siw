@@ -63,6 +63,15 @@ public class UserService {
 			return r;
 		}*/
 		
+		/*@Transactional
+		public List<Project> ottieniProgettiProprietari(User user){
+			List<Project> r = new ArrayList<>();
+			Iterable<Project> i = this.userRepository.findByOwnedProjects(user);
+			for(Project project : i)
+				r.add(project);
+			return r;
+		}
+		
 		
 
 

@@ -37,7 +37,8 @@ public class ProjectService {
 	}
 	
 	@Transactional
-	public List<Project> ottieniProgetti(){
+	public List<Project> ottieniProgetti()
+	{	
 		List<Project> r = new ArrayList<>();
 		Iterable<Project> i = this.projectRepository.findAll();
 		for(Project project : i)
