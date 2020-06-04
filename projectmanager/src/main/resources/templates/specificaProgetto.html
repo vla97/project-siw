@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Scheda Progetto</title>
+</head>
+
+<body>
+		<h1>Scheda progetto:</h1>
+		
+		
+		<ul th:object=${project}>
+		NOME: 	<li th:text="*{name}"></li>
+		PROPRIETARIO:<li th:text="*{owner}"></li>
+
+		</ul>
+		<a th:href="@{/}"><button type="submit"> home </button></a>
+
+</body>
+
+
+
+</html>

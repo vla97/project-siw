@@ -1,16 +1,22 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="ISO-8859-1" />
-	<title>inserimento dati progetto</title>
-	<link href="css/main.css" rel="stylesheet" />
-</head>
-<body>
-	<h1>Inserisci dati progetto:</h1>
-		<div>Nome: <input type="text" name="nome" /> </div>
+
+<body>>
+	<div>
+		<h4>Inserisci i dati di un progetto</h4>
+	</div>
+	<form th:action="@{/salvaProgetto}" method="POST" th:object="${project}">
 		
-		<div><a href="salva"><input type="submit" name="salva progetto"/> </a></div>
-	
-	<div class="footer"><a href="/">Home</a></div>
+		<table>
+			<tr>
+				<td>Nome:</td>
+				<td><input type="text" th:field="*{name}" placeholder ="inserisci" /></td>
+			</tr>		
+			<tr>
+				<td><button type="submit">Invio</button></td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

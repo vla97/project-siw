@@ -26,8 +26,8 @@ public class ProjectService {
 	}
 	
 	@Transactional
-	public void cancellaProgetto(Project project) {
-		this.projectRepository.delete(project);
+	public void cancellaProgetto(Long id) {
+		this.projectRepository.deleteById(id);
 	}
 	
 	@Transactional

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Profilo utente</title>
+</head>
+
+<body>
+		<h1>Dati:</h1>
+		<div th:object=${user}>
+		
+		NOME: 	<div th:text="*{name}"><input type = "submit" nome="comando" value="modifica"></input></div>
+		COGNOME:<div th:text="*{cognome}"><input type = "submit" nome="comando" value="modifica"></input></div>
+		USERNAME:<div th:text="*{username}"><input type = "submit" nome="comando" value ="modifica"></input></div>
+		DATA CREAZIONE:<div th:text="*{dataCreazione}"></div>
+		</div>
+		<a th:href="@{/}"><button type="submit"> home </button></a>
+
+</body>
+
+
+
+</html>

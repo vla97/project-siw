@@ -7,14 +7,13 @@
 	</head>
 	<body>
 		<h1>Comandi:</h1>
-		<a href="creaProgetto"><input type="submit" name="comando" value ="creaProgetto"></a>
+		<a href="creaProgetto"><input type="submit" name="comando" value ="CREA PROGETTO"></a>
+		<a href="visualizzaProfilo"><input type="submit" name="comando" value="PROFILO"></a>
 	
 	
 		<h2> Lista Progetti: </h2>
 		<li th:each="project : ${projects}">	
-		<span th:text = "|${project.name} ${project.dataCreazione} ${project.owner}|"> project manager 3/06/2020 and98</span>
-
-		
-		</li>
+		<span th:text = "|${project.name} ${project.owner}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
+		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>		</li>
 	</body>
 </html>
