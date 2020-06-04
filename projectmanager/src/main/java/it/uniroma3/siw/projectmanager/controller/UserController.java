@@ -78,5 +78,21 @@ public class UserController {
 		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
 		return "specificaProgetto.html";
 	}
+	
+	@RequestMapping(value="/condividiProgetto", method = RequestMethod.GET)
+	public String condividiProgetto(Model model, @ModelAttribute("id") Long id ) {
+		model.addAttribute("project", projectService.ottieniProgetto(id));
+		model.addAttribute("user", new User());
+		return "condividiForm.html";
+	}
+	
+	@RequestMapping(value="/condividi", method = RequestMethod.POST)
+	public String condividi(Model model, @ModelAttribute("username") String username ) {
+		model.addAttribute("user", userService.ottieniUtentePerUsername(username));
+		User user = (User) model.getAttribute("user");
+		Project project = (Project) model.getAttribute("project");
+		projectService.condiviProgetto(project, user);
+		return "progetto.html";
+	}
 
 }

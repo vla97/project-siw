@@ -24,7 +24,8 @@
 		
 		<li th:each="project : ${projects}">
 		<span th:text = "|${project.name} ${project.owner}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
-		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>		</li>
+		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>
+		<a th:href="@{/condividiProgetto(id=${project.id})}"><button type = "submit">Condividi</button></a>	</li>
 		</th>
 		<th>
 		<li th:each="project : ${projects}">

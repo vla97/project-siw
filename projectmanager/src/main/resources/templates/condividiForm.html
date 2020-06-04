@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>>
+	<div>
+		<h4>INSERISCI I DATI DEL PROGETTO:</h4>
+	</div>
+	<form th:action="@{/condividi}" method="POST" th:object="${user}">
+		
+		<table>
+			<tr>
+				<td>Username:</td>
+				<td><input type="text" th:field="*{username}" placeholder ="inserisci" /></td>
+			</tr>		
+			<tr>
+				<td><button type="submit">Invio</button></td>
+				<td><a th:href="@{/progetto}"><button type="submit">Torna indietro</button></a></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
