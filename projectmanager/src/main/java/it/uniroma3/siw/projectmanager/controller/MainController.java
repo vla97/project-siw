@@ -15,4 +15,9 @@ public class MainController {
 	public String Index(Model model) {
 		return "index";
 	}
+	
+	@RequestMapping(value = {  "/progetto" }, method = RequestMethod.GET)
+	public String Progetto(Model model) {
+		return "progetto";
+	}
 }

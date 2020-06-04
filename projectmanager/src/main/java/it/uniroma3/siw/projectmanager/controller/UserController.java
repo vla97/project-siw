@@ -51,38 +51,41 @@ public class UserController {
         return "user";
     }
 
+	
+	  @RequestMapping(value = "/creaProgetto", method = RequestMethod.GET) public
+	  String inserisciDati(Model model) { model.addAttribute("project", new
+	  Project()); return "formProgetto.html"; }
+	  
+	  
+	  @RequestMapping(value = "/salvaProgetto", method = RequestMethod.POST) public
+	  String salvaProgetto(@ModelAttribute("project") Project project, Model model)
+	  { projectService.salvaProgetto(project);
+	  model.addAttribute("projects",projectService.ottieniProgetti()); return
+	  "progetto.html"; }
+	  
+	  @RequestMapping(value = "/eliminaProgetto", method = RequestMethod.GET)
+	  public String eliminaProgetto(@ModelAttribute("id") Long id, Model model) {
+	  projectService.cancellaProgetto(id);
+	  model.addAttribute("projects",projectService.ottieniProgetti()); return
+	  "progetto.html"; }
+	  
+	  @RequestMapping(value="/visualizzaProgetto", method = RequestMethod.GET)
+	  public String visualizzaProgetto(@ModelAttribute("id") Long id, Model model)
+	  { model.addAttribute("project", projectService.ottieniProgetto(id)); return
+	  "specificaProgetto.html"; }
+	  
 	/*
-	 * @RequestMapping(value = "/creaProgetto", method = RequestMethod.GET) public
-	 * String inserisciDati(Model model) { model.addAttribute("project", new
-	 * Project()); return "formProgetto.html"; }
-	 * 
-	 * 
-	 * @RequestMapping(value = "/salvaProgetto", method = RequestMethod.POST) public
-	 * String salvaProgetto(@ModelAttribute("project") Project project, Model model)
-	 * { projectService.salvaProgetto(project);
-	 * model.addAttribute("projects",projectService.ottieniProgetti()); return
-	 * "index.html"; }
-	 * 
-	 * @RequestMapping(value = "/eliminaProgetto", method = RequestMethod.GET)
-	 * public String eliminaProgetto(@ModelAttribute("id") Long id, Model model) {
-	 * projectService.cancellaProgetto(id);
-	 * model.addAttribute("projects",projectService.ottieniProgetti()); return
-	 * "index.html"; }
-	 * 
-	 * @RequestMapping(value="/visualizzaProgetto", method = RequestMethod.GET)
-	 * public String visualizzaProgetto(@ModelAttribute("id") Long id, Model model)
-	 * { model.addAttribute("project", projectService.ottieniProgetto(id)); return
-	 * "specificaProgetto.html"; }
-	 * 
 	 * @RequestMapping(value="/", method = RequestMethod.GET) public String
 	 * tornaAllaHome(Model model) { model.addAttribute("projects",
 	 * projectService.ottieniProgetti()); return "index.html"; }
-	 * 
+	 */
+	/*
 	 * @RequestMapping(value="/visualizzaProfilo", method = RequestMethod.GET)
 	 * public String visualizzaProfilo(Model model) { model.addAttribute("user",new
 	 * User()); //da rivedere return "profiloUtente.html";
 	 * 
 	 * }
 	 */
+	 
 
 }

@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>Lista progetti</title>
+		<style>
+		table, th, td {
+  		border: 1px solid black;
+		}
+</style>
+	</head>
+	<body>
+		<h1>Comandi:</h1>
+		<a href="creaProgetto"><input type="submit" name="comando" value ="CREA PROGETTO"></a>
+		<a href="visualizzaProfilo"><input type="submit" name="comando" value="PROFILO"></a>
+	
+	
+		<h2> Lista Progetti: </h2>
+		<table>
+		
+		<tr>
+		<th>
+		
+		<li th:each="project : ${projects}">
+		<span th:text = "|${project.name} ${project.owner}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
+		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>		</li>
+		</th>
+		<th>
+		<li th:each="project : ${projects}">
+		<span th:text = "|${project.name} ${project.owner}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
+		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>		</li>
+		</th>
+		</tr>
+		</table>
+	</body>
+</html>
