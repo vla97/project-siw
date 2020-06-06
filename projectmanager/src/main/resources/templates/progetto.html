@@ -3,34 +3,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
-		<title>Lista progetti</title>
-		<style>
-		table, th, td {
-  		border: 1px solid black;
-		}
-</style>
+		<title>Progetti</title>
+	
 	</head>
 	<body>
-		<h1>Comandi:</h1>
 		<a href="creaProgetto"><input type="submit" name="comando" value ="CREA PROGETTO"></a>
 
 	
 	
-		<h2> Lista Progetti: </h2>
+		<h2>Progetti </h2>
 		<table>
 		
 		<tr>
 		<th>
 		
 		<li th:each="project : ${projects}">
-		<span th:text = "|${project.name} ${project.owner}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
+		<span th:text = "|${project.name} ${project.owner} ${project.members} ${project.tasks}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
 		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>
-		<a th:href="@{/condividiProgetto(id=${project.id})}"><button type = "submit">Condividi</button></a>	</li>
-		</th>
-		<th>
-		<li th:each="project : ${projects}">
-		<span th:text = "|${project.name} ${project.owner}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
-		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>		</li>
+		<a th:href="@{/condividiProgetto(id=${project.id})}"><button type = "submit">Condividi</button></a>
+		<a th:href="@{/aggiungiTask(id=${project.id})}"><button type="submit">Aggiungi Task</button></a>	</li>
+		
+		
+		
 		</th>
 		</tr>
 		</table>

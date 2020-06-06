@@ -4,9 +4,9 @@
 
 <body>>
 	<div>
-		<h4>INSERISCI I DATI DEL PROGETTO:</h4>
+		<h4>CONDIVISIONE:</h4>
 	</div>
-	<form th:action="@{/condividi}" method="POST" th:object="${user}">
+	<form th:action="@{/condividi(id=${project.id})}" method="POST" th:object="${user}">
 		
 		<table>
 			<tr>
@@ -15,9 +15,9 @@
 			</tr>		
 			<tr>
 				<td><button type="submit">Invio</button></td>
-				<td><a th:href="@{/progetto}"><button type="submit">Torna indietro</button></a></td>
 			</tr>
 		</table>
 	</form>
+	<td><a th:href="@{/progetto}"><button type="submit">Torna indietro</button></a></td>
 </body>
 </html>

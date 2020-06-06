@@ -46,7 +46,7 @@ public class AutenticazioneController {
 			if(!userBindingResult.hasErrors() && !credenzialiBindingResult.hasErrors()) {
 				credenziali.setUser(user);
 				credenzialiService.saveCredenziali(credenziali);
-				return "registrationSuccessful";
+				return "home";
 			}
 			return "registerUser";
 	}

@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>>
+	<div>
+		<h4>TASK</h4>
+	</div>
+	<form th:action="@{/salvaTask(id=${project.id}&id2)}" method="POST" th:object="${task}">
+		
+		<table>
+			<tr>
+				<td>Nome:</td>
+				<td><input type="text" th:field="*{nome}" placeholder ="inserisci" /></td>
+			</tr>
+			<tr>
+				<td>Descrizione:</td>
+				<td><input type="text" th:field="*{descrizione}" placeholder ="inserisci" /></td>
+			</tr>
+			<tr>
+				<td>Commento:</td>
+				<td><input type="text" th:field="*{commento}" placeholder ="inserisci" /></td>
+			</tr>		
+			<tr>
+				
+			</tr>
+			<td><button type="submit">Invio</button></td>
+		</table>
+		</form>
+		
+		
+		<table>
+		
+		<tr>
+		<th>
+		
+		<li th:each="task : ${tasks}">
+		<span th:text = "|${task.nome} ${task.descrizione} ${task.commento} ${task.isCompleto|"></span><a th:href="@{/eliminaTask(id1=${project.id}&id2=${task.id})}"><button type="submit"> Elimina </button></a>		
+		<a th:href="@{/aggiornaTask(id1=${project.id}&id2=${task.id})}"><button type="submit"> Aggiorna </button></a>
+		<a th:href="@{/condividiTask(id=${task.id})}"><button type = "submit">Condividi</button></a>
+		<a th:href="@{/aggiungiTag}"><button type="submit">Aggiungi Tag</button></a>	</li>
+		
+		
+		
+		</th>
+		</tr>
+		</table>
+</body>
+</html>

@@ -12,6 +12,8 @@
 		<ul th:object=${project}>
 		NOME: 	<li th:text="*{name}"></li>
 		PROPRIETARIO:<li th:text="*{owner}"></li>
+		MEMBRI:<li th:text="*{members}"></li>
+		TASK: <li th:text="*{tasks}"></li>
 
 		</ul>
 		<a th:href="@{/progetto}"><button type="submit"> home </button></a>
