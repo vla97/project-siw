@@ -23,10 +23,9 @@ public class Task {
 	private String nome;
 	@Column
 	private String descrizione;
-<<<<<<< HEAD
-=======
+
 	//@Column(nullable = false)
->>>>>>> branch 'master' of https://github.com/vla97/project-siw.git
+
 	private Boolean isCompleto;
 	
 	@Column(nullable = false, updatable=false)
@@ -159,6 +158,12 @@ public class Task {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return nome +" - " + descrizione + " - " + commento;
 	}
 	
 

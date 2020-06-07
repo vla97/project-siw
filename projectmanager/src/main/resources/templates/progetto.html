@@ -21,6 +21,26 @@
 		<span th:text = "|${project.name} ${project.owner} ${project.members} ${project.tasks}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
 		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>
 		<a th:href="@{/condividiProgetto(id=${project.id})}"><button type = "submit">Condividi</button></a>
+		<a th:href="@{/aggiungiTask(id=${project.id})}"><button type="submit">Gestisci Task</button></a>	</li>
+		
+		</th>
+		</tr>
+		</table>
+		
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		<table>
+		
+		<tr>
+		<th>
+		
+		<li th:each="project : ${projectsVisi}">
+		<span th:text = "|${project.name} ${project.owner} ${project.members} ${project.tasks}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
+		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>
+		<a th:href="@{/condividiProgetto(id=${project.id})}"><button type = "submit">Condividi</button></a>
 		<a th:href="@{/aggiungiTask(id=${project.id})}"><button type="submit">Aggiungi Task</button></a>	</li>
 		
 		

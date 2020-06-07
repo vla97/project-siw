@@ -66,6 +66,7 @@ public class UserController {
 		project.setOwner(loggedUser);
 		projectService.salvaProgetto(project);
 		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
+		model.addAttribute("projectsVisi", projectService.trovaProgettiMembro(loggedUser));
 		return "progetto.html";
 	}
 
@@ -74,6 +75,7 @@ public class UserController {
 		User loggedUser = sessionData.getLoggedUser();
 		projectService.cancellaProgetto(id);
 		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
+		model.addAttribute("projectsVisi", projectService.trovaProgettiMembro(loggedUser));
 		return "progetto.html";
 	}
 
@@ -81,7 +83,6 @@ public class UserController {
 	public String visualizzaProgetto(@ModelAttribute("id") Long id, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		model.addAttribute("project", projectService.ottieniProgetto(id));
-		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
 		return "specificaProgetto.html";
 	}
 	
@@ -114,35 +115,28 @@ public class UserController {
 	@RequestMapping(value="/salvaTask", method=RequestMethod.POST)
 	public String aggiungiTask(Model model, @ModelAttribute("id") Long id, @ModelAttribute("task") Task task) {
 		Project project = projectService.ottieniProgetto(id);
-<<<<<<< HEAD
+
 		taskService.salvaTask(task);
-		model.addAttribute("tasks", taskService.ottieniTask(task.getId()));
-		project.addTask(task);
-=======
-		
->>>>>>> branch 'master' of https://github.com/vla97/project-siw.git
+		model.addAttribute("tasks", taskService.ottieniTask());
+		project.addTask(taskService.ottieniTaskPerNome(task.getNome()));
+
 		model.addAttribute("project", project);
-<<<<<<< HEAD
+
 		projectService.salvaProgetto(project);
-=======
-		model.addAttribute("task", task);
-		taskService.aggiungiTask(project,taskService.ottieniTask(id) );
-		taskService.salvaTask(task);
-		project.addTask( taskService.ottieniTask(id));
-		//projectService.salvaProgetto(project);
->>>>>>> branch 'master' of https://github.com/vla97/project-siw.git
-		return "specificaProgetto.html";
+
+		return "formTask.html";
 	}
 	
-	@RequestMapping(value="/eliminaTask", method=RequestMethod.POST)
+	@RequestMapping(value="/eliminaTask", method=RequestMethod.GET)
 	public String aggiungiTask(Model model, @ModelAttribute("id") Long id1, @ModelAttribute("id") Long id2 ) {
 		Project project = projectService.ottieniProgetto(id1);
-		Task task = taskService.ottieniTask(id2);
 		
-		taskService.cancellaTask(task);
+		taskService.cancellaTask(id2);
+	
 		model.addAttribute("project", project);
 		projectService.salvaProgetto(project);
-		return "specificaProgetto.html";
+		model.addAttribute("tasks", taskService.ottieniTask());
+		return "formTask.html";
 	}
 	
 	@RequestMapping(value="/aggiornaTask", method=RequestMethod.POST)
@@ -157,7 +151,7 @@ public class UserController {
 		return "specificaProgetto.html";
 	}
 	
-	@RequestMapping(value="/condividiTask", method=RequestMethod.POST)
+	@RequestMapping(value="/condividiTask", method=RequestMethod.GET)
 	public String condividiTask(Model model, @ModelAttribute("task") Task task, @ModelAttribute("id") Long id ) {
 		Project project = projectService.ottieniProgetto(id);
 		project.addTask(task);

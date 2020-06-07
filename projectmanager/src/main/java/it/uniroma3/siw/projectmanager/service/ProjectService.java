@@ -80,6 +80,15 @@ public class ProjectService {
 		return r;
 	}
 	
+	@Transactional
+	public List<Project> trovaProgettiMembro(User user){
+		List<Project> r = new ArrayList<>();
+		Iterable<Project> projects = this.projectRepository.findByMembers(user);
+		for(Project project : projects)
+			r.add(project);
+		return r;
+	}
+	
 	
 	
 	

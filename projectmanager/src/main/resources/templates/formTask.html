@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<body>>
+<body>
 	<div>
 		<h4>TASK</h4>
 	</div>
@@ -34,8 +34,8 @@
 		<tr>
 		<th>
 		<li th:each="task : ${tasks}">
-		<span th:text = "|${task.nome} ${task.descrizione} ${task.commento} ${task.isCompleto}|"></span><a th:href="@{/eliminaTask(id1=${project.id}&id2=${task.id})}"><button type="submit"> Elimina </button></a>		
-		<a th:href="@{/aggiornaTask(id1=${project.id}&id2=${task.id})}"><button type="submit"> Aggiorna </button></a>
+		<span th:text = "|${task.nome} ${task.descrizione} ${task.commento} ${task.isCompleto}|"></span><a th:href="@{/eliminaTask(id1=${project.id},id2=${task.id})}"><button type="submit"> Elimina </button></a>		
+		<a th:href="@{/aggiornaTask(id1=${project.id},id2=${task.id})}"><button type="submit"> Aggiorna </button></a>
 		<a th:href="@{/condividiTask(id=${task.id})}"><button type = "submit">Condividi</button></a>
 		<a th:href="@{/aggiungiTag}"><button type="submit">Aggiungi Tag</button></a>	</li>
 		

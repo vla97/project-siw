@@ -34,6 +34,7 @@ public class MainController {
 		 User loggedUser = sessionData.getLoggedUser();
 		 
 		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
+		model.addAttribute("projectsVisi", projectService.trovaProgettiMembro(loggedUser));
 		return "progetto";
 	}
 	
