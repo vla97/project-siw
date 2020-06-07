@@ -30,7 +30,7 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private TaskService taskService;
-
+	
 	@Autowired
 	SessionData sessionData;
 
@@ -53,7 +53,9 @@ public class UserController {
 
 	@RequestMapping(value = "/creaProgetto", method = RequestMethod.GET)
 	public String inserisciDati(Model model) {
+		
 		User loggedUser = sessionData.getLoggedUser();
+		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("project", new Project());
 		return "formProgetto.html";
 	}
