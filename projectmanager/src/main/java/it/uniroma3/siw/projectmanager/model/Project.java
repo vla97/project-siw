@@ -164,6 +164,11 @@ public class Project {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", name=" + name + ", dataCreazione=" + dataCreazione + ", owner=" + owner
+				+ ", members=" + members + ", tagProgetti=" + tagProgetti + ", tasks=" + tasks + "]";
+	}
 	
 	
 

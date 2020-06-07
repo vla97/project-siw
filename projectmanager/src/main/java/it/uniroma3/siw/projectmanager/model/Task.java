@@ -23,7 +23,6 @@ public class Task {
 	private String nome;
 	@Column
 	private String descrizione;
-	@Column(nullable = false)
 	private Boolean isCompleto;
 	
 	@Column(nullable = false, updatable=false)

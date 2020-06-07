@@ -1,5 +1,7 @@
 package it.uniroma3.siw.projectmanager.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -22,6 +24,16 @@ public class TaskService {
 	public Task ottieniTask(Long id) {
 		Optional<Task> r = this.taskRepository.findById(id);
 		return r.orElse(null);
+	}
+	
+	@Transactional
+	public List<Task> ottieniTask(){
+		List <Task> tasks = new ArrayList<>();
+		Iterable <Task> r = taskRepository.findAll();
+		for(Task task : r)
+			tasks.add(task);
+		return tasks;
+		
 	}
 
 	@Transactional

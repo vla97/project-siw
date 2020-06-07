@@ -95,7 +95,7 @@ public class UserController {
 		Project project = projectService.ottieniProgetto(id);
 		User loggedUser = sessionData.getLoggedUser();
 		model.addAttribute("project", project);
-		projectService.condiviProgetto(project, userService.ottieniUtentePerId(user.getId()));
+		projectService.condiviProgetto(project, userService.ottieniUtentePerUsername(user.getUsername()));
 		projectService.salvaProgetto(project);
 		model.addAttribute("projects", projectService.ottieniProgettiProprietari(loggedUser));
 		return "progetto.html";
@@ -110,11 +110,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/salvaTask", method=RequestMethod.POST)
-	public String aggiungiTask(Model model, @ModelAttribute("task") Task task, @ModelAttribute("id") Long id ) {
+	public String aggiungiTask(Model model, @ModelAttribute("id") Long id, @ModelAttribute("task") Task task) {
 		Project project = projectService.ottieniProgetto(id);
-		project.addTask( taskService.ottieniTask(task.getId()));
+		taskService.salvaTask(task);
+		model.addAttribute("tasks", taskService.ottieniTask(task.getId()));
+		project.addTask(task);
 		model.addAttribute("project", project);
-	
 		projectService.salvaProgetto(project);
 		return "specificaProgetto.html";
 	}
@@ -137,7 +138,7 @@ public class UserController {
 		taskService.aggiornaTask();
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", project.getTasks());
-	
+		taskService.salvaTask(task);
 		projectService.salvaProgetto(project);
 		return "specificaProgetto.html";
 	}
@@ -148,6 +149,7 @@ public class UserController {
 		project.addTask(task);
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", project.getTasks());
+		taskService.salvaTask(task);
 	
 		projectService.salvaProgetto(project);
 		return "specificaProgetto.html";
