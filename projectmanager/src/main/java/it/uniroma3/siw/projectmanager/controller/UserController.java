@@ -30,7 +30,7 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private TaskService taskService;
-
+	
 	@Autowired
 	SessionData sessionData;
 
@@ -53,7 +53,9 @@ public class UserController {
 
 	@RequestMapping(value = "/creaProgetto", method = RequestMethod.GET)
 	public String inserisciDati(Model model) {
+		
 		User loggedUser = sessionData.getLoggedUser();
+		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("project", new Project());
 		return "formProgetto.html";
 	}
@@ -112,11 +114,23 @@ public class UserController {
 	@RequestMapping(value="/salvaTask", method=RequestMethod.POST)
 	public String aggiungiTask(Model model, @ModelAttribute("id") Long id, @ModelAttribute("task") Task task) {
 		Project project = projectService.ottieniProgetto(id);
+<<<<<<< HEAD
 		taskService.salvaTask(task);
 		model.addAttribute("tasks", taskService.ottieniTask(task.getId()));
 		project.addTask(task);
+=======
+		
+>>>>>>> branch 'master' of https://github.com/vla97/project-siw.git
 		model.addAttribute("project", project);
+<<<<<<< HEAD
 		projectService.salvaProgetto(project);
+=======
+		model.addAttribute("task", task);
+		taskService.aggiungiTask(project,taskService.ottieniTask(id) );
+		taskService.salvaTask(task);
+		project.addTask( taskService.ottieniTask(id));
+		//projectService.salvaProgetto(project);
+>>>>>>> branch 'master' of https://github.com/vla97/project-siw.git
 		return "specificaProgetto.html";
 	}
 	

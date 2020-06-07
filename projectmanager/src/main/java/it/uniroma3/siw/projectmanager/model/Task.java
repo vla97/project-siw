@@ -23,6 +23,10 @@ public class Task {
 	private String nome;
 	@Column
 	private String descrizione;
+<<<<<<< HEAD
+=======
+	//@Column(nullable = false)
+>>>>>>> branch 'master' of https://github.com/vla97/project-siw.git
 	private Boolean isCompleto;
 	
 	@Column(nullable = false, updatable=false)
@@ -44,7 +48,7 @@ public class Task {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.commento = commento;
-		this.isCompleto = false;
+		
 		
 	}
 	
