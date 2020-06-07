@@ -112,10 +112,13 @@ public class UserController {
 	@RequestMapping(value="/salvaTask", method=RequestMethod.POST)
 	public String aggiungiTask(Model model, @ModelAttribute("task") Task task, @ModelAttribute("id") Long id ) {
 		Project project = projectService.ottieniProgetto(id);
-		project.addTask( taskService.ottieniTask(task.getId()));
+		
 		model.addAttribute("project", project);
-	
-		projectService.salvaProgetto(project);
+		model.addAttribute("task", task);
+		taskService.aggiungiTask(project,taskService.ottieniTask(id) );
+		taskService.salvaTask(task);
+		project.addTask( taskService.ottieniTask(id));
+		//projectService.salvaProgetto(project);
 		return "specificaProgetto.html";
 	}
 	
