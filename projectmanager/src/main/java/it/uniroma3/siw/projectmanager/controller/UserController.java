@@ -105,10 +105,11 @@ public class UserController {
 		return "progetto.html";
 	}
 	
-	@RequestMapping(value = "/creaTask", method = RequestMethod.GET)
+	@RequestMapping(value = "/gestisciTask", method = RequestMethod.GET)
 	public String task(Model model, @ModelAttribute("id") Long id) {
 		Project project = projectService.ottieniProgetto(id);
 		model.addAttribute("tasks", taskService.ottieniTask(project));
+		model.addAttribute("project", project);
 
 		return "task";
 	}
@@ -139,7 +140,6 @@ public class UserController {
 
 		projectService.salvaProgetto(project);
 
-		model.addAttribute("task", new Task());
 
 
 		return "task.html";
