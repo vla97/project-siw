@@ -105,10 +105,20 @@ public class UserController {
 		return "progetto.html";
 	}
 	
+	@RequestMapping(value = "/creaTask", method = RequestMethod.GET)
+	public String task(Model model, @ModelAttribute("id") Long id) {
+		Project project = projectService.ottieniProgetto(id);
+		model.addAttribute("tasks", taskService.ottieniTask(project));
+
+		return "task";
+	}
+
+	
+	
 	@RequestMapping(value="/aggiungiTask", method = RequestMethod.GET)
 	public String aggiungiTask(Model model, @ModelAttribute("id") Long id) {
 		Project project = projectService.ottieniProgetto(id);
-		model.addAttribute("tasks", taskService.ottieniTask(project));
+		
 		model.addAttribute("project",project);
 		model.addAttribute("task", new Task());
 		return "formTask.html";
@@ -132,7 +142,7 @@ public class UserController {
 		model.addAttribute("task", new Task());
 
 
-		return "formTask.html";
+		return "task.html";
 	}
 	
 	@RequestMapping(value="/eliminaTask", method=RequestMethod.GET)
@@ -147,7 +157,7 @@ public class UserController {
 
 		model.addAttribute("tasks", taskService.ottieniTask(project));
 		projectService.salvaProgetto(project);
-		return "formTask.html";
+		return "task.html";
 	}
 	
 	@RequestMapping(value="/aggiornaTask", method=RequestMethod.POST)

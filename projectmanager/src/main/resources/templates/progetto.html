@@ -21,7 +21,7 @@
 		<span th:text = "|${project.name} ${project.owner} ${project.members}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
 		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>
 		<a th:href="@{/condividiProgetto(id=${project.id})}"><button type = "submit">Condividi</button></a>
-		<a th:href="@{/aggiungiTask(id=${project.id})}"><button type="submit">Gestisci Task</button></a>	</li>
+		<a th:href="@{/creaTask(id=${project.id})}"><button type="submit">Gestisci Task</button></a>	</li>
 		
 		</th>
 		</tr>
