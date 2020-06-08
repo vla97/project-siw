@@ -62,7 +62,7 @@ public class SessionData {
     private void update() {
         UserDetails loggedUserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         this.credenziali = this.credenzialiRepository.findByUsername(loggedUserDetails.getUsername()).get(); // can never be absent
-        this.credenziali.setPassword("[PROTECTED]");
+        //this.credenziali.setPassword("[PROTECTED]");
         this.user = this.credenziali.getUser();
     }
 }

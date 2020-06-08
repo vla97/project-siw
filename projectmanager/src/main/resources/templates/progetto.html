@@ -18,7 +18,8 @@
 		<th>
 		
 		<li th:each="project : ${projects}">
-		<span th:text = "|${project.name} ${project.owner} ${project.members}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
+		<span th:text = "|${project.name} ${project.owner} ${project.members}|"></span>
+		<a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
 		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>
 		<a th:href="@{/condividiProgetto(id=${project.id})}"><button type = "submit">Condividi</button></a>
 		<a th:href="@{/gestisciTask(id=${project.id})}"><button type="submit">Gestisci Task</button></a>	</li>
@@ -38,10 +39,10 @@
 		<th>
 		
 		<li th:each="project : ${projectsVisi}">
-		<span th:text = "|${project.name} ${project.owner} ${project.members} ${project.tasks}|"></span><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>		
+		<span th:text = "|${project.name} ${project.owner} ${project.members} |"></span>	
 		<a th:href="@{/visualizzaProgetto(id=${project.id})}"><button type="submit"> Visualizza </button></a>
-		<a th:href="@{/condividiProgetto(id=${project.id})}"><button type = "submit">Condividi</button></a>
-		<a th:href="@{/aggiungiTask(id=${project.id})}"><button type="submit">Aggiungi Task</button></a>	</li>
+		
+		<a th:href="@{/commentaTask(id=${project.id})}"><button type="submit">Commenta Task</button></a>	</li>
 		
 		
 		

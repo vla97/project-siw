@@ -38,7 +38,7 @@ public class Project {
 	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private List<Tag> tagProgetti;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy="project")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="project")
 	private List<Task> tasks;
 	
 	

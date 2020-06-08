@@ -131,17 +131,14 @@ public class UserController {
 		Project project = projectService.ottieniProgetto(id);
 
 		task.setProject(project);
-		model.addAttribute("tasks", taskService.ottieniTask(project));
+		//model.addAttribute("tasks", taskService.ottieniTask(project));
 
 		taskService.salvaTask(task);
-
-
 		model.addAttribute("project", project);
-
+		model.addAttribute("tasks", taskService.ottieniTask(project));
 		projectService.salvaProgetto(project);
-
-
-
+		
+	
 		return "task.html";
 	}
 	

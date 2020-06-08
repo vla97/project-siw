@@ -31,7 +31,9 @@ public class AutConfigurazione extends WebSecurityConfigurerAdapter{
 			.defaultSuccessUrl("/home")
 			.and().logout()
 			.logoutUrl("/logout")
-			.logoutSuccessUrl("/index");
+			.logoutSuccessUrl("/index")
+			.invalidateHttpSession(true)
+			.clearAuthentication(true).permitAll();
 			
 			
 	}
@@ -46,7 +48,7 @@ public class AutConfigurazione extends WebSecurityConfigurerAdapter{
 	}
 	
 	@Bean
-	PasswordEncoder passwordEncoder() {
+	PasswordEncoder PasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 }
