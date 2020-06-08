@@ -82,6 +82,16 @@ public class TaskService {
 		
 	}
 	
+	@Transactional
+	public List<Task> ottieniTask(Tag tag){
+		List <Task> tasks = new ArrayList<>();
+		Iterable <Task> r = taskRepository.findByTagAssociati(tag);
+		for(Task task : r)
+			tasks.add(task);
+		return tasks;
+		
+	}
+	
 	/*@Transactional 
 	public Optional<Task> getTask(Long id){
 		taskRepository.findById(id);

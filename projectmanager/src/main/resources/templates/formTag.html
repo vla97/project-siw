@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div>
+		<h4>TAG</h4>
+	</div>
+	<form th:action="@{/aggiungi(id1=${project.id},id2=${task.id})}" method="POST" th:object="${tag}">
+		
+		<table>
+			<tr>
+				<td>Nome:</td>
+				<td><input type="text" th:field="*{nome}" placeholder ="inserisci" /></td>
+			</tr>
+			<tr>
+				<td>Colore:</td>
+				<td><input type="text" th:field="*{colore}" placeholder ="inserisci" /></td>
+			</tr>
+			<tr>
+				<td>Descrizione:</td>
+				<td><input type="text" th:field="*{descrizione}" placeholder ="inserisci" /></td>
+			</tr>		
+			<tr>
+				
+			</tr>
+			<tr>
+			<td><button type="submit">Invio</button></td>
+			</tr>
+		</table>
+		</form>
+		
+		
+		
+		<a th:href="@{/task}"><button type="submit"> Torna indietro </button></a>
+		
+		
+</body>
+</html>

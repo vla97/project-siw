@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div>
+		<h4>Aggiornamento</h4>
+	</div>
+	<form th:action="@{/aggiorna(id=${project.id})}" method="POST" th:object="${task}">
+		
+		<table>
+			<tr>
+				<td>Nome:</td>
+				<td><input type="text" th:field="*{nome}" placeholder ="inserisci" value="*{nome}" /></td>
+			</tr>
+			<tr>
+				<td>Descrizione:</td>
+				<td><input type="text" th:field="*{descrizione}" placeholder ="inserisci"  value="*{descrizione}" /></td>
+			</tr>
+			<tr>
+				<td>Commento:</td>
+				<td><input type="text" th:field="*{commento}" placeholder ="inserisci"  value="*{commento}" /></td>
+			</tr>		
+			<tr>
+				
+			</tr>
+			<tr>
+			<td><button type="submit">Invio</button></td>
+			</tr>
+		</table>
+		</form>
+		
+		
+		
+		<a th:href="@{/task}"><button type="submit"> Torna indietro </button></a>
+		
+		
+</body>
+</html>

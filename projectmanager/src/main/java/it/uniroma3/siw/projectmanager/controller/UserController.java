@@ -9,15 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.projectmanager.model.Credenziali;
 import it.uniroma3.siw.projectmanager.model.Project;
+import it.uniroma3.siw.projectmanager.model.Tag;
 import it.uniroma3.siw.projectmanager.model.Task;
 import it.uniroma3.siw.projectmanager.model.User;
 import it.uniroma3.siw.projectmanager.service.ProjectService;
+import it.uniroma3.siw.projectmanager.service.TagService;
 import it.uniroma3.siw.projectmanager.service.TaskService;
 import it.uniroma3.siw.projectmanager.service.UserService;
 
@@ -30,6 +33,9 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private TaskService taskService;
+	
+	@Autowired
+	private TagService tagService;
 	
 	@Autowired
 	SessionData sessionData;
@@ -49,6 +55,14 @@ public class UserController {
 		model.addAttribute("credenziali", credenziali);
 
 		return "user";
+	}
+	
+	@RequestMapping(value = { "/task/{id}" }, method = RequestMethod.GET)
+	public String return(Model model, @PathVariable Long id) {
+		
+	
+
+		return "task";
 	}
 
 	@RequestMapping(value = "/creaProgetto", method = RequestMethod.GET)
@@ -157,22 +171,29 @@ public class UserController {
 		return "task.html";
 	}
 	
-	@RequestMapping(value="/aggiornaTask", method=RequestMethod.POST)
-	public String aggiornaTask(Model model, @ModelAttribute("id") Long id1, @ModelAttribute("id") Long id2 ) {
+	@RequestMapping(value="/aggiornaTask", method=RequestMethod.GET)
+	public String aggiornaTask(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2 ) {
 		Project project = projectService.ottieniProgetto(id1);
 		Task task = taskService.ottieniTask(id2);
-		taskService.aggiornaTask();
 		model.addAttribute("project", project);
-		model.addAttribute("tasks", project.getTasks());
+		model.addAttribute("task", task);
+		return "aggiornaTask.html";
+	}
+	
+	@RequestMapping(value="/aggiorna", method=RequestMethod.POST)
+	public String aggiorna(Model model, @ModelAttribute("id") Long id, @ModelAttribute("task") Task task) {
+		Project project = projectService.ottieniProgetto(id);
 		taskService.salvaTask(task);
-		projectService.salvaProgetto(project);
-		return "specificaProgetto.html";
+		model.addAttribute("project", project);
+
+		model.addAttribute("tasks", taskService.ottieniTask(project));
+		return "task.html";
 	}
 	
 	@RequestMapping(value="/condividiTask", method=RequestMethod.GET)
 	public String condividiTask(Model model, @ModelAttribute("task") Task task, @ModelAttribute("id") Long id ) {
 		Project project = projectService.ottieniProgetto(id);
-		project.addTask(task);
+		
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", project.getTasks());
 		taskService.salvaTask(task);
@@ -180,5 +201,30 @@ public class UserController {
 		projectService.salvaProgetto(project);
 		return "specificaProgetto.html";
 	}
+	
+	@RequestMapping(value="/aggiungiTag", method=RequestMethod.GET)
+	public String aggiungiTag
+	(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2 ) {
+		Project project = projectService.ottieniProgetto(id1);
+		Task task = taskService.ottieniTask(id2);
+		model.addAttribute("project", project);
+		model.addAttribute("task", task);
+		model.addAttribute("tag", new Tag());
+		return "formTag.html";
 
+	}
+	
+	@RequestMapping(value="/aggiungi", method=RequestMethod.POST)
+	public String aggiungi(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2, @ModelAttribute("tag") Tag tag ) {
+		Project project = projectService.ottieniProgetto(id1);
+		Task task = taskService.ottieniTask(id2);
+		taskService.aggiungiTag(task, tag);
+		
+		tagService.salvaTag(tag);
+		taskService.salvaTask(task);
+		model.addAttribute("tags", tagService.ottieniTag(task));
+		
+		return "tag.html";
+
+}
 }

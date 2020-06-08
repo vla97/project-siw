@@ -1,10 +1,13 @@
 package it.uniroma3.siw.projectmanager.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Tag {
@@ -20,7 +23,12 @@ public class Tag {
 	
 	private String descrizione;
 	
+	@ManyToMany(mappedBy="tagAssociati")
+	private List<Task> taskAssociati;
+	
 	//COSTRUTTORI
+	
+	public Tag() {}
 	
 	public Tag(String nome, String colore, String descrizione) {
 		this.nome = nome;
@@ -85,6 +93,14 @@ public class Tag {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+	}
+
+	public List<Task> getTaskAssociati() {
+		return taskAssociati;
+	}
+
+	public void setTaskAssociati(List<Task> taskAssociati) {
+		this.taskAssociati = taskAssociati;
 	}
 	
 }
