@@ -13,10 +13,13 @@
 		NOME: 	<li th:text="*{name}"></li>
 		PROPRIETARIO:<li th:text="*{owner}"></li>
 		MEMBRI:<li th:text="*{members}"></li>
-		TASK: <li th:text="*{tasks}"></li>
+		TASKS:<li th:each="task : ${tasks}">
+		<span th:text = "|${task.nome} ${task.descrizione} ${task.commento}|"></span></li>
 
 		</ul>
 		<a th:href="@{/progetto}"><button type="submit"> home </button></a>
+		
+
 
 </body>
 

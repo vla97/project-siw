@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -19,7 +20,7 @@ public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false)
+	@Column
 	private String nome;
 	@Column
 	private String descrizione;
@@ -28,12 +29,15 @@ public class Task {
 
 	private Boolean isCompleto;
 	
-	@Column(nullable = false, updatable=false)
+	//@Column(nullable = false, updatable=false)
 	private LocalDateTime dataCreazione;
 	private String commento;
 
 	@ManyToMany
 	private List<Tag> tagAssociati;
+	
+	@ManyToOne
+	private Project project;
 	
 	//COSTRUTTORI
 	
@@ -120,6 +124,15 @@ public class Task {
 	public void aggiungiTag(Tag tag) {
 		this.tagAssociati.add(tag);
 	}
+	
+	public Project getProject() {
+		return project;
+	}
+
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
 
 
 	@Override
@@ -161,9 +174,12 @@ public class Task {
 	}
 
 
+	
+
+
 	@Override
 	public String toString() {
-		return nome +" - " + descrizione + " - " + commento;
+		return nome +" - " + descrizione + " - " + commento + " - " + project;
 	}
 	
 

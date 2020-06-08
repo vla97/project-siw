@@ -83,6 +83,7 @@ public class UserController {
 	public String visualizzaProgetto(@ModelAttribute("id") Long id, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		model.addAttribute("project", projectService.ottieniProgetto(id));
+		model.addAttribute("tasks",taskService.ottieniTask( projectService.ottieniProgetto(id)));
 		return "specificaProgetto.html";
 	}
 	
@@ -107,6 +108,7 @@ public class UserController {
 	@RequestMapping(value="/aggiungiTask", method = RequestMethod.GET)
 	public String aggiungiTask(Model model, @ModelAttribute("id") Long id) {
 		Project project = projectService.ottieniProgetto(id);
+		model.addAttribute("tasks", taskService.ottieniTask(project));
 		model.addAttribute("project",project);
 		model.addAttribute("task", new Task());
 		return "formTask.html";
@@ -114,28 +116,32 @@ public class UserController {
 	
 	@RequestMapping(value="/salvaTask", method=RequestMethod.POST)
 	public String aggiungiTask(Model model, @ModelAttribute("id") Long id, @ModelAttribute("task") Task task) {
+		
 		Project project = projectService.ottieniProgetto(id);
-
+		task.setProject(project);
+		model.addAttribute("tasks", taskService.ottieniTask(project));
 		taskService.salvaTask(task);
-		model.addAttribute("tasks", taskService.ottieniTask());
-		project.addTask(taskService.ottieniTaskPerNome(task.getNome()));
 
 		model.addAttribute("project", project);
 
 		projectService.salvaProgetto(project);
+		model.addAttribute("task", new Task());
 
 		return "formTask.html";
 	}
 	
 	@RequestMapping(value="/eliminaTask", method=RequestMethod.GET)
-	public String aggiungiTask(Model model, @ModelAttribute("id") Long id1, @ModelAttribute("id") Long id2 ) {
+	public String aggiungiTask(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2 ) {
 		Project project = projectService.ottieniProgetto(id1);
+		Task task = taskService.ottieniTask(id2);
+		project.removeTask(task);
 		
-		taskService.cancellaTask(id2);
+		taskService.cancellaTask(task);
 	
 		model.addAttribute("project", project);
+
+		model.addAttribute("tasks", taskService.ottieniTask(project));
 		projectService.salvaProgetto(project);
-		model.addAttribute("tasks", taskService.ottieniTask());
 		return "formTask.html";
 	}
 	
