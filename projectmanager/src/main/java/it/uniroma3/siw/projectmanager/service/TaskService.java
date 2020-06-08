@@ -33,9 +33,9 @@ public class TaskService {
 	}
 	
 	@Transactional
-	public List<Task> ottieniTask(){
+	public List<Task> ottieniTask(Project project){
 		List <Task> tasks = new ArrayList<>();
-		Iterable <Task> r = taskRepository.findAll();
+		Iterable <Task> r = taskRepository.findByProject(project);
 		for(Task task : r)
 			tasks.add(task);
 		return tasks;
@@ -52,8 +52,8 @@ public class TaskService {
 	}
 
 	@Transactional
-	public void cancellaTask(Long id) {
-		this.taskRepository.deleteById(id);
+	public void cancellaTask(Task task) {
+		this.taskRepository.delete(task);
 	}
 	
 	@Transactional

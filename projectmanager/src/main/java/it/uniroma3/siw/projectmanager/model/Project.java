@@ -38,7 +38,7 @@ public class Project {
 	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private List<Tag> tagProgetti;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy="project")
 	private List<Task> tasks;
 	
 	
@@ -122,6 +122,11 @@ public class Project {
 	
 	public void addMember(User user) {
 		this.members.add(user);
+	}
+	
+
+	public void removeTask(Task task) {
+		this.tasks.remove(task);
 	}
 	
 	public List<Tag> getTagProgetti() {
