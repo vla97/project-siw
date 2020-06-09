@@ -218,13 +218,36 @@ public class UserController {
 	public String aggiungi(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2, @ModelAttribute("tag") Tag tag ) {
 		Project project = projectService.ottieniProgetto(id1);
 		Task task = taskService.ottieniTask(id2);
-		taskService.aggiungiTag(task, tag);
+		model.addAttribute("project", project);
 		
 		tagService.salvaTag(tag);
+		taskService.aggiungiTag(task, tag);
 		taskService.salvaTask(task);
 		model.addAttribute("tags", tagService.ottieniTag(task));
 		
 		return "tag.html";
+	}
+	
+	
+	@RequestMapping(value="/visualizzaTag", method=RequestMethod.GET)
+	public String visTag(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2, @ModelAttribute("tag") Tag tag) {
+		Project project = projectService.ottieniProgetto(id1);
+		Task task = taskService.ottieniTask(id2);
+		model.addAttribute("project", project);
+		model.addAttribute("tags", tagService.ottieniTag(task));
+		return "tag.html";
+	}
+	@RequestMapping(value="/indietro", method=RequestMethod.GET)
+	public String indietro(Model model, @ModelAttribute("id1") Long id1) {
+		Project project = projectService.ottieniProgetto(id1);
 
-}
+		
+		model.addAttribute("project", project);
+		model.addAttribute("tasks", taskService.ottieniTask(project));
+		
+		return "task.html";
+	}
+	
+	
+	
 }

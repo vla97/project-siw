@@ -23,6 +23,7 @@
 		<span th:text = "|${task.nome} ${task.descrizione} ${task.commento}|"></span>&emsp;&emsp;<a th:href="@{/eliminaTask(id1=${project.id},id2=${task.id})}"><button type="submit"> Elimina </button></a>		
 		<a th:href="@{/aggiornaTask(id1=${project.id},id2=${task.id})}"><button type="submit"> Aggiorna </button></a>
 		<a th:href="@{/condividiTask(id=${task.id})}"><button type = "submit">Condividi</button></a>
+		<a th:href="@{/visualizzaTag(id1=${project.id},id2=${task.id})}"><button type = "submit">Tag</button></a>
 		<a th:href="@{/aggiungiTag(id1=${project.id},id2=${task.id})}"><button type="submit">Aggiungi Tag</button></a>	</li>
 		
 		
