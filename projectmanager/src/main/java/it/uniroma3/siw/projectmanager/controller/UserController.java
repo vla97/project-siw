@@ -183,6 +183,7 @@ public class UserController {
 		 * task1.setCommento(task.getCommento());
 		 */
 		task.setProject(project);
+		//taskService.ottieniTask(id).setNome(task.getNome());
 		taskService.salvaTask(task);
 		model.addAttribute("project", project);
 		
@@ -237,17 +238,7 @@ public class UserController {
 		model.addAttribute("tags", tagService.ottieniTag(task));
 		return "tag.html";
 	}
-	@RequestMapping(value="/indietro", method=RequestMethod.GET)
-	public String indietro(Model model, @ModelAttribute("id1") Long id1) {
-		Project project = projectService.ottieniProgetto(id1);
 
-		
-		model.addAttribute("project", project);
-		model.addAttribute("tasks", taskService.ottieniTask(project));
-		
-		return "task.html";
-	}
-	
 	
 	
 }
