@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.projectmanager.model.Credenziali;
 import it.uniroma3.siw.projectmanager.model.Project;
@@ -175,15 +176,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/aggiorna", method=RequestMethod.POST)
-	public String aggiorna(Model model, @ModelAttribute("id") Long id, @ModelAttribute("task") Task task) {
-		Project project = projectService.ottieniProgetto(id);
-		/*
-		 * Task task1 = new Task(); task1.setNome(task.getNome());
-		 * task1.setDescrizione(task.getDescrizione());
-		 * task1.setCommento(task.getCommento());
-		 */
-		task.setProject(project);
-		//taskService.ottieniTask(id).setNome(task.getNome());
+	public String aggiorna(Model model, @ModelAttribute("id") Long id,@ModelAttribute("id1") Long id1,
+			@RequestParam("nome") String nNome, @RequestParam("descrizione") String nDescrizione) {
+		Project project = projectService.ottieniProgetto(id1);
+		Task task = taskService.ottieniTask(id);
+	
+		task.setNome(nNome);
+		task.setDescrizione(nDescrizione);
 		taskService.salvaTask(task);
 		model.addAttribute("project", project);
 		

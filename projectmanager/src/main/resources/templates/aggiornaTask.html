@@ -6,16 +6,16 @@
 	<div>
 		<h4>Aggiornamento</h4>
 	</div>
-	<form th:action="@{/aggiorna(id=${project.id})}" method="POST" th:object="${task}">
+	<form th:action="@{/aggiorna(id=${task.id},id1=${project.id})}" method="POST" th:object="${task}">
 		
 		<table>
 			<tr>
 				<td>Nome:</td>
-				<td><input type="text" th:field="*{nome}" placeholder ="inserisci" value="*{nome}" /></td>
+				<td><input type="text" th:field="*{nome}" placeholder ="inserisci" th:name="nome" value="*{nome}" /></td>
 			</tr>
 			<tr>
 				<td>Descrizione:</td>
-				<td><input type="text" th:field="*{descrizione}" placeholder ="inserisci"  value="*{descrizione}" /></td>
+				<td><input type="text" th:field="*{descrizione}" placeholder ="inserisci" th:name="descrizione" value="*{descrizione}" /></td>
 			</tr>
 			<tr>
 				<td>Commento:</td>
