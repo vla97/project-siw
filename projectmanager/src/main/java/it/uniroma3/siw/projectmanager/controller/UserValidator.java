@@ -16,17 +16,17 @@ public class UserValidator implements Validator {
 	public void validate(Object o, Errors errors) {
 		User user = (User) o;
 		String name = user.getName().trim();
-		String cognome = user.getCognome().trim();
+		String surname = user.getSurname().trim();
 		
 		if (name.isEmpty())
 			errors.rejectValue("name", "required");
 		else if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH)
 			errors.rejectValue("name", "size");
 		
-		if (cognome.isEmpty())
-			errors.rejectValue("cognome", "required");
-		else if (cognome.length() < MIN_NAME_LENGTH || cognome.length() > MAX_NAME_LENGTH)
-			errors.rejectValue("cognome", "size");
+		if (surname.isEmpty())
+			errors.rejectValue("surname", "required");
+		else if (surname.length() < MIN_NAME_LENGTH || surname.length() > MAX_NAME_LENGTH)
+			errors.rejectValue("surname", "size");
 	}
 	@Override
 	public boolean supports(Class<?> clazz) {

@@ -27,7 +27,7 @@ public class User {
 	private String name;
 	
 	@Column(nullable = false, length = 100)
-	private String cognome;
+	private String surname;
 	
 	@Column(unique = true, nullable = false, length = 16)
 	private String username;
@@ -53,12 +53,12 @@ public class User {
 		this.visibleProjects = new ArrayList<>();
 	}
 	
-	public User(String username, String password, String name, String cognome) {
+	public User(String username, String password, String name, String surname) {
 		this();
 		this.username = username;
 		this.password = password;
 		this.name = name;
-		this.cognome = cognome;
+		this.surname = surname;
 	}
 	@PrePersist
 	protected void onPersist() {
@@ -83,12 +83,12 @@ public class User {
 		this.name = name;
 	}
 
-	public String getCognome() {
-		return cognome;
+	public String getSurname() {
+		return surname;
 	}
 
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public String getUsername() {
@@ -135,7 +135,7 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cognome == null) ? 0 : cognome.hashCode());
+		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
 		result = prime * result + ((dataCreazione == null) ? 0 : dataCreazione.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -151,10 +151,10 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (cognome == null) {
-			if (other.cognome != null)
+		if (surname == null) {
+			if (other.surname != null)
 				return false;
-		} else if (!cognome.equals(other.cognome))
+		} else if (!surname.equals(other.surname))
 			return false;
 		if (dataCreazione == null) {
 			if (other.dataCreazione != null)

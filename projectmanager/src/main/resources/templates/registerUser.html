@@ -34,11 +34,11 @@
 					th:errors="${userForm.name}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
-				<td><label for="cognomeInput">Cognome</label>
-				<td><input id="cognomeInput" type="text" placeholder="COGNOME" required
-							th:field="${userForm.cognome}"/></td>
-				<td th:if="${#fields.hasErrors('userForm.cognome')}"
-					th:errors="${userForm.cognome}" th:style="'color:red'"></td>
+				<td><label for="surnameInput">Surname</label>
+				<td><input id="surnameInput" type="text" placeholder="SURNAME" required
+							th:field="${userForm.surname}"/></td>
+				<td th:if="${#fields.hasErrors('userForm.surname')}"
+					th:errors="${userForm.surname}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
 				<td>
