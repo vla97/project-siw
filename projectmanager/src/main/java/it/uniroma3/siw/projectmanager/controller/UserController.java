@@ -237,6 +237,43 @@ public class UserController {
 		model.addAttribute("tags", tagService.ottieniTag(task));
 		return "tag.html";
 	}
+	
+	
+	@RequestMapping(value="/aggiungiTagProgetto", method=RequestMethod.GET)
+	public String aggiungiTagProgetto
+	(Model model, @ModelAttribute("id") Long id ) {
+		Project project = projectService.ottieniProgetto(id);
+		
+		model.addAttribute("project", project);
+		
+		model.addAttribute("tag", new Tag());
+		return "formTagProgetto.html";
+
+	}
+	
+	@RequestMapping(value="/aggiungiTagP", method=RequestMethod.POST)
+	public String aggiungiTagP(Model model, @ModelAttribute("id") Long id, @ModelAttribute("tag") Tag tag ) {
+		Project project = projectService.ottieniProgetto(id);
+		
+		model.addAttribute("project", project);
+		
+		tagService.salvaTag(tag);
+		projectService.aggiungiTag(project, tag);
+		//projectService.salvaProgetto(project);
+		model.addAttribute("tags", tag);
+		
+		return "tagProgetto.html";
+	}
+	
+	
+	/*
+	 * @RequestMapping(value="/visualizzaTag", method=RequestMethod.GET) public
+	 * String visTagProgetto(Model model, @ModelAttribute("id1") Long
+	 * id1, @ModelAttribute("id2") Long id2, @ModelAttribute("tag") Tag tag) {
+	 * Project project = projectService.ottieniProgetto(id1); Task task =
+	 * taskService.ottieniTask(id2); model.addAttribute("project", project);
+	 * model.addAttribute("tags", tagService.ottieniTag(task)); return "tag.html"; }
+	 */
 
 	
 	

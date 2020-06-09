@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div>
+		<h4>TAG</h4>
+	</div>
+		
+
+	
+	
+	
+		
+		
+		<table>
+		
+		<tr>
+		<th>
+		<li th:each="tag : ${tags}">
+		<span th:text = "|${tag.nome} ${tag.colore} ${tag.descrizione}|"></span>&emsp;&emsp;
+		
+		
+		
+		</th>
+		</tr>
+		</table>
+		<br>
+		<br>
+		<br>
+		<br>
+		<a th:href="@{/progetto}"><button type="submit"> Torna indietro </button></a>
+		
+		
+</body>
+</html>

@@ -67,6 +67,7 @@ public class ProjectService {
 	@Transactional 
 	public void aggiungiTag(Project progetto, Tag tag) {
 		progetto.addTag(tag);
+		projectRepository.save(progetto);
 		
 		
 	}

@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.projectmanager.model.Project;
 import it.uniroma3.siw.projectmanager.model.Tag;
 import it.uniroma3.siw.projectmanager.model.Task;
 import it.uniroma3.siw.projectmanager.repository.TagRepository;
@@ -36,5 +37,6 @@ public class TagService {
 			r.add(tag);
 		return r;
 	}
+	
 
 }
