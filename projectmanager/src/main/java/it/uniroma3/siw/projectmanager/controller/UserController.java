@@ -57,13 +57,7 @@ public class UserController {
 		return "user";
 	}
 	
-	@RequestMapping(value = { "/task/{id}" }, method = RequestMethod.GET)
-	public String return(Model model, @PathVariable Long id) {
-		
-	
 
-		return "task";
-	}
 
 	@RequestMapping(value = "/creaProgetto", method = RequestMethod.GET)
 	public String inserisciDati(Model model) {
@@ -172,7 +166,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/aggiornaTask", method=RequestMethod.GET)
-	public String aggiornaTask(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2 ) {
+	public String aggiornaTask(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 		Project project = projectService.ottieniProgetto(id1);
 		Task task = taskService.ottieniTask(id2);
 		model.addAttribute("project", project);
@@ -183,9 +177,15 @@ public class UserController {
 	@RequestMapping(value="/aggiorna", method=RequestMethod.POST)
 	public String aggiorna(Model model, @ModelAttribute("id") Long id, @ModelAttribute("task") Task task) {
 		Project project = projectService.ottieniProgetto(id);
+		/*
+		 * Task task1 = new Task(); task1.setNome(task.getNome());
+		 * task1.setDescrizione(task.getDescrizione());
+		 * task1.setCommento(task.getCommento());
+		 */
+		task.setProject(project);
 		taskService.salvaTask(task);
 		model.addAttribute("project", project);
-
+		
 		model.addAttribute("tasks", taskService.ottieniTask(project));
 		return "task.html";
 	}

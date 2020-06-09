@@ -49,6 +49,7 @@ public class TaskService {
 
 	@Transactional
 	public void aggiornaTask() {
+		
 	}
 
 	@Transactional
