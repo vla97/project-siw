@@ -41,11 +41,7 @@ public class UserController {
 	@Autowired
 	SessionData sessionData;
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(Model model) {
 
-		return "home";
-	}
 
 	@RequestMapping(value = { "/users/me" }, method = RequestMethod.GET)
 	public String me(Model model) {

@@ -28,6 +28,19 @@ public class MainController {
 	public String Index(Model model) {
 		return "index";
 	}
+	@RequestMapping(value = {"/home"}, method = RequestMethod.GET)
+	public String home(Model model) {
+		User user = sessionData.getLoggedUser();
+		model.addAttribute("user", user);
+		return "home";
+	}
+	
+	@RequestMapping(value = {"/admin"}, method = RequestMethod.GET)
+	public String admin(Model model) {
+		User user = sessionData.getLoggedUser();
+		model.addAttribute("user", user);
+		return "admin";
+	}
 	
 	@RequestMapping(value = { "/progetto" }, method = RequestMethod.GET)
 	public String Progetto(Model model) {
