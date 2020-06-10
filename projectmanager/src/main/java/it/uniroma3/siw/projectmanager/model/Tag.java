@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Tag {
@@ -25,7 +26,8 @@ public class Tag {
 	
 	@ManyToMany(mappedBy="tagAssociati")
 	private List<Task> taskAssociati;
-	
+	@ManyToOne
+	private Project project;
 	//COSTRUTTORI
 	
 	public Tag() {}
@@ -101,6 +103,14 @@ public class Tag {
 
 	public void setTaskAssociati(List<Task> taskAssociati) {
 		this.taskAssociati = taskAssociati;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 	
 }

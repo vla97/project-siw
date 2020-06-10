@@ -254,9 +254,10 @@ public class UserController {
 		model.addAttribute("project", project);
 		
 		tagService.salvaTag(tag);
+		//project.addTag(tag);
 		projectService.aggiungiTag(project, tag);
-		//projectService.salvaProgetto(project);
-		model.addAttribute("tags", tag);
+		projectService.salvaProgetto(project);
+		model.addAttribute("tag", tag);
 		
 		return "tagProgetto.html";
 	}
