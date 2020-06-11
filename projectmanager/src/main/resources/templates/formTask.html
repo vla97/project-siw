@@ -6,16 +6,20 @@
 	<div>
 		<h4>TASK</h4>
 	</div>
-	<form th:action="@{/salvaTask(id=${project.id})}" method="POST" th:object="${task}">
+	<form id="registerTaskForm" th:action="@{/salvaTask(id=${project.id})}" method="POST" th:object="${task}">
 		
 		<table>
 			<tr>
-				<td>Nome:</td>
-				<td><input type="text" th:field="*{nome}" placeholder ="inserisci" /></td>
+				<td><label for="taskNameInput">Nome:</label>
+				<td><input id="taskNameInput" type="text" th:field="*{nome}" placeholder ="NOME" required /></td>
+				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+					th:style="'color:red'"></td>
 			</tr>
 			<tr>
-				<td>Descrizione:</td>
-				<td><input type="text" th:field="*{descrizione}" placeholder ="inserisci" /></td>
+				<td><label for="taskDescrizioneInput">Descrizione:</label>
+				<td><input id="taskDescrizioneInput" type="text" th:field="*{descrizione}" placeholder ="DESCRIZIONE" required/></td>
+				<td th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"
+					th:style="'color:red'"></td>
 			</tr>
 			<tr>
 				<td>Commento:</td>

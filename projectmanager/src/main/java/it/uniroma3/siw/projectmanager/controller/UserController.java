@@ -3,6 +3,8 @@ package it.uniroma3.siw.projectmanager.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import it.uniroma3.siw.projectmanager.controller.session.SessionData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import it.uniroma3.siw.projectmanager.model.Project;
 import it.uniroma3.siw.projectmanager.model.Tag;
 import it.uniroma3.siw.projectmanager.model.Task;
 import it.uniroma3.siw.projectmanager.model.User;
+import it.uniroma3.siw.projectmanager.service.CredenzialiService;
 import it.uniroma3.siw.projectmanager.service.ProjectService;
 import it.uniroma3.siw.projectmanager.service.TagService;
 import it.uniroma3.siw.projectmanager.service.TaskService;
@@ -34,7 +37,12 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private TaskService taskService;
-	
+	@Autowired
+	private CredenzialiService credenzialiService;
+	@Autowired 
+	private ProjectValidator projectValidator;
+	@Autowired 
+	private TaskValidator taskValidator;
 	@Autowired
 	private TagService tagService;
 	
@@ -66,13 +74,20 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/salvaProgetto", method = RequestMethod.POST)
-	public String salvaProgetto(@ModelAttribute("project") Project project, Model model) {
+	public String salvaProgetto(@Valid @ModelAttribute("project") Project project, Model model,
+			BindingResult projectBindingResult) {
 		User loggedUser = sessionData.getLoggedUser();
-		project.setOwner(loggedUser);
-		projectService.salvaProgetto(project);
-		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
-		model.addAttribute("projectsVisi", projectService.trovaProgettiMembro(loggedUser));
-		return "progetto.html";
+		projectValidator.validate(project, projectBindingResult);
+		if(!projectBindingResult.hasErrors()) {
+			project.setOwner(loggedUser);
+			projectService.salvaProgetto(project);
+			model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
+			model.addAttribute("projectsVisi", projectService.trovaProgettiMembro(loggedUser));
+			return "progetto";
+		}
+		//model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
+		//model.addAttribute("projectsVisi", projectService.trovaProgettiMembro(loggedUser));
+		return "formProgetto.html";
 	}
 
 	@RequestMapping(value = "/eliminaProgetto", method = RequestMethod.GET)
@@ -110,93 +125,7 @@ public class UserController {
 		return "progetto.html";
 	}
 	
-	@RequestMapping(value = "/gestisciTask", method = RequestMethod.GET)
-	public String task(Model model, @ModelAttribute("id") Long id) {
-		Project project = projectService.ottieniProgetto(id);
-		model.addAttribute("tasks", taskService.ottieniTask(project));
-		model.addAttribute("project", project);
 
-		return "task";
-	}
-
-	
-	
-	@RequestMapping(value="/aggiungiTask", method = RequestMethod.GET)
-	public String aggiungiTask(Model model, @ModelAttribute("id") Long id) {
-		Project project = projectService.ottieniProgetto(id);
-		
-		model.addAttribute("project",project);
-		model.addAttribute("task", new Task());
-		return "formTask.html";
-	}
-	
-	@RequestMapping(value="/salvaTask", method=RequestMethod.POST)
-	public String aggiungiTask(Model model, @ModelAttribute("id") Long id, @ModelAttribute("task") Task task) {
-		
-		Project project = projectService.ottieniProgetto(id);
-
-		task.setProject(project);
-		//model.addAttribute("tasks", taskService.ottieniTask(project));
-
-		taskService.salvaTask(task);
-		model.addAttribute("project", project);
-		model.addAttribute("tasks", taskService.ottieniTask(project));
-		projectService.salvaProgetto(project);
-		
-	
-		return "task.html";
-	}
-	
-	@RequestMapping(value="/eliminaTask", method=RequestMethod.GET)
-	public String aggiungiTask(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2 ) {
-		Project project = projectService.ottieniProgetto(id1);
-		Task task = taskService.ottieniTask(id2);
-		project.removeTask(task);
-		
-		taskService.cancellaTask(task);
-	
-		model.addAttribute("project", project);
-
-		model.addAttribute("tasks", taskService.ottieniTask(project));
-		projectService.salvaProgetto(project);
-		return "task.html";
-	}
-	
-	@RequestMapping(value="/aggiornaTask", method=RequestMethod.GET)
-	public String aggiornaTask(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
-		Project project = projectService.ottieniProgetto(id1);
-		Task task = taskService.ottieniTask(id2);
-		model.addAttribute("project", project);
-		model.addAttribute("task", task);
-		return "aggiornaTask.html";
-	}
-	
-	@RequestMapping(value="/aggiorna", method=RequestMethod.POST)
-	public String aggiorna(Model model, @ModelAttribute("id") Long id,@ModelAttribute("id1") Long id1,
-			@RequestParam("nome") String nNome, @RequestParam("descrizione") String nDescrizione) {
-		Project project = projectService.ottieniProgetto(id1);
-		Task task = taskService.ottieniTask(id);
-	
-		task.setNome(nNome);
-		task.setDescrizione(nDescrizione);
-		taskService.salvaTask(task);
-		model.addAttribute("project", project);
-		
-		model.addAttribute("tasks", taskService.ottieniTask(project));
-		return "task.html";
-	}
-	
-	@RequestMapping(value="/condividiTask", method=RequestMethod.GET)
-	public String condividiTask(Model model, @ModelAttribute("task") Task task, @ModelAttribute("id") Long id ) {
-		Project project = projectService.ottieniProgetto(id);
-		
-		model.addAttribute("project", project);
-		model.addAttribute("tasks", project.getTasks());
-		taskService.salvaTask(task);
-	
-		projectService.salvaProgetto(project);
-		return "specificaProgetto.html";
-	}
 	
 	@RequestMapping(value="/aggiungiTag", method=RequestMethod.GET)
 	public String aggiungiTag
@@ -272,6 +201,19 @@ public class UserController {
 	 * model.addAttribute("tags", tagService.ottieniTag(task)); return "tag.html"; }
 	 */
 
-	
+	@RequestMapping(value= {"/admin/users"},method=RequestMethod.GET)
+	public String listaUtenti(Model model) {
+		User loggedUser = sessionData.getLoggedUser();
+		List<Credenziali> tuttiCredenziali = this.credenzialiService.getTuttiCredenziali();
+		model.addAttribute("loggedUser", loggedUser);
+		model.addAttribute("listaCredenziali", tuttiCredenziali);
+		return "tuttiUtenti";
+	}
+	@RequestMapping(value= {"/admin/users/{username}/delete"},method=RequestMethod.POST)
+	public String cancellaUtente(Model model, @PathVariable String username ) {
+		this.credenzialiService.eliminaCredenziali(username);
+		return "redirect:/admin/users";
+	}
+
 	
 }

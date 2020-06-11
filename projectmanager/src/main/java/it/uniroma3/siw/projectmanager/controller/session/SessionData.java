@@ -65,4 +65,18 @@ public class SessionData {
         //this.credenziali.setPassword("[PROTECTED]");
         this.user = this.credenziali.getUser();
     }
+    
+    
+    
+    public Credenziali getCredenzialiCorrenti() {
+		return credenziali;
+	}
+	
+	public void clear() {
+		this.credenziali = null;
+		this.user = null;
+	}
+    
+    
+    
 }

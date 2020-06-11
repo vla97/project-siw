@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.uniroma3.siw.projectmanager.controller.session.SessionData;
 import it.uniroma3.siw.projectmanager.model.Credenziali;
 import it.uniroma3.siw.projectmanager.model.User;
 import it.uniroma3.siw.projectmanager.service.CredenzialiService;
@@ -25,6 +26,9 @@ public class AutenticazioneController {
 	
 	@Autowired
 	CredenzialiValidator credenzialiValidator;
+	
+	@Autowired
+	private SessionData sessionData;
 	
 	@RequestMapping(value = {"/users/register"}, method = RequestMethod.GET)
 	public String showRegisterForm(Model model) {
@@ -50,4 +54,23 @@ public class AutenticazioneController {
 			}
 			return "registerUser";
 	}
+	
+	
+	@RequestMapping(value="/login", method = RequestMethod.GET)
+	public String login(Model model) {  
+		if(sessionData.getCredenzialiCorrenti() != null) {
+			model.addAttribute("user",sessionData.getLoggedUser());
+			model.addAttribute("credenziali",sessionData.getLoggedCredenziali());
+			return "redirect:/index";
+		}
+		return "login";
+	}
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logout(Model model) {
+		this.sessionData.clear();
+		return "index";
+	}
+	
+	
+	
 }

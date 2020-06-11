@@ -29,12 +29,14 @@ public class AutConfigurazione extends WebSecurityConfigurerAdapter{
 			.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
 			.anyRequest().authenticated()
 			.and().formLogin()
+			.loginPage("/login")
+			.loginProcessingUrl("/login")
 			.defaultSuccessUrl("/home")
 			.and().logout()
 			.logoutUrl("/logout")
+			.clearAuthentication(true).permitAll()
 			.logoutSuccessUrl("/index")
-			.invalidateHttpSession(true)
-			.clearAuthentication(true).permitAll();
+			.invalidateHttpSession(true);
 			
 			
 	}
