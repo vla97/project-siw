@@ -2,6 +2,7 @@ package it.uniroma3.siw.projectmanager.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -24,8 +25,9 @@ public class TagService {
 	}
 	
 	@Transactional 
-	public void ottieniTag(Tag tag) {
-		tagRepository.findById(tag.getId());
+	public Tag ottieniTag(Tag tag) {
+		Optional<Tag> opt = tagRepository.findById(tag.getId());
+		return opt.orElse(null);
 	}
 	
 	
@@ -33,6 +35,15 @@ public class TagService {
 	public List<Tag> ottieniTag(Task task) {
 		List<Tag> r = new ArrayList<>();
 		Iterable<Tag> i = tagRepository.findByTaskAssociati(task);
+		for(Tag tag : i)
+			r.add(tag);
+		return r;
+	}
+	
+	@Transactional 
+	public List<Tag> ottieniTag(Project project) {
+		List<Tag> r = new ArrayList<>();
+		Iterable<Tag> i = tagRepository.findByProject(project);
 		for(Tag tag : i)
 			r.add(tag);
 		return r;

@@ -178,15 +178,17 @@ public class UserController {
 	
 	@RequestMapping(value="/aggiungiTagP", method=RequestMethod.POST)
 	public String aggiungiTagP(Model model, @ModelAttribute("id") Long id, @ModelAttribute("tag") Tag tag ) {
+		
+		
 		Project project = projectService.ottieniProgetto(id);
-		
-		model.addAttribute("project", project);
-		
 		tagService.salvaTag(tag);
 		//project.addTag(tag);
-		projectService.aggiungiTag(project, tag);
+		projectService.aggiungiTag(project,tagService.ottieniTag(tag));
 		projectService.salvaProgetto(project);
-		model.addAttribute("tag", tag);
+		model.addAttribute("project", project);
+		model.addAttribute("tags", tagService.ottieniTag(project));
+		
+		
 		
 		return "tagProgetto.html";
 	}
@@ -209,7 +211,7 @@ public class UserController {
 		model.addAttribute("listaCredenziali", tuttiCredenziali);
 		return "tuttiUtenti";
 	}
-	@RequestMapping(value= {"/admin/users/{username}/delete"},method=RequestMethod.POST)
+	@RequestMapping(value= {"/admin/users/{username}/delete"}, method=RequestMethod.POST)
 	public String cancellaUtente(Model model, @PathVariable String username ) {
 		this.credenzialiService.eliminaCredenziali(username);
 		return "redirect:/admin/users";

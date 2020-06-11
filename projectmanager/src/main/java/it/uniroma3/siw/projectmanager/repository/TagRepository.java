@@ -10,6 +10,7 @@ import it.uniroma3.siw.projectmanager.model.Task;
 
 public interface TagRepository extends CrudRepository<Tag, Long> {
 	public List<Tag> findByTaskAssociati(Task task);
+	public List<Tag> findByProject(Project project);
 	
 
 }
