@@ -112,4 +112,6 @@ public class Tag {
 	public void setTaskAssociati(List<Task> taskAssociati) {
 		this.taskAssociati = taskAssociati;
 	}
+
+	
 }

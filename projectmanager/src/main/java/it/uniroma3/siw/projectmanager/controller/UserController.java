@@ -105,6 +105,7 @@ public class UserController {
 		Project project = projectService.ottieniProgetto(id);
 			model.addAttribute("project", project);
 			model.addAttribute("tasks",taskService.ottieniTask( projectService.ottieniProgetto(id)));
+			
 			return "specificaProgetto.html";
 		}
 	
@@ -196,13 +197,15 @@ public class UserController {
 		
 		Project project = projectService.ottieniProgetto(id);
 		
-	
+		tag.setProjectOwner(project);
+		//project.setTagProgetti(tagService.ottieniTag(tag.getProjectOwner()));
 		tagService.salvaTag(tag);
 		
 		//project.addTag(tagService.ottieniTag(tag.getId()));
-		projectService.aggiungiTag(project, tagService.ottieniTag(tag.getId()));
+		projectService.aggiungiTag(project, tagService.ottieniTag(id));
 		projectService.salvaProgetto(project);
-		model.addAttribute("tags", tagService.ottieniTag(project));
+		model.addAttribute("project", project);
+		model.addAttribute("tags", tagService.ottieniTag(tag.getProjectOwner()));
 		
 		
 		
