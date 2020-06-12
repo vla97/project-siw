@@ -196,7 +196,9 @@ public class UserController {
 		
 		Project project = projectService.ottieniProgetto(id);
 		
+	
 		tagService.salvaTag(tag);
+		
 		//project.addTag(tagService.ottieniTag(tag.getId()));
 		projectService.aggiungiTag(project, tagService.ottieniTag(tag.getId()));
 		projectService.salvaProgetto(project);

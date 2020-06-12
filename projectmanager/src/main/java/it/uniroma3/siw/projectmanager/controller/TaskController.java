@@ -141,4 +141,30 @@ public class TaskController {
 		return "task";
 		
 	}
+	
+	@RequestMapping(value="/commentaTask", method=RequestMethod.GET)
+	public String commenta(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2 ) {
+		model.addAttribute("project",projectService.ottieniProgetto(id1));
+		model.addAttribute("task", taskService.ottieniTask(id2));
+		return"formCommento";
+	}
+	
+	@RequestMapping(value="/aggiungiCommento", method=RequestMethod.POST)
+	public String aggiungiCommenta(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
+			@RequestParam("commento") String commento) {
+		User loggedUser = sessionData.getLoggedUser();
+		Project project = projectService.ottieniProgetto(id1);
+		Task task = taskService.ottieniTask(id2);
+		task.setCommento(commento);
+		
+		taskService.salvaTask(task);
+		model.addAttribute("project", project);
+		
+		model.addAttribute("tasks", taskService.ottieniTask(loggedUser));
+		
+		return"dettagliProgetto";
+	}
+	
+	
+	
 }
