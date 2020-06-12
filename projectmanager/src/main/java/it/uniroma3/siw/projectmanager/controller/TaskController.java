@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.projectmanager.controller.session.SessionData;
 import it.uniroma3.siw.projectmanager.model.Project;
 import it.uniroma3.siw.projectmanager.model.Task;
+import it.uniroma3.siw.projectmanager.model.User;
 import it.uniroma3.siw.projectmanager.service.ProjectService;
 import it.uniroma3.siw.projectmanager.service.TaskService;
+import it.uniroma3.siw.projectmanager.service.UserService;
 
 @Controller
 public class TaskController {
@@ -25,6 +27,8 @@ public class TaskController {
 	private TaskValidator taskValidator;
 	@Autowired
 	private TaskService taskService;
+	@Autowired
+	private UserService userService;
 	@Autowired
 	SessionData sessionData;
 	
@@ -112,14 +116,29 @@ public class TaskController {
 	}
 	
 	@RequestMapping(value="/condividiTask", method=RequestMethod.GET)
-	public String condividiTask(Model model, @ModelAttribute("task") Task task, @ModelAttribute("id") Long id ) {
-		Project project = projectService.ottieniProgetto(id);
+	public String condividiTask(Model model, @ModelAttribute("task") Task task, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 		
-		model.addAttribute("project", project);
-		model.addAttribute("tasks", project.getTasks());
-		taskService.salvaTask(task);
+		
+		model.addAttribute("project",projectService.ottieniProgetto(id1));
+		model.addAttribute("task", taskService.ottieniTask(id2));
+		model.addAttribute("user", new User());
+		return "condividiTaskForm";
+		
+	}
 	
-		projectService.salvaProgetto(project);
-		return "specificaProgetto.html";
+	@RequestMapping(value="/condividiT", method=RequestMethod.POST)
+	public String condividiT(Model model, @ModelAttribute("user") User user, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2 ) {
+		
+		
+		Project project = projectService.ottieniProgetto(id1);
+		Task task = taskService.ottieniTask(id2);
+		taskService.aggiungiMembro(task, userService.ottieniUtentePerUsername(user.getUsername()));
+		taskService.salvaTask(task);
+		model.addAttribute("project", project);
+		model.addAttribute("tasks", taskService.ottieniTask(project));
+		
+
+		return "task";
+		
 	}
 }

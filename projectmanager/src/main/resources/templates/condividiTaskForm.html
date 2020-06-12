@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div>
+		<h4>CONDIVISIONE:</h4>
+	</div>
+	<form th:action="@{/condividiT(id1=${project.id}, id2=${task.id})}" method="POST" th:object="${user}">
+		
+		<table>
+			<tr>
+				<td>Username:</td>
+				<td><input type="text" th:field="*{username}" placeholder ="inserisci" /></td>
+			</tr>		
+			<tr>
+				<td><button type="submit">Invio</button></td>
+			</tr>
+		</table>
+
+	</form>
+	<a th:href="@{/progetto}"><button type="submit">Torna indietro</button></a>
+
+
+</body>
+</html>

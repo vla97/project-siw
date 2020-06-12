@@ -102,10 +102,12 @@ public class UserController {
 	@RequestMapping(value = "/visualizzaProgetto", method = RequestMethod.GET)
 	public String visualizzaProgetto(@ModelAttribute("id") Long id, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
-		model.addAttribute("project", projectService.ottieniProgetto(id));
-		model.addAttribute("tasks",taskService.ottieniTask( projectService.ottieniProgetto(id)));
-		return "specificaProgetto.html";
-	}
+		Project project = projectService.ottieniProgetto(id);
+			model.addAttribute("project", project);
+			model.addAttribute("tasks",taskService.ottieniTask( projectService.ottieniProgetto(id)));
+			return "specificaProgetto.html";
+		}
+	
 	
 	@RequestMapping(value="/condividiProgetto", method = RequestMethod.GET)
 	public String condividiProgetto(Model model, @ModelAttribute("id") Long id ) {
@@ -123,6 +125,17 @@ public class UserController {
 		projectService.salvaProgetto(project);
 		model.addAttribute("projects", projectService.ottieniProgettiProprietari(loggedUser));
 		return "progetto.html";
+	}
+	
+	@RequestMapping(value="/visualizzaDettagli", method = RequestMethod.GET)
+	public String visualizzaDettagli(Model model, @ModelAttribute("id") Long id) {
+		User loggedUser = sessionData.getLoggedUser();
+		Project project = projectService.ottieniProgetto(id);
+		model.addAttribute("project", project);
+		model.addAttribute("tasks", taskService.ottieniTask(loggedUser));
+		
+		
+		return "dettagliProgetto.html";
 	}
 	
 
@@ -154,6 +167,8 @@ public class UserController {
 	}
 	
 	
+	
+	
 	@RequestMapping(value="/visualizzaTag", method=RequestMethod.GET)
 	public String visTag(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2, @ModelAttribute("tag") Tag tag) {
 		Project project = projectService.ottieniProgetto(id1);
@@ -179,13 +194,12 @@ public class UserController {
 	@RequestMapping(value="/aggiungiTagP", method=RequestMethod.POST)
 	public String aggiungiTagP(Model model, @ModelAttribute("id") Long id, @ModelAttribute("tag") Tag tag ) {
 		
-		
 		Project project = projectService.ottieniProgetto(id);
+		
 		tagService.salvaTag(tag);
-		//project.addTag(tag);
-		projectService.aggiungiTag(project,tagService.ottieniTag(tag));
+		//project.addTag(tagService.ottieniTag(tag.getId()));
+		projectService.aggiungiTag(project, tagService.ottieniTag(tag.getId()));
 		projectService.salvaProgetto(project);
-		model.addAttribute("project", project);
 		model.addAttribute("tags", tagService.ottieniTag(project));
 		
 		

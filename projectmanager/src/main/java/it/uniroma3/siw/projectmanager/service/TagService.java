@@ -25,8 +25,8 @@ public class TagService {
 	}
 	
 	@Transactional 
-	public Tag ottieniTag(Tag tag) {
-		Optional<Tag> opt = tagRepository.findById(tag.getId());
+	public Tag ottieniTag(Long id) {
+		Optional<Tag> opt = tagRepository.findById(id);
 		return opt.orElse(null);
 	}
 	
@@ -43,7 +43,7 @@ public class TagService {
 	@Transactional 
 	public List<Tag> ottieniTag(Project project) {
 		List<Tag> r = new ArrayList<>();
-		Iterable<Tag> i = tagRepository.findByProject(project);
+		Iterable<Tag> i = tagRepository.findByProjectOwner(project);
 		for(Tag tag : i)
 			r.add(tag);
 		return r;

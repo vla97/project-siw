@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div>
+		<h4>INSERISCI COMMENTO:</h4>
+	</div>
+	<form th:action="@{/aggiungiCommento(id1=${project.id}, id2=${task.id})}" method="POST" th:object="${task}">
+		
+		<table>
+		
+		
+			<tr>
+		
+				<td>Commento:</td>
+				<td><input type="text" th:field="*{commento}" placeholder ="inserisci" /></td>
+			
+			</tr>		
+			<tr>
+				<td><button type="submit">Invio</button></td>
+			</tr>
+		</table>
+	</form>
+	<a th:href="@{/progetto}"><button type="submit"> home </button></a>
+</body>
+</html>	
+	
+	
+	
+				

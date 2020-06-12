@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import it.uniroma3.siw.projectmanager.model.Project;
 import it.uniroma3.siw.projectmanager.model.Tag;
 import it.uniroma3.siw.projectmanager.model.Task;
-
+import it.uniroma3.siw.projectmanager.model.User;
 import it.uniroma3.siw.projectmanager.repository.TaskRepository;
 
 @Service
@@ -84,9 +84,27 @@ public class TaskService {
 	}
 	
 	@Transactional
+	public void aggiungiMembro(Task task, User user) {
+		task.addMember(user);
+		taskRepository.save(task);
+		
+		
+	}
+	
+	@Transactional
 	public List<Task> ottieniTask(Tag tag){
 		List <Task> tasks = new ArrayList<>();
 		Iterable <Task> r = taskRepository.findByTagAssociati(tag);
+		for(Task task : r)
+			tasks.add(task);
+		return tasks;
+		
+	}
+	
+	@Transactional
+	public List<Task> ottieniTask(User user){
+		List <Task> tasks = new ArrayList<>();
+		Iterable <Task> r = taskRepository.findByMembers(user);
 		for(Task task : r)
 			tasks.add(task);
 		return tasks;

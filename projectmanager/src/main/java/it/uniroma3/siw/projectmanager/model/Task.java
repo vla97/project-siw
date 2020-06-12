@@ -24,13 +24,25 @@ public class Task {
 	private String nome;
 	@Column
 	private String descrizione;
+	
+	@ManyToMany
+	private List<User> members;
 
 	//@Column(nullable = false)
 
+
+
+
+
 	private Boolean isCompleto;
 	
-	//@Column(nullable = false, updatable=false)
+	//@Column(nullable = false)
 	private LocalDateTime dataCreazione;
+	
+	
+
+
+
 	private String commento;
 
 	@ManyToMany
@@ -134,6 +146,19 @@ public class Task {
 		this.project = project;
 	}
 
+	
+	public List<User> getMembers() {
+		return members;
+	}
+	
+	
+	public void setMembers(List<User> members) {
+		this.members = members;
+	}
+	
+	public void addMember(User user) {
+		this.members.add(user);
+	}
 
 	@Override
 	public int hashCode() {

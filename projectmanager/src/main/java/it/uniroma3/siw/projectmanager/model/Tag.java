@@ -27,9 +27,10 @@ public class Tag {
 	@ManyToMany(mappedBy="tagAssociati")
 	private List<Task> taskAssociati;
 	@ManyToOne
-	private Project project;
+	private Project projectOwner;
 	//COSTRUTTORI
 	
+
 	public Tag() {}
 	
 	public Tag(String nome, String colore, String descrizione) {
@@ -71,6 +72,13 @@ public class Tag {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
+	public Project getProjectOwner() {
+		return projectOwner;
+	}
+	
+	public void setProjectOwner(Project projectOwner) {
+		this.projectOwner = projectOwner;
+	}
 
 	@Override
 	public int hashCode() {
@@ -104,13 +112,4 @@ public class Tag {
 	public void setTaskAssociati(List<Task> taskAssociati) {
 		this.taskAssociati = taskAssociati;
 	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-	
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Scheda Progetto</title>
+</head>
+
+<body>
+		<h1>Scheda progetto:</h1>
+		
+		
+		<ul th:object=${project}>
+		NOME: 	<li th:text="*{name}"></li>
+		PROPRIETARIO:<li th:text="*{owner}"></li>
+		MEMBRI:<li th:text="*{members}"></li>
+		TASKS:<li th:each="task : ${tasks}">
+		<span th:text = "|${task.nome} ${task.descrizione} ${task.commento}|"></span><a th:href="@{/commentaTask(id1=${project.id}, id2=${task.id})}"><button type="submit">Commenta Task</button></a></li>
+		
+		
+	
+		</ul>
+		<a th:href="@{/progetto}"><button type="submit"> home </button></a>
+		
+
+
+</body>
+
+
+
+</html>
