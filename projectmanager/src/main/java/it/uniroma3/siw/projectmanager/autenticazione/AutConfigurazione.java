@@ -18,7 +18,7 @@ import static it.uniroma3.siw.projectmanager.model.Credenziali.ADMIN_ROLE;
 @EnableWebSecurity
 public class AutConfigurazione extends WebSecurityConfigurerAdapter{
 	@Autowired
-	DataSource datasourse;
+	DataSource dataSource;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -44,7 +44,7 @@ public class AutConfigurazione extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
-				.dataSource(this.datasourse)
+				.dataSource(this.dataSource)
 				.authoritiesByUsernameQuery("SELECT username, role FROM credenziali WHERE username=?")
 				.usersByUsernameQuery("SELECT username, password, 1 as enable FROM credenziali WHERE username=?");
 				

@@ -202,7 +202,7 @@ public class UserController {
 		tagService.salvaTag(tag);
 		
 		//project.addTag(tagService.ottieniTag(tag.getId()));
-		projectService.aggiungiTag(project, tagService.ottieniTag(id));
+		//projectService.aggiungiTag(project, tagService.ottieniTag(id));
 		projectService.salvaProgetto(project);
 		model.addAttribute("project", project);
 		model.addAttribute("tags", tagService.ottieniTag(tag.getProjectOwner()));

@@ -113,5 +113,10 @@ public class Tag {
 		this.taskAssociati = taskAssociati;
 	}
 
+	@Override
+	public String toString() {
+		return nome + ", " + colore + ", " + descrizione;
+	}
+
 	
 }
