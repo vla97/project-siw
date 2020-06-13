@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div>
+		<h4>INSERISCI I NUOVI DATI DEL PROGETTO:</h4>
+	</div>
+	<form th:action="@{/aggiornaP(id=${project.id})}" method="POST" th:object="${project}">
+		
+		<table>
+			<tr>
+				<td><label>Nome:</label>
+				<td><input type="text" th:field="*{name}" placeholder="NAME" value="*{name}"/></td>
+				
+			</tr>		
+			<tr>
+				<td><button type="submit">Invio</button></td>
+			</tr>
+		</table>
+	</form>
+	<a th:href="@{/progetto}"><button type="submit"> home </button></a>
+</body>
+</html>

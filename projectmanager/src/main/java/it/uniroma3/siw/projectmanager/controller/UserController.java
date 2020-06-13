@@ -98,9 +98,33 @@ public class UserController {
 		model.addAttribute("projectsVisi", projectService.trovaProgettiMembro(loggedUser));
 		return "progetto.html";
 	}
+	
+	@RequestMapping(value = "/aggiornaProgetto", method = RequestMethod.GET)
+	public String aggiornaProgetto(@ModelAttribute("id") Long id, Model model) {
+		Project project = projectService.ottieniProgetto(id);
+		model.addAttribute("project", project);
+		
+			
+			return "aggiornaProgetto.html";
+		}
+	
+	@RequestMapping(value = "/aggiornaP", method = RequestMethod.POST)
+	public String aggiornaP(@ModelAttribute("id") Long id, Model model, @RequestParam ("name") String name) {
+		User loggedUser = sessionData.getLoggedUser();
+		Project project = projectService.ottieniProgetto(id);
+		project.setName(name);
+		projectService.salvaProgetto(project);
+		model.addAttribute("project", project);
+	
+		
+			
+		return "redirect:/visualizzaProgetto/"+project.getId();
+		}
+	
+	
 
-	@RequestMapping(value = "/visualizzaProgetto", method = RequestMethod.GET)
-	public String visualizzaProgetto(@ModelAttribute("id") Long id, Model model) {
+	@RequestMapping(value = "/visualizzaProgetto/{id}", method = RequestMethod.GET)
+	public String visualizzaProgetto(@PathVariable Long id, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = projectService.ottieniProgetto(id);
 			model.addAttribute("project", project);
