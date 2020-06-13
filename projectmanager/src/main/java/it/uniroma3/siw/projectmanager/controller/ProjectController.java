@@ -21,12 +21,16 @@ import it.uniroma3.siw.projectmanager.service.UserService;
 
 @Controller
 public class ProjectController {
+	
 	@Autowired
 	private ProjectService projectService;
+	
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
 	private TaskService taskService;
+	
 	@Autowired
 	private ProjectValidator projectValidator;
 
@@ -78,7 +82,6 @@ public class ProjectController {
 
 		Project project = projectService.ottieniProgetto(id);
 		model.addAttribute("project", project);
-
 		return "aggiornaProgetto.html";
 	}
 
@@ -89,7 +92,6 @@ public class ProjectController {
 		project.setName(name);
 		projectService.salvaProgetto(project);
 		model.addAttribute("project", project);
-
 		return "redirect:/visualizzaProgetto/" + project.getId();
 	}
 
@@ -99,7 +101,6 @@ public class ProjectController {
 		Project project = projectService.ottieniProgetto(id);
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", taskService.ottieniTask(projectService.ottieniProgetto(id)));
-
 		return "specificaProgetto.html";
 	}
 
@@ -130,7 +131,6 @@ public class ProjectController {
 		Project project = projectService.ottieniProgetto(id);
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", taskService.ottieniTask(loggedUser));
-
 		return "dettagliProgetto.html";
 	}
 

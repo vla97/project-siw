@@ -14,10 +14,7 @@ import it.uniroma3.siw.projectmanager.service.UserService;
 
 @Controller
 public class MainController {
-	@Autowired
-	private ProjectService projectService;
-	@Autowired
-	private UserService userService;
+
 	@Autowired
 	SessionData sessionData;
 
@@ -36,11 +33,5 @@ public class MainController {
 		return "home";
 	}
 
-	@RequestMapping(value = { "/admin" }, method = RequestMethod.GET)
-	public String admin(Model model) {
-		User user = sessionData.getLoggedUser();
-		model.addAttribute("user", user);
-		return "admin";
-	}
-
+	
 }

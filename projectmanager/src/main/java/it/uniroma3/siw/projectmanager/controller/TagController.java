@@ -17,13 +17,12 @@ import it.uniroma3.siw.projectmanager.service.TaskService;
 
 @Controller
 public class TagController {
-	// private UserValidator userValidator;
+
 	@Autowired
 	private ProjectService projectService;
 
 	@Autowired
 	private TaskService taskService;
-
 
 	@Autowired
 	private TagService tagService;
@@ -42,7 +41,6 @@ public class TagController {
 		model.addAttribute("task", task);
 		model.addAttribute("tag", new Tag());
 		return "formTag.html";
-
 	}
 
 	@RequestMapping(value = "/aggiungi", method = RequestMethod.POST)
@@ -52,12 +50,10 @@ public class TagController {
 		Project project = projectService.ottieniProgetto(id1);
 		Task task = taskService.ottieniTask(id2);
 		model.addAttribute("project", project);
-
 		tagService.salvaTag(tag);
 		taskService.aggiungiTag(task, tag);
 		taskService.salvaTask(task);
 		model.addAttribute("tags", tagService.ottieniTag(task));
-
 		return "tag.html";
 	}
 
@@ -76,27 +72,20 @@ public class TagController {
 	public String aggiungiTagProgetto(Model model, @ModelAttribute("id") Long id) {
 		
 		Project project = projectService.ottieniProgetto(id);
-
 		model.addAttribute("project", project);
-
 		model.addAttribute("tag", new Tag());
 		return "formTagProgetto.html";
-
 	}
 
 	@RequestMapping(value = "/aggiungiTagP", method = RequestMethod.POST)
 	public String aggiungiTagP(Model model, @ModelAttribute("id") Long id, @ModelAttribute("tag") Tag tag) {
 
 		Project project = projectService.ottieniProgetto(id);
-
 		tag.setProjectOwner(project);
-
 		tagService.salvaTag(tag);
-
 		projectService.salvaProgetto(project);
 		model.addAttribute("project", project);
 		model.addAttribute("tags", tagService.ottieniTag(tag.getProjectOwner()));
-
 		return "tagProgetto.html";
 	}
 

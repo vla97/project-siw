@@ -23,14 +23,10 @@ import it.uniroma3.siw.projectmanager.service.CredenzialiService;
 
 @Controller
 public class UserController {
-	// private UserValidator userValidator;
-
 
 	@Autowired
 	private CredenzialiService credenzialiService;
-
-
-
+	
 	@Autowired
 	SessionData sessionData;
 
@@ -42,11 +38,16 @@ public class UserController {
 		System.out.println(credenziali.getPassword());
 		model.addAttribute("user", loggedUser);
 		model.addAttribute("credenziali", credenziali);
-
 		return "user";
 	}
 
-	
+	@RequestMapping(value = { "/admin" }, method = RequestMethod.GET)
+	public String admin(Model model) {
+		User user = sessionData.getLoggedUser();
+		model.addAttribute("user", user);
+		return "admin";
+	}
+
 	@RequestMapping(value = { "/admin/users" }, method = RequestMethod.GET)
 	public String listaUtenti(Model model) {
 		
