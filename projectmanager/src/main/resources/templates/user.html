@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<h1>Mio Profilo</h1>
+<h1>Profilo:</h1>
     <table>
         <tr>
             <td>Username</td>
@@ -34,6 +34,6 @@
             <td th:text="${user.lastUpdateTimestamp}">...</td>
         </tr> -->
     </table>
-    <h2><a href="/home">Torna indietro</a></h2>
+    <h2><a th:href="@{/tornaIndietro}">Torna indietro</a></h2>
 </body>
 </html>
