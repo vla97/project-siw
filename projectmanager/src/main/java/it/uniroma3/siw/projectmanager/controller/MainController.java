@@ -14,42 +14,33 @@ import it.uniroma3.siw.projectmanager.service.UserService;
 
 @Controller
 public class MainController {
-	@Autowired 
+	@Autowired
 	private ProjectService projectService;
-	@Autowired 
+	@Autowired
 	private UserService userService;
 	@Autowired
-    SessionData sessionData;
-	
+	SessionData sessionData;
+
 	public MainController() {
 	}
-	
+
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public String Index(Model model) {
 		return "index";
 	}
-	@RequestMapping(value = {"/home"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
 		User user = sessionData.getLoggedUser();
 		model.addAttribute("user", user);
 		return "home";
 	}
-	
-	@RequestMapping(value = {"/admin"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/admin" }, method = RequestMethod.GET)
 	public String admin(Model model) {
 		User user = sessionData.getLoggedUser();
 		model.addAttribute("user", user);
 		return "admin";
 	}
-	
-	@RequestMapping(value = { "/progetto" }, method = RequestMethod.GET)
-	public String Progetto(Model model) {
-		 User loggedUser = sessionData.getLoggedUser();
-		 
-		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
-		model.addAttribute("projectsVisi", projectService.trovaProgettiMembro(loggedUser));
-		return "progetto";
-	}
-	
-	
+
 }
