@@ -3,6 +3,7 @@ package it.uniroma3.siw.projectmanager.model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,6 +46,7 @@ public class User {
 	
 	@ManyToMany(mappedBy = "members")
 	private List<Project> visibleProjects;
+	
 	
 	//COSTRUTTORI
 	
@@ -131,6 +133,7 @@ public class User {
 		this.visibleProjects = visibleProjects;
 	}
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -178,7 +181,7 @@ public class User {
 	public String toString() {
 		return username;
 	}
-	
+
 	
 	
 

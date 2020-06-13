@@ -54,6 +54,8 @@ public class UserService {
 			return r;
 		}
 		
+		
+		
 		/*@Transactional
 		public List<Project> ottieniProgettiCondivisi(User user){
 			List<Project> r = new ArrayList<>();
