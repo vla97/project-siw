@@ -12,13 +12,20 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import static it.uniroma3.siw.projectmanager.model.Credenziali.ADMIN_ROLE;
+import static it.uniroma3.siw.projectmanager.model.Credenziali.DEFAULT_ROLE;
+
 @Configuration
 @EnableWebSecurity
 public class AutConfigurazione extends WebSecurityConfigurerAdapter{
 	@Autowired
 	DataSource dataSource;
+	
+	@Autowired
+	  CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
+    
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -31,7 +38,8 @@ public class AutConfigurazione extends WebSecurityConfigurerAdapter{
 			.and().formLogin()
 			.loginPage("/login")
 			.loginProcessingUrl("/login")
-			.defaultSuccessUrl("/home")
+			//.defaultSuccessUrl(customizeAuthenticationSuccessHandler)
+			.successHandler(customizeAuthenticationSuccessHandler)
 			.and().logout()
 			.logoutUrl("/logout")
 			.clearAuthentication(true).permitAll()
@@ -40,6 +48,8 @@ public class AutConfigurazione extends WebSecurityConfigurerAdapter{
 			
 			
 	}
+	
+
 	
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {

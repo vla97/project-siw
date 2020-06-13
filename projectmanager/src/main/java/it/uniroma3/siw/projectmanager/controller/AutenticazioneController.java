@@ -1,5 +1,6 @@
 package it.uniroma3.siw.projectmanager.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,16 +57,15 @@ public class AutenticazioneController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model) {
-
-		if (sessionData.getCredenzialiCorrenti() != null) {
-			model.addAttribute("user", sessionData.getLoggedUser());
-			model.addAttribute("credenziali", sessionData.getLoggedCredenziali());
-
-			return "redirect:/home";
-		}
-		return "login";
-	}
+    public String loginPage(HttpServletRequest httpServletRequest, Model model) {
+        if(httpServletRequest.isUserInRole(ADMIN_ROLE)) {
+            return "admin";
+        } else if(httpServletRequest.isUserInRole(DEFAULT_ROLE)) {
+            return "home";
+        } else {
+            return "login";
+        }
+    }
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(Model model) {

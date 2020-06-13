@@ -212,16 +212,6 @@ public class UserController {
 		return "tagProgetto.html";
 	}
 	
-	
-	/*
-	 * @RequestMapping(value="/visualizzaTag", method=RequestMethod.GET) public
-	 * String visTagProgetto(Model model, @ModelAttribute("id1") Long
-	 * id1, @ModelAttribute("id2") Long id2, @ModelAttribute("tag") Tag tag) {
-	 * Project project = projectService.ottieniProgetto(id1); Task task =
-	 * taskService.ottieniTask(id2); model.addAttribute("project", project);
-	 * model.addAttribute("tags", tagService.ottieniTag(task)); return "tag.html"; }
-	 */
-
 	@RequestMapping(value= {"/admin/users"},method=RequestMethod.GET)
 	public String listaUtenti(Model model) {
 		User loggedUser = sessionData.getLoggedUser();
@@ -230,9 +220,11 @@ public class UserController {
 		model.addAttribute("listaCredenziali", tuttiCredenziali);
 		return "tuttiUtenti";
 	}
-	@RequestMapping(value= {"/admin/users/{username}/delete"}, method=RequestMethod.POST)
-	public String cancellaUtente(Model model, @PathVariable String username ) {
-		this.credenzialiService.eliminaCredenziali(username);
+
+	@RequestMapping(value= {"/admin/users/delete"}, method=RequestMethod.POST)
+	public String cancellaUtente(Model model, @ModelAttribute ("id") Long id ) {
+		
+		this.credenzialiService.cancellaCredenziali(id);
 		return "redirect:/admin/users";
 	}
 
