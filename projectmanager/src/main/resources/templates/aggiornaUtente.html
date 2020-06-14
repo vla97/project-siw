@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="https://www.thumeleaf.org">
+<head>
+	<title>ProjectManager</title>
+</head>
+<body>
+<h1>Aggiorna dati Utente</h1>
+<form id = "registerUserForm"
+		th:action="@{/aggiornaDatiUtente}"
+		method = "POST">
+		
+		<table>
+<!-- 			<tr>
+				<td><label for="userNameInput">Username</label>
+				<td><input id="userNameInput" type="text" placeholder="USERNAME" required
+							th:field="${credenzialiForm.username}"/></td>
+				<td th:if="${#fields.hasErrors('credenzialiForm.username')}"
+					th:errors="${credenzialiForm.username}" th:style="'color:red'"></td>
+			</tr>
+			<tr>
+				<td><label for="passwordInput">Password</label>
+				<td><input id="passwordInput" type="password" placeholder="PASSWORD" required
+							th:field="${credenzialiForm.password}"/></td>
+				<td th:if="${#fields.hasErrors('credenzialiForm.password')}"
+					th:errors="${credenzialiForm.password}" th:style="'color:red'"></td>
+			</tr> -->
+			<tr>
+				<td><label for="nameInput">Name</label>
+				<td><input id="nameInput" type="text" placeholder="NAME" required
+							th:field="${user.name}"/></td>
+				<!-- <td th:if="${#fields.hasErrors('userForm.name')}"
+					th:errors="${userForm.name}" th:style="'color:red'"></td> -->
+			</tr>
+			<tr>
+				<td><label for="surnameInput">Surname</label>
+				<td><input id="surnameInput" type="text" placeholder="SURNAME" required
+							th:field="${user.surname}"/></td>
+				<!-- <td th:if="${#fields.hasErrors('userForm.surname')}"
+					th:errors="${userForm.surname}" th:style="'color:red'"></td> -->
+			</tr>
+			<tr>
+				<td>
+				<button type="submit">Aggiorna</button>
+				</td>
+			</tr>
+		</table>
+</form>
+
+</body>
+
+</html>

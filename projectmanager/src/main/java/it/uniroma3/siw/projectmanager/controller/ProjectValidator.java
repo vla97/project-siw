@@ -1,13 +1,18 @@
 package it.uniroma3.siw.projectmanager.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.projectmanager.model.Project;
+import it.uniroma3.siw.projectmanager.service.ProjectService;
 
 @Component
-public class ProjectValidator implements Validator {
+public class ProjectValidator implements Validator { 
+	
+	@Autowired
+	ProjectService projectService;
 
 	final Integer MAX_NAME_LENGTH = 100;
 	final Integer MIN_NAME_LENGTH = 2;
@@ -22,6 +27,8 @@ public class ProjectValidator implements Validator {
 			errors.rejectValue("name", "required");
 		else if (nome.length() < MIN_NAME_LENGTH || nome.length() > MAX_NAME_LENGTH)
 			errors.rejectValue("name", "size");
+		else if (this.projectService.ottieniProgetto(nome)!=null)
+			errors.rejectValue("name", "duplicate");
 
 
 	}

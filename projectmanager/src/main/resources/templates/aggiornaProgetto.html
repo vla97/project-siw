@@ -6,13 +6,14 @@
 	<div>
 		<h4>INSERISCI I NUOVI DATI DEL PROGETTO:</h4>
 	</div>
-	<form th:action="@{/aggiornaP(id=${project.id})}" method="POST" th:object="${project}">
+	<form id="registerProjectForm" th:action="@{/aggiornaP{id}(id=${project.id})}" method="POST" th:object="${project}">
 		
 		<table>
 			<tr>
-				<td><label>Nome:</label>
-				<td><input type="text" th:field="*{name}" placeholder="NAME" value="*{name}"/></td>
-				
+				<td><label for="projectNameInput">Nome:</label>
+				<td><input id="projectNameInput" type="text" th:field="*{name}" placeholder="NAME" value="*{name}" required/></td>
+				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+					th:style="'color:red'"></td>
 			</tr>		
 			<tr>
 				<td><button type="submit">Invio</button></td>

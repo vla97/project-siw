@@ -153,7 +153,7 @@ public class TaskController {
 		task.setCommento(commento);		
 		taskService.salvaTask(task);
 		model.addAttribute("project", project);		
-		model.addAttribute("tasks", taskService.ottieniTask(loggedUser));		
+		model.addAttribute("tasks", taskService.ottieniTask(project));		
 		return"dettagliProgetto";
 	}
 	

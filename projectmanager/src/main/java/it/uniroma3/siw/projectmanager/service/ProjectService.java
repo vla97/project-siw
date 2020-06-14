@@ -35,6 +35,11 @@ public class ProjectService {
 		Optional<Project> r = this.projectRepository.findById(id);
 		return r.orElse(null);
 	}
+	@Transactional
+	public Project ottieniProgetto(String name) {
+		Optional<Project> r = this.projectRepository.findByName(name);
+		return r.orElse(null);
+	}
 	
 	@Transactional
 	public List<Project> ottieniProgetti()
@@ -48,14 +53,7 @@ public class ProjectService {
 	
 	
 	
-	@Transactional
-	public void aggiornaProgetto( String nomeVecchio, String nomeNuovo) {
-		 Project r = projectRepository.findByName(nomeVecchio);
-		 r.setName(nomeNuovo);
-		 projectRepository.save(r);
-		 
-		
-	}
+
 	
 	@Transactional 
 	public Project condiviProgetto(Project progetto, User user) {

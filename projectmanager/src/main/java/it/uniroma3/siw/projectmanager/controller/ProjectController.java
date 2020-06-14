@@ -85,14 +85,17 @@ public class ProjectController {
 		return "aggiornaProgetto.html";
 	}
 
-	@RequestMapping(value = "/aggiornaP", method = RequestMethod.POST)
-	public String aggiornaP(@ModelAttribute("id") Long id, Model model, @RequestParam("name") String name) {
+	@RequestMapping(value = "/aggiornaP{id}", method = RequestMethod.POST)
+	public String aggiornaP(@Valid @RequestParam("name") String name,@Valid @ModelAttribute("project") Project project, 
+			@ModelAttribute("id") Long id, Model model) {
 
-		Project project = projectService.ottieniProgetto(id);
+		project = projectService.ottieniProgetto(id);
 		project.setName(name);
 		projectService.salvaProgetto(project);
 		model.addAttribute("project", project);
 		return "redirect:/visualizzaProgetto/" + project.getId();
+		
+		
 	}
 
 	@RequestMapping(value = "/visualizzaProgetto/{id}", method = RequestMethod.GET)
@@ -104,7 +107,7 @@ public class ProjectController {
 		return "specificaProgetto.html";
 	}
 
-	@RequestMapping(value = "/condividiProgetto", method = RequestMethod.GET)
+	@RequestMapping(value = "/condividiProgetto/{id}", method = RequestMethod.GET)
 	public String condividiProgetto(Model model, @ModelAttribute("id") Long id) {
 
 		model.addAttribute("project", projectService.ottieniProgetto(id));
@@ -121,7 +124,7 @@ public class ProjectController {
 		projectService.condiviProgetto(project, userService.ottieniUtentePerUsername(user.getUsername()));
 		projectService.salvaProgetto(project);
 		model.addAttribute("projects", projectService.ottieniProgettiProprietari(loggedUser));
-		return "progetto.html";
+		return "redirect:/progetto";
 	}
 
 	@RequestMapping(value = "/visualizzaDettagli", method = RequestMethod.GET)
@@ -130,7 +133,7 @@ public class ProjectController {
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = projectService.ottieniProgetto(id);
 		model.addAttribute("project", project);
-		model.addAttribute("tasks", taskService.ottieniTask(loggedUser));
+		model.addAttribute("tasks", taskService.ottieniTask(project));
 		return "dettagliProgetto.html";
 	}
 

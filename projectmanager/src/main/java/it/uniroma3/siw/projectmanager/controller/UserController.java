@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.projectmanager.model.Credenziali;
 
 import it.uniroma3.siw.projectmanager.model.User;
 import it.uniroma3.siw.projectmanager.service.CredenzialiService;
+import it.uniroma3.siw.projectmanager.service.UserService;
 
 
 
@@ -26,6 +27,8 @@ public class UserController {
 
 	@Autowired
 	private CredenzialiService credenzialiService;
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	SessionData sessionData;
@@ -39,6 +42,26 @@ public class UserController {
 		model.addAttribute("user", loggedUser);
 		model.addAttribute("credenziali", credenziali);
 		return "user";
+	}
+	
+	@RequestMapping(value = "/aggiornaUtente", method = RequestMethod.GET)
+	public String aggiornaUtente(Model model) {
+		User loggedUser = sessionData.getLoggedUser();
+		Credenziali credenziali = sessionData.getLoggedCredenziali();
+		model.addAttribute("user", loggedUser);
+		model.addAttribute("credenziali", credenziali);
+		return "aggiornaUtente";
+	}
+	@RequestMapping(value = "/aggiornaDatiUtente", method = RequestMethod.POST)
+	public String aggiornaDatiUtente(Model model, @RequestParam("name") String name,
+							@RequestParam("surname") String surname) {
+		
+		User user = sessionData.getLoggedUser();
+		
+		user.setName(name);
+		user.setSurname(surname);
+		userService.salvaUtente(user);
+		return "redirect:/users/me";
 	}
 
 	@RequestMapping(value = { "/admin" }, method = RequestMethod.GET)

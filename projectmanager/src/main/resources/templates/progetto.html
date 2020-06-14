@@ -2,56 +2,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-	<head>
-		<title>Progetti</title>
-	
-	</head>
-	<body>
-		<a href="creaProgetto"><input type="submit" name="comando" value ="CREA PROGETTO"></a>
+<head>
+<title>Progetti</title>
 
-	
-	
-		<h2>Progetti </h2>
-		<table>
-		
-		<tr>
-		
-		
-		<li th:each="project : ${projects}">
-		<span th:text = "|${project.name} ${project.owner} ${project.members} |">&emsp;&emsp;</span>
-		<a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit"> Elimina </button></a>
-		<a th:href="@{/aggiornaProgetto(id=${project.id})}"><button type="submit"> Aggiorna </button></a>			
-		<a th:href="@{/visualizzaProgetto/{id}(id=${project.id})}"><button type="submit"> Visualizza </button></a>
-		<a th:href="@{/condividiProgetto(id=${project.id})}"><button type = "submit">Condividi</button></a>
-		<a th:href="@{/gestisciTask(id=${project.id})}"><button type="submit">Gestisci Task</button></a>
-		<a th:href="@{/aggiungiTagProgetto(id=${project.id})}"><button type="submit">Aggiungi Tag</button></a>	
-		</li>
-		
-		
-		</tr>
-		</table>
-		
-		<br>
-		<br>
-		<br>
-		<br>
-		
-		<table>
-		
-		<tr>
-		
-		
-		<li th:each="project : ${projectsVisi}">
-		<span th:text = "|${project.name} ${project.owner} ${project.members} |"></span>	
-		<a th:href="@{/visualizzaDettagli(id=${project.id})}"><button type="submit"> Visualizza </button></a>
-		
-		</li>
-		
-		
-		
-		
-		</tr>
-		</table>
-		 <h2><a th:href="@{/tornaIndietro}">Torna indietro</a></h2>
-	</body>
+</head>
+<body>
+	<a href="creaProgetto"><input type="submit" name="comando" value="CREA PROGETTO"></a>
+
+	<h2>Progetti</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Nome progetto</th>
+				<th>Proprietario</th>
+				<th>Membri</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="project : ${projects}">
+				<td th:text="${project.name}"></td>
+				<td th:text="${project.owner}"></td>
+				<td th:text="${project.members}"></td>
+				<td><a th:href="@{/eliminaProgetto(id=${project.id})}"><button type="submit">Elimina</button></a> 
+					<a th:href="@{/aggiornaProgetto(id=${project.id})}"><button type="submit">Aggiorna</button></a> 
+					<a th:href="@{/visualizzaProgetto/{id}(id=${project.id})}"><button type="submit">Visualizza</button></a> 
+					<a th:href="@{/condividiProgetto/{id}(id=${project.id})}"><button type="submit">Condividi</button></a> 
+					<a th:href="@{/gestisciTask(id=${project.id})}"><button type="submit">Gestisci Task</button></a> 
+					<a th:href="@{/aggiungiTagProgetto(id=${project.id})}"><button type="submit">Aggiungi Tag</button></a></td>
+			</tr>
+		</tbody>
+
+	</table>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<h2>Progetti visibili</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Nome progetto</th>
+				<th>Proprietario</th>
+				<th>Membri</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="project : ${projectsVisi}">
+				<td th:text="${project.name}"></td>
+				<td th:text="${project.owner}"></td>
+				<td th:text="${project.members}"></td>
+				<td><a th:href="@{/visualizzaDettagli(id=${project.id})}"><button type="submit">Visualizza</button></a></td>
+			</tr>
+		</tbody>
+	</table>
+	<h2>
+		<a th:href="@{/tornaIndietro}">Torna indietro</a>
+	</h2>
+</body>
 </html>

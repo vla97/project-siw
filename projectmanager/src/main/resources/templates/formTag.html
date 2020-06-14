@@ -11,15 +11,21 @@
 		<table>
 			<tr>
 				<td>Nome:</td>
-				<td><input type="text" th:field="*{nome}" placeholder ="inserisci" /></td>
+				<td><input type="text" th:field="*{nome}" placeholder ="NOME" required/></td>
+				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+					th:style="'color:red'"></td>
 			</tr>
 			<tr>
 				<td>Colore:</td>
-				<td><input type="text" th:field="*{colore}" placeholder ="inserisci" /></td>
+				<td><input type="text" th:field="*{colore}" placeholder ="COLORE" required/></td>
+				<td th:if="${#fields.hasErrors('colore')}" th:errors="*{colore}"
+					th:style="'color:red'"></td>
 			</tr>
 			<tr>
 				<td>Descrizione:</td>
-				<td><input type="text" th:field="*{descrizione}" placeholder ="inserisci" /></td>
+				<td><input type="text" th:field="*{descrizione}" placeholder ="DESCRIZIONE" required/></td>
+				<td th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"
+					th:style="'color:red'"></td>
 			</tr>		
 			<tr>
 				

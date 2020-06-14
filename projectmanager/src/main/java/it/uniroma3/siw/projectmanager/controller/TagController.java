@@ -1,8 +1,11 @@
 package it.uniroma3.siw.projectmanager.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +29,9 @@ public class TagController {
 
 	@Autowired
 	private TagService tagService;
+	
+	@Autowired
+	private TagValidator tagValidator;
 
 	@Autowired
 	SessionData sessionData;
@@ -45,16 +51,20 @@ public class TagController {
 
 	@RequestMapping(value = "/aggiungi", method = RequestMethod.POST)
 	public String aggiungi(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
-			@ModelAttribute("tag") Tag tag) {
+			@Valid@ModelAttribute("tag") Tag tag, BindingResult tagBindingResult) {
 		
 		Project project = projectService.ottieniProgetto(id1);
 		Task task = taskService.ottieniTask(id2);
-		model.addAttribute("project", project);
-		tagService.salvaTag(tag);
-		taskService.aggiungiTag(task, tag);
-		taskService.salvaTask(task);
-		model.addAttribute("tags", tagService.ottieniTag(task));
-		return "tag.html";
+		tagValidator.validate(tag, tagBindingResult);
+		if(!tagBindingResult.hasErrors()) {
+			model.addAttribute("project", project);
+			tagService.salvaTag(tag);
+			taskService.aggiungiTag(task, tag);
+			taskService.salvaTask(task);
+			model.addAttribute("tags", tagService.ottieniTag(task));
+			return "tag.html";
+		}
+		return "formTag";
 	}
 
 	@RequestMapping(value = "/visualizzaTag", method = RequestMethod.GET)
@@ -78,15 +88,21 @@ public class TagController {
 	}
 
 	@RequestMapping(value = "/aggiungiTagP", method = RequestMethod.POST)
-	public String aggiungiTagP(Model model, @ModelAttribute("id") Long id, @ModelAttribute("tag") Tag tag) {
+	public String aggiungiTagP(Model model, @ModelAttribute("id") Long id, 
+			@ModelAttribute("tag") Tag tag, BindingResult tagBindingResult) {
 
 		Project project = projectService.ottieniProgetto(id);
-		tag.setProjectOwner(project);
-		tagService.salvaTag(tag);
-		projectService.salvaProgetto(project);
-		model.addAttribute("project", project);
-		model.addAttribute("tags", tagService.ottieniTag(tag.getProjectOwner()));
-		return "tagProgetto.html";
+		tagValidator.validate(tag, tagBindingResult);
+		if(!tagBindingResult.hasErrors()) {
+			tag.setProjectOwner(project);
+			tagService.salvaTag(tag);
+			projectService.salvaProgetto(project);
+			model.addAttribute("project", project);
+			model.addAttribute("tags", tagService.ottieniTag(tag.getProjectOwner()));
+			
+			return "tagProgetto.html";
+		}
+		return"formTagProgetto";
 	}
 
 }
