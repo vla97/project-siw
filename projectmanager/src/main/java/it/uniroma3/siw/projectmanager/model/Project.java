@@ -49,11 +49,9 @@ public class Project {
 		this.tasks = new ArrayList<>();
 		this.tagProgetti = new ArrayList<>();
 	}
-	public Project(Long id, String name, User owner) {
+	public Project(String name) {
 		this();
-		this.id = id;
-		this.name = name;
-		this.owner = owner;
+		this.name = name;	
 	}
 	
 	@PrePersist

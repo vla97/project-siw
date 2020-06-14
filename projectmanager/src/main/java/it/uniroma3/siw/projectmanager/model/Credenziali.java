@@ -30,6 +30,12 @@ public class Credenziali {
 	public Credenziali() {
 		
 	}
+	public Credenziali(String username, String password) {
+		this();
+		this.username = username;
+		this.password = password;
+	}
+	
 
 	public Long getId() {
 		return id;
