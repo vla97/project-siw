@@ -70,7 +70,7 @@ public class TaskController {
 			model.addAttribute("tasks", taskService.ottieniTask(project));
 			projectService.salvaProgetto(project);
 			return "task";
-		}
+		} 
 		projectService.salvaProgetto(project);
 		model.addAttribute("tasks", taskService.ottieniTask(project));
 		//return "formTask.html";
@@ -157,6 +157,23 @@ public class TaskController {
 		return"dettagliProgetto";
 	}
 	
-	
-	
+	@RequestMapping(value="/setStato", method=RequestMethod.POST)
+	public String setStato(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
+							@ModelAttribute("checkbox") Boolean checked) {
+		
+		
+		model.addAttribute("project",projectService.ottieniProgetto(id1));
+		Task task = taskService.ottieniTask(id2);
+		model.addAttribute("task", task);
+		
+		if(checked) {
+			taskService.setTaskCompleto(task);
+			taskService.salvaTask(task);
+		
+			return "redirect:/gestisciTask";
+		}
+		
+		else
+			return "redirect:/gestisciTask";
+	}
 }

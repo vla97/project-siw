@@ -133,8 +133,8 @@ public class ProjectController {
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = projectService.ottieniProgetto(id);
 		model.addAttribute("project", project);
-		model.addAttribute("tasks", taskService.ottieniTask(project));
+		model.addAttribute("tasks", taskService.ottieniTaskCondiviso(project, loggedUser));
 		return "dettagliProgetto.html";
-	}
+	} 
 
 }

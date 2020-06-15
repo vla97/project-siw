@@ -20,6 +20,9 @@ public class TaskService {
 	@Autowired
 	private TaskRepository taskRepository;
 	
+	@Autowired
+	private UserService userService;
+	
 	@Transactional
 	public Task ottieniTask(Long id) {
 		Optional<Task> r = this.taskRepository.findById(id);
@@ -30,7 +33,7 @@ public class TaskService {
 	public Task ottieniTaskPerNome(String nome) {
 		Optional<Task> r = this.taskRepository.findByNome(nome);
 		return r.orElse(null);
-	}
+	} 
 	
 	@Transactional
 	public List<Task> ottieniTask(Project project){
@@ -64,7 +67,7 @@ public class TaskService {
 	
 	@Transactional
 	public boolean setTaskCompleto(Task task) {
-		task.setIsCompleto(true);	
+		task.setIsCompleto();	
 		this.taskRepository.save(task);
 		return task.getIsCompleto();
 	}
@@ -107,6 +110,20 @@ public class TaskService {
 		Iterable <Task> r = taskRepository.findByMembers(user);
 		for(Task task : r)
 			tasks.add(task);
+		return tasks;
+		
+	}
+	
+	@Transactional
+	public List<Task> ottieniTaskCondiviso(Project project, User user){
+		List <Task> tasks = new ArrayList<>();
+		
+		Iterable <Task> r = taskRepository.findByMembers(user);
+		
+		for(Task task : r ) {
+			if(task.getProject().getName() == project.getName() )
+				tasks.add(task);
+		}
 		return tasks;
 		
 	}

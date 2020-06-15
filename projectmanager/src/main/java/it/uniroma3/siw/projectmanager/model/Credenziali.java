@@ -24,7 +24,7 @@ public class Credenziali {
 	private String password;
 	@Column(nullable = false, length = 10)
 	private String role;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL) 
 	private User user;
 	
 	public Credenziali() {

@@ -15,7 +15,7 @@
 		MEMBRI:<li th:text="*{members}"></li>
 		TAG:<li th:text="*{tagProgetti}"></li>
 		TASKS:<li th:each="task : ${tasks}">
-		<span th:text = "|${task.nome} ${task.descrizione} ${task.commento}|"></span></li>
+		<span th:text = "|${task.nome} ${task.descrizione} ${task.commento} ${task.isCompleto}|"></span></li>
 		
 	
 		</ul>

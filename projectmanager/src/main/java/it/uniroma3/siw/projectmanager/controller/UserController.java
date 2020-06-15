@@ -40,7 +40,7 @@ public class UserController {
 		Credenziali credenziali = sessionData.getLoggedCredenziali();
 		System.out.println(credenziali.getPassword());
 		model.addAttribute("user", loggedUser);
-		model.addAttribute("credenziali", credenziali);
+		model.addAttribute("credenziali", credenziali); 
 		return "user";
 	}
 	

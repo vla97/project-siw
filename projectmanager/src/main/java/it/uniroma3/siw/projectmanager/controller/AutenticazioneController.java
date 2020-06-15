@@ -25,7 +25,7 @@ public class AutenticazioneController {
 	CredenzialiService credenzialiService;
 
 	@Autowired
-	UserValidator userValidator;
+	UserValidator userValidator; 
 
 	@Autowired
 	CredenzialiValidator credenzialiValidator;

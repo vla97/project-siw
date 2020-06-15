@@ -26,7 +26,7 @@ public class CredenzialiValidator implements Validator{
 		String password = credenziali.getPassword().trim();
 		
 		if (username.isEmpty())
-			errors.rejectValue("username", "requred");
+			errors.rejectValue("username", "required");
 		else if (username.length() < MIN_PU_LENGTH || username.length() > MAX_PU_LENGTH)
 			errors.rejectValue("username", "size");
 		else if (this.credenzialiService.getCredenziali(username)!= null)

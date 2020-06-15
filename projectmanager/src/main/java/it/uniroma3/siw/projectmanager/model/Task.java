@@ -28,13 +28,8 @@ public class Task {
 	@ManyToMany
 	private List<User> members;
 
-	//@Column(nullable = false)
-
-
-
-
-
-	private Boolean isCompleto;
+	@Column
+	private Boolean isCompleto = false;
 	
 	//@Column(nullable = false)
 	private LocalDateTime dataCreazione;
@@ -63,6 +58,7 @@ public class Task {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.commento = commento;
+
 		
 		
 	}
@@ -75,7 +71,7 @@ public class Task {
 	
 	//GETTERS AND SETTERS
 	
-	public Long getId() {
+	public Long getId() { 
 		return id;
 	}
 
@@ -129,8 +125,8 @@ public class Task {
 	}
 
 
-	public void setIsCompleto(Boolean isCompleto) {
-		this.isCompleto = isCompleto;
+	public void setIsCompleto() {
+		this.isCompleto = true;
 	}
 	
 	public void aggiungiTag(Tag tag) {
@@ -204,7 +200,7 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return nome +" - " + descrizione + " - " + commento + " - " + project;
+		return nome +" - " + descrizione + " - " + commento + " - " + project + " - " + isCompleto;
 	}
 	
 
