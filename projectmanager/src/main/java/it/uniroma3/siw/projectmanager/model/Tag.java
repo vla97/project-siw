@@ -34,6 +34,7 @@ public class Tag {
 	public Tag() {}
 	
 	public Tag(String nome, String colore, String descrizione) {
+		this();
 		this.nome = nome;
 		this.colore = colore;
 		this.descrizione = descrizione;

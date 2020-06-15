@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import it.uniroma3.siw.projectmanager.model.Credenziali;
 import it.uniroma3.siw.projectmanager.model.Project;
+import it.uniroma3.siw.projectmanager.model.Tag;
 import it.uniroma3.siw.projectmanager.model.Task;
 import it.uniroma3.siw.projectmanager.model.User;
 import it.uniroma3.siw.projectmanager.repository.ProjectRepository;
@@ -22,6 +23,7 @@ import it.uniroma3.siw.projectmanager.repository.TaskRepository;
 import it.uniroma3.siw.projectmanager.repository.UserRepository;
 import it.uniroma3.siw.projectmanager.service.CredenzialiService;
 import it.uniroma3.siw.projectmanager.service.ProjectService;
+import it.uniroma3.siw.projectmanager.service.TagService;
 import it.uniroma3.siw.projectmanager.service.TaskService;
 import it.uniroma3.siw.projectmanager.service.UserService;
 
@@ -47,6 +49,8 @@ class ProjectmanagerApplicationTests {
   private ProjectService projectService;
   @Autowired
   private TaskService taskService;
+  @Autowired
+  private TagService tagService;
   
   
   
@@ -126,13 +130,28 @@ class ProjectmanagerApplicationTests {
     t1Update.setId(t1.getId());
     t1Update = taskService.salvaTask(t1Update);
     assertEquals(t1Update.getNome(), "task1Update");
+
+		/*
+		 * taskService.aggiungiMembro(t1Update, u2); t1Update =
+		 * taskService.salvaTask(t1Update); List<Task> taskCondivisi =
+		 * taskRepository.findByMembers(u2); assertEquals(taskCondivisi.size(), 1);
+		 */
     
-    taskService.aggiungiMembro(t2, u2);
-    List<Task> taskCondivisi = taskRepository.findByMembers(u2);
-    assertEquals(taskCondivisi.size(), 1);
-  
+    Tag tag1 = new Tag("Tag1","Blu","Prova tag1");
+    tagService.salvaTag(tag1);
+    taskService.aggiungiTag(t2, tag1);
+    List<Tag> tagsA = tagRepository.findByTaskAssociati(t2);
+    assertEquals(tagsA.size(), 1);
+    assertEquals(tagsA.get(0), tag1);
     
-   
+    Tag tag2 = new Tag("Tag2","Rosso","Prova tag2");
+    tag2.setProjectOwner(p2);
+    tagService.salvaTag(tag2);
+    List<Tag> tags = tagService.ottieniTag(p2);
+    assertEquals(tags.size(), 1);
+    assertEquals(tags.get(0), tag2);
+    
+    
   }
 
 }

@@ -35,7 +35,7 @@ public class TaskController {
 	
 	@Autowired
 	SessionData sessionData;
-	
+
 	
 	@RequestMapping(value = "/gestisciTask/{id}", method = RequestMethod.GET)
 	public String task(Model model, @ModelAttribute("id") Long id) {
@@ -132,7 +132,7 @@ public class TaskController {
 		taskService.salvaTask(task);
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", taskService.ottieniTask(project));
-		return "task";		
+		return "task";
 	}
 	
 	@RequestMapping(value="/commentaTask", method=RequestMethod.GET)

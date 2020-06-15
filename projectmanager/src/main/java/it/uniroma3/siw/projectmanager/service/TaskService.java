@@ -91,7 +91,6 @@ public class TaskService {
 		task.addMember(user);
 		taskRepository.save(task);
 		
-		
 	}
 	
 	@Transactional

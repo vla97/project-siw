@@ -88,7 +88,7 @@ public class TagController {
 	}
 
 	@RequestMapping(value = "/aggiungiTagP", method = RequestMethod.POST)
-	public String aggiungiTagP(Model model, @ModelAttribute("id") Long id, 
+	public String aggiungiTagP(Model model, @ModelAttribute("id") Long id,
 			@ModelAttribute("tag") Tag tag, BindingResult tagBindingResult) {
 
 		Project project = projectService.ottieniProgetto(id);
