@@ -155,18 +155,20 @@ public class TaskController {
 		model.addAttribute("project", project);		
 		model.addAttribute("tasks", taskService.ottieniTask(project));		
 		return"dettagliProgetto";
-	}
+	} 
 	
 	@RequestMapping(value="/setStato", method=RequestMethod.POST)
-	public String setStato(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
-							@ModelAttribute("task") Task task) {
+	public String setStato(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 		
 		Project project = projectService.ottieniProgetto(id1);
 		model.addAttribute("project",projectService.ottieniProgetto(id1));
+		Task task = taskService.ottieniTask(id2);
+		model.addAttribute("flag", task.getIsCompleto());
+		taskService.setTaskCompleto(task);
 		taskService.salvaTask(task);
 		model.addAttribute("task", task);
 		
-			return "redirect:/gestisciTask/"+ project.getId();
+		return "redirect:/gestisciTask/"+ project.getId();
 		
 	}
 }
