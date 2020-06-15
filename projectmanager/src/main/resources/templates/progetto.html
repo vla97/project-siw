@@ -28,7 +28,7 @@
 					<a th:href="@{/aggiornaProgetto(id=${project.id})}"><button type="submit">Aggiorna</button></a> 
 					<a th:href="@{/visualizzaProgetto/{id}(id=${project.id})}"><button type="submit">Visualizza</button></a> 
 					<a th:href="@{/condividiProgetto/{id}(id=${project.id})}"><button type="submit">Condividi</button></a> 
-					<a th:href="@{/gestisciTask(id=${project.id})}"><button type="submit">Gestisci Task</button></a> 
+					<a th:href="@{/gestisciTask/{id}(id=${project.id})}"><button type="submit">Gestisci Task</button></a> 
 					<a th:href="@{/aggiungiTagProgetto(id=${project.id})}"><button type="submit">Aggiungi Tag</button></a></td>
 			</tr>
 		</tbody>

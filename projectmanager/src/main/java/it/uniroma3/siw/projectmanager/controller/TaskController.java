@@ -37,7 +37,7 @@ public class TaskController {
 	SessionData sessionData;
 	
 	
-	@RequestMapping(value = "/gestisciTask", method = RequestMethod.GET)
+	@RequestMapping(value = "/gestisciTask/{id}", method = RequestMethod.GET)
 	public String task(Model model, @ModelAttribute("id") Long id) {
 		
 		Project project = projectService.ottieniProgetto(id);
@@ -161,12 +161,12 @@ public class TaskController {
 	public String setStato(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
 							@ModelAttribute("task") Task task) {
 		
-		
+		Project project = projectService.ottieniProgetto(id1);
 		model.addAttribute("project",projectService.ottieniProgetto(id1));
 		taskService.salvaTask(task);
 		model.addAttribute("task", task);
 		
-			return "redirect:/gestisciTask";
+			return "redirect:/gestisciTask/"+ project.getId();
 		
 	}
 }
