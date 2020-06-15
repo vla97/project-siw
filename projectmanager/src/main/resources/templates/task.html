@@ -34,8 +34,8 @@
 				<td th:text ="${task.commento}">... </td> &emsp;&emsp;
 				
 				<td>
-					<form th:action="@{/setStato(id1=${project.id},id2=${task.id})}" method ="POST">
-					<input type="checkbox" th:name="checkbox" th:value="${task.isCompleto}">
+					<form th:action="@{/setStato(id1=${project.id},id2=${task.id})}" th:object="${task}" method ="POST">
+					<input type="checkbox" th:name="checkbox" th:field="*{isCompleto}" th:value="true">
 						 <label for="check"></label>
 						 <input type="submit" value="submit" />
 					</form>

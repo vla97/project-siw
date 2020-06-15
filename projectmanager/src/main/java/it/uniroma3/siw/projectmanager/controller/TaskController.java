@@ -159,21 +159,14 @@ public class TaskController {
 	
 	@RequestMapping(value="/setStato", method=RequestMethod.POST)
 	public String setStato(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
-							@ModelAttribute("checkbox") Boolean checked) {
+							@ModelAttribute("task") Task task) {
 		
 		
 		model.addAttribute("project",projectService.ottieniProgetto(id1));
-		Task task = taskService.ottieniTask(id2);
+		taskService.salvaTask(task);
 		model.addAttribute("task", task);
 		
-		if(checked) {
-			taskService.setTaskCompleto(task);
-			taskService.salvaTask(task);
-		
 			return "redirect:/gestisciTask";
-		}
 		
-		else
-			return "redirect:/gestisciTask";
 	}
 }
