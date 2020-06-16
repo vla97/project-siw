@@ -12,56 +12,55 @@
 	<br>
 	<br>
 
-
-
-
-
 	<table>
 		<thead>
 			<tr>
-				<th> Nome Task </th>
-				<th> Descrizione </th>
-				<th> Commento </th>
-				<th> Completo </th>
+				<th>Nome Task</th>
+				<th>Descrizione</th>
+				<th>Commento</th>
+				<th>Completo</th>
 			</tr>
 		</thead>
-		
+
 		<tbody>
 
 			<tr th:each="task : ${tasks}">
-				<td th:text = "${task.nome}">... </td>
-				<td th:text =  "${task.descrizione}">... </td>
-				<td th:text ="${task.commento}">... </td> &emsp;&emsp;
-				
+				<td th:text="${task.nome}">...</td>
+				<td th:text="${task.descrizione}">...</td>
+				<td th:text="${task.commento}">...</td> &emsp;&emsp;
+
 				<td>
-					<form th:action="@{/setStato(id1=${project.id},id2=${task.id})}" method ="POST">
-					<input type="checkbox" th:name="checkbox" th:value="${task.isCompleto}" onclick="submit();" th:checked="${flag}">
-					
-						 
+					<form th:action="@{/setStato(id1=${project.id},id2=${task.id})}"
+						method="POST">
+						<input type="checkbox" th:name="checkbox"
+							th:value="${task.isCompleto}" onclick="submit();"
+							th:checked="${flag}">
+
+
 					</form>
 				</td>
-				
-				
-				<td> <a th:href="@{/eliminaTask(id1=${project.id},id2=${task.id})}"><button
-						type="submit">Elimina</button></a> <a
-				th:href="@{/aggiornaTask(id1=${project.id},id2=${task.id})}"><button
-						type="submit">Aggiorna</button></a> <a
-				th:href="@{/condividiTask(id1=${project.id},id2=${task.id})}"><button
-						type="submit">Condividi</button></a> <a
-				th:href="@{/visualizzaTag(id1=${project.id},id2=${task.id})}"><button
-						type="submit">Tag</button></a> <a
-				th:href="@{/aggiungiTag(id1=${project.id},id2=${task.id})}"><button
-						type="submit">Aggiungi Tag</button></a>
-				</td>
-						
-			
+
+
+				<td><a
+					th:href="@{/eliminaTask(id1=${project.id},id2=${task.id})}"><button
+							type="submit">Elimina</button></a> <a
+					th:href="@{/aggiornaTask(id1=${project.id},id2=${task.id})}"><button
+							type="submit">Aggiorna</button></a> <a
+					th:href="@{/condividiTask(id1=${project.id},id2=${task.id})}"><button
+							type="submit">Condividi</button></a> <a
+					th:href="@{/visualizzaTag(id1=${project.id},id2=${task.id})}"><button
+							type="submit">Tag</button></a> <a
+					th:href="@{/aggiungiTag(id1=${project.id},id2=${task.id})}"><button
+							type="submit">Aggiungi Tag</button></a></td>
+
+
 			</tr>
 
 
 
 
 
-		</tr>
+			</tr>
 	</table>
 	<br>
 	<br>

@@ -1,6 +1,5 @@
 package it.uniroma3.siw.projectmanager;
 
-
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
@@ -27,45 +26,39 @@ import it.uniroma3.siw.projectmanager.service.TagService;
 import it.uniroma3.siw.projectmanager.service.TaskService;
 import it.uniroma3.siw.projectmanager.service.UserService;
 
-
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
 class ProjectmanagerApplicationTests {
-  
-  @Autowired
-  private UserRepository userRepository;
-  @Autowired
-  private ProjectRepository projectRepository;
-  @Autowired
-  private TaskRepository taskRepository;
-  @Autowired
-  private TagRepository tagRepository;
-  @Autowired
-  private CredenzialiService credenzialiService;
-  @Autowired
-  private UserService userService;
-  @Autowired
-  private ProjectService projectService;
-  @Autowired
-  private TaskService taskService;
-  @Autowired
-  private TagService tagService;
-  
-  
-  
-  @Before
-  public void deletAll() {
-    System.out.println("Eliminando il contenuto dei repository...");
-    this.userRepository.deleteAll();
-    this.projectRepository.deleteAll();
-    this.taskRepository.deleteAll();
-    System.out.println("Fatto.");
-  }
-  
-  
 
-  @Test
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private ProjectRepository projectRepository;
+	@Autowired
+	private TaskRepository taskRepository;
+	@Autowired
+	private TagRepository tagRepository;
+	@Autowired
+	private CredenzialiService credenzialiService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private ProjectService projectService;
+	@Autowired
+	private TaskService taskService;
+	@Autowired
+	private TagService tagService;
+
+	@Before
+	public void deletAll() {
+		System.out.println("Eliminando il contenuto dei repository...");
+		this.userRepository.deleteAll();
+		this.projectRepository.deleteAll();
+		this.taskRepository.deleteAll();
+		System.out.println("Fatto.");
+	}
+
+	@Test
   void test() {
     //creazione due utenti
     User u1 = new User("and98","and98","Andrea","Moscato");
@@ -122,20 +115,20 @@ class ProjectmanagerApplicationTests {
     taskService.salvaTask(t2);
     taskService.cancellaTask(t1);
     List<Task> tasks = taskRepository.findByProject(p1);
-    assertEquals(tasks.size(), 1);
+    assertEquals(tasks.size(), 1); 
     assertEquals(tasks.get(0), t2);
     
  
-    Task t1Update = new Task("task1Update", "verde", "uno");
-    t1Update.setId(t1.getId());
-    t1Update = taskService.salvaTask(t1Update);
-    assertEquals(t1Update.getNome(), "task1Update");
+    Task t2Update = new Task("task2Update", "blue", "due");
+    t2Update.setId(t2.getId());
+    t2Update = taskService.salvaTask(t2Update);
+    assertEquals(t2Update.getNome(), "task2Update");
 
-		/*
-		 * taskService.aggiungiMembro(t1Update, u2); t1Update =
-		 * taskService.salvaTask(t1Update); List<Task> taskCondivisi =
-		 * taskRepository.findByMembers(u2); assertEquals(taskCondivisi.size(), 1);
-		 */
+	taskService.aggiungiMembro(t2Update, u2);
+	taskService.salvaTask(t2Update);
+	List<Task> taskCondivisi = taskRepository.findByMembers(u2); 
+	assertEquals(taskCondivisi.size(), 1);
+		
     
     Tag tag1 = new Tag("Tag1","Blu","Prova tag1");
     tagService.salvaTag(tag1);

@@ -11,6 +11,7 @@ import it.uniroma3.siw.projectmanager.model.Task;
 import it.uniroma3.siw.projectmanager.model.User;
 
 public interface TaskRepository extends CrudRepository<Task, Long> {
+	
 	public Optional<Task> findByNome(String nome);
 	public List<Task> findByProject(Project project);
 	public List<Task> findByTagAssociati(Tag tag);

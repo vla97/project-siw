@@ -5,31 +5,24 @@
 	<div>
 		<h4>TAG</h4>
 	</div>
-		
 
-	
-	
-	
-		
-		
-		<table>
-		
+	<table>
+
 		<tr>
-		
-		<li th:each="tag : ${tags}">
-		<span th:text = "|${tag.nome} ${tag.colore} ${tag.descrizione}|"></span>&emsp;&emsp;
-		
-		
-		
-		
+
+			<li th:each="tag : ${tags}"><span
+				th:text="|${tag.nome} ${tag.colore} ${tag.descrizione}|"></span>&emsp;&emsp;
+
+			
 		</tr>
-		</table>
-		<br>
-		<br>
-		<br>
-		<br>
-		<a th:href="@{/gestisciTask/{id}(id=${project.id})}"><button type="submit"> Torna indietro </button></a>
-		
-		
+	</table>
+	<br>
+	<br>
+	<br>
+	<br>
+	<a th:href="@{/gestisciTask/{id}(id=${project.id})}"><button
+			type="submit">Torna indietro</button></a>
+
+
 </body>
 </html>

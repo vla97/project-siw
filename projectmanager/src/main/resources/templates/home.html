@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en"
-		xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:th="https://www.thumeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thumeleaf.org">
 <head>
-	<meta charset="UTF-8"> 
-	<title>ProjectManager</title>
+<meta charset="UTF-8">
+<title>ProjectManager</title>
 </head>
 <body>
-<h1 th:text="'Benvenuto ' + ${user.name} + '!'"></h1>
-<h4><a href="/progetto">Workspace</a></h4>
-<h4><a href="/users/me">Profilo</a></h4>
-<h4><a th:href="@{/logout}">Logout</a></h4>
+	<h1 th:text="'Benvenuto ' + ${user.name} + '!'"></h1>
+	<h4>
+		<a href="/progetto">Workspace</a>
+	</h4>
+	<h4>
+		<a href="/users/me">Profilo</a>
+	</h4>
+	<h4>
+		<a th:href="@{/logout}">Logout</a>
+	</h4>
 </body>
 
 </html>

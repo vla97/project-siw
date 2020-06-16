@@ -6,40 +6,45 @@
 	<div>
 		<h4>TAG</h4>
 	</div>
-	<form th:action="@{/aggiungi(id1=${project.id},id2=${task.id})}" method="POST" th:object="${tag}">
-		
+	<form th:action="@{/aggiungi(id1=${project.id},id2=${task.id})}"
+		method="POST" th:object="${tag}">
+
 		<table>
 			<tr>
 				<td>Nome:</td>
-				<td><input type="text" th:field="*{nome}" placeholder ="NOME" required/></td>
+				<td><input type="text" th:field="*{nome}" placeholder="NOME"
+					required /></td>
 				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
 					th:style="'color:red'"></td>
 			</tr>
 			<tr>
 				<td>Colore:</td>
-				<td><input type="text" th:field="*{colore}" placeholder ="COLORE" required/></td>
+				<td><input type="text" th:field="*{colore}"
+					placeholder="COLORE" required /></td>
 				<td th:if="${#fields.hasErrors('colore')}" th:errors="*{colore}"
 					th:style="'color:red'"></td>
 			</tr>
 			<tr>
 				<td>Descrizione:</td>
-				<td><input type="text" th:field="*{descrizione}" placeholder ="DESCRIZIONE" required/></td>
-				<td th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"
-					th:style="'color:red'"></td>
-			</tr>		
-			<tr>
-				
+				<td><input type="text" th:field="*{descrizione}"
+					placeholder="DESCRIZIONE" required /></td>
+				<td th:if="${#fields.hasErrors('descrizione')}"
+					th:errors="*{descrizione}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
-			<td><button type="submit">Invio</button></td>
+
+			</tr>
+			<tr>
+				<td><button type="submit">Invio</button></td>
 			</tr>
 		</table>
-		</form>
-		
-		
-		
-		<a th:href="@{/gestisciTask/{id}(id=${project.id})}"><button type="submit"> Torna indietro </button></a>
-		
-		
+	</form>
+
+
+
+	<a th:href="@{/gestisciTask/{id}(id=${project.id})}"><button
+			type="submit">Torna indietro</button></a>
+
+
 </body>
 </html>

@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -14,34 +14,33 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import static it.uniroma3.siw.projectmanager.model.Credenziali.ADMIN_ROLE;
-import static it.uniroma3.siw.projectmanager.model.Credenziali.DEFAULT_ROLE;
- 
+
+
 @Component
 public class CustomizeAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
- 
-  private Logger logger = LoggerFactory.getLogger(this.getClass());
-  
-  @Override
-  public void onAuthenticationSuccess(HttpServletRequest request,
-      HttpServletResponse response, Authentication authentication)
-      throws IOException, ServletException {
-        //set our response to OK status
-        response.setStatus(HttpServletResponse.SC_OK);
-        
-        boolean admin = false;
-        
-        logger.info("AT onAuthenticationSuccess(...) function!");
-        
-        for (GrantedAuthority auth : authentication.getAuthorities()) {
-            if (ADMIN_ROLE.equals(auth.getAuthority())){
-              admin = true;
-            }
-        }
-        
-        if(admin){
-          response.sendRedirect("/admin");
-        }else{
-          response.sendRedirect("/home");
-        }
-  }
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+		// set our response to OK status
+		response.setStatus(HttpServletResponse.SC_OK);
+
+		boolean admin = false;
+
+		logger.info("AT onAuthenticationSuccess(...) function!");
+
+		for (GrantedAuthority auth : authentication.getAuthorities()) {
+			if (ADMIN_ROLE.equals(auth.getAuthority())) {
+				admin = true;
+			}
+		}
+
+		if (admin) {
+			response.sendRedirect("/admin");
+		} else {
+			response.sendRedirect("/home");
+		}
+	}
 }

@@ -1,33 +1,34 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>ProjectManager</title>
+<title>ProjectManager</title>
 </head>
 <body>
-<div>
+	<div>
 		<h4>INSERISCI I DATI:</h4>
 	</div>
-<form th:action="@{/login}" method="post">
+	<form th:action="@{/login}" method="post">
 
-	<tabel>
+		<tabel>
 		<tr>
-    		
-    		<td><label> Username : </label>
-    		<td><input type="text" name="username" placeholder ="USERNAME"/> </td>
+
+			<td><label> Username : </label>
+			<td><input type="text" name="username" placeholder="USERNAME" />
+			</td>
 		</tr>
-    	<tr>
-    		<td><label> Password: </label>
-    		<td><input type="password" name="password" placeholder ="PASSWORD"/> </td>
-    	</tr>
-    	<tr>
-    		<td>
-    		<input type="submit" value="Sign In"/>
-    		</td>
-    	</tr>
-    </tabel>
-</form>
-<h2><a href="/index"><button type="submit"> Torna al Menu </button></a></h2>
+		<tr>
+			<td><label> Password: </label>
+			<td><input type="password" name="password"
+				placeholder="PASSWORD" /></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="Sign In" /></td>
+		</tr>
+		</tabel>
+	</form>
+	<h2>
+		<a href="/index"><button type="submit">Torna al Menu</button></a>
+	</h2>
 </body>
 </html>

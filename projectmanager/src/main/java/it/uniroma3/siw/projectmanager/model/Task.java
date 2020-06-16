@@ -20,58 +20,53 @@ public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
 	@Column
 	private String nome;
+
 	@Column
 	private String descrizione;
-	
+
 	@ManyToMany
 	private List<User> members;
 
 	@Column
 	private Boolean isCompleto = false;
-	
-	//@Column(nullable = false)
+
+	@Column
 	private LocalDateTime dataCreazione;
-	
-	
 
-
-
+	@Column
 	private String commento;
 
 	@ManyToMany
 	private List<Tag> tagAssociati;
-	
+
 	@ManyToOne
 	private Project project;
-	
-	//COSTRUTTORI
-	
+
+	// COSTRUTTORI
+
 	public Task() {
 		this.tagAssociati = new ArrayList<>();
 	}
-	
-	
+
 	public Task(String nome, String descrizione, String commento) {
 		this();
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.commento = commento;
 
-		
-		
 	}
-	
+
 	@PrePersist
 	protected void onPersist() {
 		this.dataCreazione = LocalDateTime.now();
 	}
 
-	
-	//GETTERS AND SETTERS
-	
-	public Long getId() { 
+	// GETTERS AND SETTERS
+
+	public Long getId() {
 		return id;
 	}
 
@@ -119,42 +114,39 @@ public class Task {
 		this.tagAssociati = tagAssociati;
 	}
 
-
 	public Boolean getIsCompleto() {
 		return isCompleto;
 	}
 
-
 	public void setIsCompleto() {
 		this.isCompleto = true;
 	}
-	
+
 	public void aggiungiTag(Tag tag) {
 		this.tagAssociati.add(tag);
 	}
-	
+
 	public Project getProject() {
 		return project;
 	}
-
 
 	public void setProject(Project project) {
 		this.project = project;
 	}
 
-	
 	public List<User> getMembers() {
 		return members;
 	}
-	
-	
+
 	public void setMembers(List<User> members) {
 		this.members = members;
 	}
-	
+
 	public void addMember(User user) {
 		this.members.add(user);
 	}
+
+	// HASHCODE
 
 	@Override
 	public int hashCode() {
@@ -166,6 +158,7 @@ public class Task {
 		return result;
 	}
 
+	// EQUALS
 
 	@Override
 	public boolean equals(Object obj) {
@@ -194,14 +187,11 @@ public class Task {
 		return true;
 	}
 
-
-	
-
+	// TOSTRING
 
 	@Override
 	public String toString() {
-		return nome +" - " + descrizione + " - " + commento + " - " + project + " - " + isCompleto;
+		return nome + " - " + descrizione + " - " + commento + " - " + project + " - " + isCompleto;
 	}
-	
 
 }

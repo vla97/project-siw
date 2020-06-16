@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,38 +32,35 @@ public class MainController {
 	public MainController() {
 	}
 
-	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+	@GetMapping(value = { "/", "/index" })
 	public String Index(Model model) {
 		return "index";
 	}
 
-	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
+	@GetMapping(value = { "/home" })
 	public String home(Model model) {
 		User user = sessionData.getLoggedUser();
 		model.addAttribute("user", user);
 		return "home";
 	}
-	
-	@RequestMapping(value = { "/tornaIndietro" }, method = RequestMethod.GET)
-	public void tornaIndietro(Model model, HttpServletRequest request,
-		      HttpServletResponse response, Authentication authentication) throws IOException, ServletException{
-		 
-		
-			boolean admin = false;
-	        
-	        
-	        for (GrantedAuthority auth : authentication.getAuthorities()) {
-	            if (ADMIN_ROLE.equals(auth.getAuthority())){
-	              admin = true;
-	            }
-	        }
-	        
-	        if(admin){
-	          response.sendRedirect("/admin");
-	        }else{
-	          response.sendRedirect("/home");
-	        }
-	  }
 
-	
+	@GetMapping(value = { "/tornaIndietro" })
+	public void tornaIndietro(Model model, HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+
+		boolean admin = false;
+
+		for (GrantedAuthority auth : authentication.getAuthorities()) {
+			if (ADMIN_ROLE.equals(auth.getAuthority())) {
+				admin = true;
+			}
+		}
+
+		if (admin) {
+			response.sendRedirect("/admin");
+		} else {
+			response.sendRedirect("/home");
+		}
+	}
+
 }

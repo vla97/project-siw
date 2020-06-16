@@ -9,30 +9,28 @@ import it.uniroma3.siw.projectmanager.model.Project;
 import it.uniroma3.siw.projectmanager.service.ProjectService;
 
 @Component
-public class ProjectValidator implements Validator { 
-	
+public class ProjectValidator implements Validator {
+
 	@Autowired
 	ProjectService projectService;
 
 	final Integer MAX_NAME_LENGTH = 100;
 	final Integer MIN_NAME_LENGTH = 2;
 
-
 	@Override
 	public void validate(Object o, Errors errors) {
-		Project project  = (Project) o;
+		Project project = (Project) o;
 		String nome = project.getName().trim();
-		
+
 		if (nome.isEmpty())
 			errors.rejectValue("name", "required");
 		else if (nome.length() < MIN_NAME_LENGTH || nome.length() > MAX_NAME_LENGTH)
 			errors.rejectValue("name", "size");
-		else if (this.projectService.ottieniProgetto(nome)!=null)
+		else if (this.projectService.ottieniProgetto(nome) != null)
 			errors.rejectValue("name", "duplicate");
 
-
 	}
-	
+
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Project.class.equals(clazz);

@@ -10,32 +10,40 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Credenziali {
-	
+
 	public static final String DEFAULT_ROLE = "DEFAULT";
-	
+
 	public static final String ADMIN_ROLE = "ADMIN";
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(unique= true, nullable = false, length = 100)
+
+	@Column(unique = true, nullable = false, length = 100)
 	private String username;
+
 	@Column(nullable = false, length = 100)
 	private String password;
+
 	@Column(nullable = false, length = 10)
 	private String role;
-	@OneToOne(cascade = CascadeType.ALL) 
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private User user;
-	
+
+	// COSTRUTTORI
+
 	public Credenziali() {
-		
+
 	}
+
 	public Credenziali(String username, String password) {
 		this();
 		this.username = username;
 		this.password = password;
 	}
-	
+
+	// GETTERS AND SETTERS
 
 	public Long getId() {
 		return id;
@@ -84,6 +92,5 @@ public class Credenziali {
 	public static String getAdminRole() {
 		return ADMIN_ROLE;
 	}
-	
 
 }

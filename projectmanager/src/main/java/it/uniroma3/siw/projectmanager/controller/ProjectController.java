@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,33 +23,32 @@ import it.uniroma3.siw.projectmanager.service.UserService;
 
 @Controller
 public class ProjectController {
-	
+
 	@Autowired
 	private ProjectService projectService;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private TaskService taskService;
-	
+
 	@Autowired
 	private ProjectValidator projectValidator;
 
 	@Autowired
 	SessionData sessionData;
-	
-	
-	@RequestMapping(value = { "/progetto" }, method = RequestMethod.GET)
+
+	@GetMapping(value = { "/progetto" })
 	public String Progetto(Model model) {
-		 User loggedUser = sessionData.getLoggedUser();
-		 
-		model.addAttribute("projects",projectService.ottieniProgettiProprietari(loggedUser));
+		User loggedUser = sessionData.getLoggedUser();
+
+		model.addAttribute("projects", projectService.ottieniProgettiProprietari(loggedUser));
 		model.addAttribute("projectsVisi", projectService.trovaProgettiMembro(loggedUser));
 		return "progetto";
 	}
 
-	@RequestMapping(value = "/creaProgetto", method = RequestMethod.GET)
+	@GetMapping(value = "/creaProgetto")
 	public String inserisciDati(Model model) {
 
 		User loggedUser = sessionData.getLoggedUser();
@@ -56,7 +57,7 @@ public class ProjectController {
 		return "formProgetto.html";
 	}
 
-	@RequestMapping(value = "/salvaProgetto", method = RequestMethod.POST)
+	@PostMapping(value = "/salvaProgetto")
 	public String salvaProgetto(@Valid @ModelAttribute("project") Project project, Model model,
 			BindingResult projectBindingResult) {
 
@@ -70,14 +71,14 @@ public class ProjectController {
 		return "formProgetto.html";
 	}
 
-	@RequestMapping(value = "/eliminaProgetto", method = RequestMethod.GET)
+	@GetMapping(value = "/eliminaProgetto")
 	public String eliminaProgetto(@ModelAttribute("id") Long id, Model model) {
 
 		projectService.cancellaProgetto(id);
 		return "redirect:/progetto";
 	}
 
-	@RequestMapping(value = "/aggiornaProgetto", method = RequestMethod.GET)
+	@GetMapping(value = "/aggiornaProgetto")
 	public String aggiornaProgetto(@ModelAttribute("id") Long id, Model model) {
 
 		Project project = projectService.ottieniProgetto(id);
@@ -85,20 +86,18 @@ public class ProjectController {
 		return "aggiornaProgetto.html";
 	}
 
-	@RequestMapping(value = "/aggiornaP{id}", method = RequestMethod.POST)
-	public String aggiornaP(@Valid @RequestParam("name") String name,@Valid @ModelAttribute("project") Project project, 
-			@ModelAttribute("id") Long id, Model model) {
+	@PostMapping(value = "/aggiornaP/{id}")
+	public String aggiornaP(@RequestParam("name") String name, @ModelAttribute("id") Long id, Model model) {
 
-		project = projectService.ottieniProgetto(id);
+		Project project = projectService.ottieniProgetto(id);
 		project.setName(name);
 		projectService.salvaProgetto(project);
 		model.addAttribute("project", project);
 		return "redirect:/visualizzaProgetto/" + project.getId();
-		
-		
+
 	}
 
-	@RequestMapping(value = "/visualizzaProgetto/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/visualizzaProgetto/{id}")
 	public String visualizzaProgetto(@PathVariable Long id, Model model) {
 
 		Project project = projectService.ottieniProgetto(id);
@@ -107,7 +106,7 @@ public class ProjectController {
 		return "specificaProgetto.html";
 	}
 
-	@RequestMapping(value = "/condividiProgetto/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/condividiProgetto/{id}")
 	public String condividiProgetto(Model model, @ModelAttribute("id") Long id) {
 
 		model.addAttribute("project", projectService.ottieniProgetto(id));
@@ -115,7 +114,7 @@ public class ProjectController {
 		return "condividiForm.html";
 	}
 
-	@RequestMapping(value = "/condividi", method = RequestMethod.POST)
+	@PostMapping(value = "/condividi")
 	public String condividi(Model model, @ModelAttribute("user") User user, @ModelAttribute("id") Long id) {
 
 		Project project = projectService.ottieniProgetto(id);
@@ -127,7 +126,7 @@ public class ProjectController {
 		return "redirect:/progetto";
 	}
 
-	@RequestMapping(value = "/visualizzaDettagli", method = RequestMethod.GET)
+	@GetMapping(value = "/visualizzaDettagli")
 	public String visualizzaDettagli(Model model, @ModelAttribute("id") Long id) {
 
 		User loggedUser = sessionData.getLoggedUser();
@@ -135,6 +134,6 @@ public class ProjectController {
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", taskService.ottieniTaskCondiviso(project, loggedUser));
 		return "dettagliProgetto.html";
-	} 
+	}
 
 }

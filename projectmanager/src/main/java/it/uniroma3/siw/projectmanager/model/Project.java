@@ -17,116 +17,107 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name = "projects")
 public class Project {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
 	@Column(nullable = false, length = 100)
 	private String name;
+
 	@Column(updatable = false, nullable = false)
 	private LocalDateTime dataCreazione;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User owner;
+
 	@ManyToMany
 	private List<User> members;
-	
-	@OneToMany(cascade = CascadeType.REMOVE, mappedBy="projectOwner")
-	private List<Tag> tagProgetti;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="project")
-	private List<Task> tasks;
-	
-	
 
-	//COSTRUTTORI
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "projectOwner")
+	private List<Tag> tagProgetti;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+	private List<Task> tasks;
+
+	// COSTRUTTORI
+
 	public Project() {
 		this.members = new ArrayList<>();
 		this.tasks = new ArrayList<>();
 		this.tagProgetti = new ArrayList<>();
 	}
+
 	public Project(String name) {
 		this();
-		this.name = name;	
+		this.name = name;
 	}
-	
+
 	@PrePersist
 	protected void onPersist() {
 		this.dataCreazione = LocalDateTime.now();
 	}
 
-	
-	//GETTERS AND SETTERS
-	
-	
+	// GETTERS AND SETTERS
+
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public LocalDateTime getDataCreazione() {
 		return dataCreazione;
 	}
-
 
 	public void setDataCreazione(LocalDateTime creationTime) {
 		this.dataCreazione = creationTime;
 	}
 
-
 	public List<Task> getTasks() {
 		return tasks;
 	}
+
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
+
 	public User getOwner() {
 		return owner;
 	}
-
 
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
 
-
 	public List<User> getMembers() {
 		return members;
 	}
 
-
 	public void setMembers(List<User> members) {
 		this.members = members;
 	}
-	
+
 	public void addMember(User user) {
 		this.members.add(user);
 	}
-	
 
 	public void removeTask(Task task) {
 		this.tasks.remove(task);
 	}
-	
+
 	public List<Tag> getTagProgetti() {
 		return tagProgetti;
 	}
@@ -134,14 +125,16 @@ public class Project {
 	public void setTagProgetti(List<Tag> tagProgetti) {
 		this.tagProgetti = tagProgetti;
 	}
-	
+
 	public void addTag(Tag tag) {
 		this.tagProgetti.add(tag);
 	}
-	
+
 	public void addTask(Task task) {
 		tasks.add(task);
 	}
+
+	// HASCHCODE
 
 	@Override
 	public int hashCode() {
@@ -150,6 +143,8 @@ public class Project {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
+
+	// EQUALS
 
 	@Override
 	public boolean equals(Object obj) {
@@ -167,12 +162,13 @@ public class Project {
 			return false;
 		return true;
 	}
+
+	// TOSTRING
+
 	@Override
 	public String toString() {
 		return "Project [id=" + id + ", name=" + name + ", dataCreazione=" + dataCreazione + ", owner=" + owner
 				+ ", members=" + members + ", tagProgetti=" + tagProgetti + ", tasks=" + tasks + "]";
 	}
-	
-	
 
 }

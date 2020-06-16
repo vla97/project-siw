@@ -23,38 +23,35 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(nullable = false, length = 100)
 	private String name;
-	
+
 	@Column(nullable = false, length = 100)
 	private String surname;
-	
+
 	@Column(unique = true, nullable = false, length = 16)
 	private String username;
-	
+
 	@Column(nullable = false, length = 16)
 	private String password;
-	
+
 	@Column(updatable = false, nullable = false)
 	private LocalDateTime dataCreazione;
-	
-	@OneToMany(mappedBy = "owner",
-			fetch = FetchType.EAGER,
-			cascade = CascadeType.REMOVE)
+
+	@OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Project> ownedProjects;
-	
+
 	@ManyToMany(mappedBy = "members")
 	private List<Project> visibleProjects;
-	
-	
-	//COSTRUTTORI
-	
+
+	// COSTRUTTORI
+
 	public User() {
 		this.ownedProjects = new ArrayList<>();
 		this.visibleProjects = new ArrayList<>();
 	}
-	
+
 	public User(String username, String password, String name, String surname) {
 		this();
 		this.username = username;
@@ -62,12 +59,13 @@ public class User {
 		this.name = name;
 		this.surname = surname;
 	}
+
 	@PrePersist
 	protected void onPersist() {
 		this.dataCreazione = LocalDateTime.now();
 	}
-	
-	//GETTERS AND SETTERS
+
+	// GETTERS AND SETTERS
 
 	public Long getId() {
 		return id;
@@ -133,6 +131,7 @@ public class User {
 		this.visibleProjects = visibleProjects;
 	}
 
+	// HASHCODE
 
 	@Override
 	public int hashCode() {
@@ -144,6 +143,8 @@ public class User {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
+	// EQUALS
 
 	@Override
 	public boolean equals(Object obj) {
@@ -177,12 +178,11 @@ public class User {
 		return true;
 	}
 
+	// TOSTRING
+
 	@Override
 	public String toString() {
 		return username;
 	}
-
-	
-	
 
 }

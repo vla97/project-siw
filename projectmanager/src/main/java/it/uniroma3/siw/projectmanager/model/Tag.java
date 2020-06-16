@@ -16,31 +16,32 @@ public class Tag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private String nome;
-	
+
 	private String colore;
-	
+
 	private String descrizione;
-	
-	@ManyToMany(mappedBy="tagAssociati")
+
+	@ManyToMany(mappedBy = "tagAssociati")
 	private List<Task> taskAssociati;
 	@ManyToOne
 	private Project projectOwner;
-	//COSTRUTTORI
-	
 
-	public Tag() {}
-	
+	// COSTRUTTORI
+
+	public Tag() {
+	}
+
 	public Tag(String nome, String colore, String descrizione) {
 		this();
 		this.nome = nome;
 		this.colore = colore;
 		this.descrizione = descrizione;
 	}
-	
-	//GETTERS AND SETTERS
+
+	// GETTERS AND SETTERS
 
 	public Long getId() {
 		return id;
@@ -73,13 +74,24 @@ public class Tag {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
+
 	public Project getProjectOwner() {
 		return projectOwner;
 	}
-	
+
 	public void setProjectOwner(Project projectOwner) {
 		this.projectOwner = projectOwner;
 	}
+
+	public List<Task> getTaskAssociati() {
+		return taskAssociati;
+	}
+
+	public void setTaskAssociati(List<Task> taskAssociati) {
+		this.taskAssociati = taskAssociati;
+	}
+
+	// HASHCODE
 
 	@Override
 	public int hashCode() {
@@ -88,6 +100,8 @@ public class Tag {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
+
+	// EQUALS
 
 	@Override
 	public boolean equals(Object obj) {
@@ -106,18 +120,11 @@ public class Tag {
 		return true;
 	}
 
-	public List<Task> getTaskAssociati() {
-		return taskAssociati;
-	}
-
-	public void setTaskAssociati(List<Task> taskAssociati) {
-		this.taskAssociati = taskAssociati;
-	}
+	// TOSTRING
 
 	@Override
 	public String toString() {
 		return nome + ", " + colore + ", " + descrizione;
 	}
 
-	
 }

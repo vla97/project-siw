@@ -19,118 +19,111 @@ import it.uniroma3.siw.projectmanager.repository.TaskRepository;
 public class TaskService {
 	@Autowired
 	private TaskRepository taskRepository;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Transactional
 	public Task ottieniTask(Long id) {
 		Optional<Task> r = this.taskRepository.findById(id);
 		return r.orElse(null);
 	}
-	
+
 	@Transactional
 	public Task ottieniTaskPerNome(String nome) {
 		Optional<Task> r = this.taskRepository.findByNome(nome);
 		return r.orElse(null);
-	} 
-	
+	}
+
 	@Transactional
-	public List<Task> ottieniTask(Project project){
-		List <Task> tasks = new ArrayList<>();
-		Iterable <Task> r = taskRepository.findByProject(project);
-		for(Task task : r)
+	public List<Task> ottieniTask(Project project) {
+		List<Task> tasks = new ArrayList<>();
+		Iterable<Task> r = taskRepository.findByProject(project);
+		for (Task task : r)
 			tasks.add(task);
 		return tasks;
-		
+
 	}
 
 	@Transactional
 	public void aggiungiTask(Project progetto, Task task) {
 		progetto.addTask(task);
-		}
+	}
 
 	@Transactional
 	public void aggiornaTask() {
-		
+
 	}
 
 	@Transactional
 	public void cancellaTask(Task task) {
 		this.taskRepository.delete(task);
 	}
-	
+
 	@Transactional
 	public Task salvaTask(Task task) {
 		return this.taskRepository.save(task);
 	}
-	
+
 	@Transactional
 	public boolean setTaskCompleto(Task task) {
-		task.setIsCompleto();	
+		task.setIsCompleto();
 		this.taskRepository.save(task);
 		return task.getIsCompleto();
 	}
-	
-	@Transactional 
+
+	@Transactional
 	public void aggiungiTag(Task task, Tag tag) {
 		task.aggiungiTag(tag);
 		taskRepository.save(task);
 	}
-	
+
 	@Transactional
 	public void aggiungiCommento(Task task, String commento) {
 		task.setCommento(commento);
 		taskRepository.save(task);
-		
-		
+
 	}
-	
+
 	@Transactional
 	public void aggiungiMembro(Task task, User user) {
 		task.addMember(user);
 		taskRepository.save(task);
-		
+
 	}
-	
+
 	@Transactional
-	public List<Task> ottieniTask(Tag tag){
-		List <Task> tasks = new ArrayList<>();
-		Iterable <Task> r = taskRepository.findByTagAssociati(tag);
-		for(Task task : r)
+	public List<Task> ottieniTask(Tag tag) {
+		List<Task> tasks = new ArrayList<>();
+		Iterable<Task> r = taskRepository.findByTagAssociati(tag);
+		for (Task task : r)
 			tasks.add(task);
 		return tasks;
-		
+
 	}
-	
+
 	@Transactional
-	public List<Task> ottieniTask(User user){
-		List <Task> tasks = new ArrayList<>();
-		Iterable <Task> r = taskRepository.findByMembers(user);
-		for(Task task : r)
+	public List<Task> ottieniTask(User user) {
+		List<Task> tasks = new ArrayList<>();
+		Iterable<Task> r = taskRepository.findByMembers(user);
+		for (Task task : r)
 			tasks.add(task);
 		return tasks;
-		
+
 	}
-	
+
 	@Transactional
-	public List<Task> ottieniTaskCondiviso(Project project, User user){
-		List <Task> tasks = new ArrayList<>();
-		
-		Iterable <Task> r = taskRepository.findByMembers(user);
-		
-		for(Task task : r ) {
-			if(task.getProject().getName() == project.getName() )
+	public List<Task> ottieniTaskCondiviso(Project project, User user) {
+		List<Task> tasks = new ArrayList<>();
+
+		Iterable<Task> r = taskRepository.findByMembers(user);
+
+		for (Task task : r) {
+			if (task.getProject().getName() == project.getName())
 				tasks.add(task);
 		}
 		return tasks;
-		
+
 	}
-	
-	
-	/*@Transactional 
-	public Optional<Task> getTask(Long id){
-		taskRepository.findById(id);
-	}*/
 
 }

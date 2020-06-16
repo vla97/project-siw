@@ -1,40 +1,34 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>ProjectManager</title>
+<title>ProjectManager</title>
 </head>
 
 <body>
-<h1>Profilo:</h1>
-    <table>
-        <tr>
-            <td>Username</td>
-            <td th:text="${credenziali.username}">...</td>
-        </tr>
-        <tr>
-            <td>Nome</td>
-            <td th:text="${user.name}">...</td>
-        </tr>
-        <tr>
-            <td>Cognome</td>
-            <td th:text="${user.surname}">...</td>
-        </tr>
-        <tr>
-            <td>Ruolo</td>
-            <td th:text="${credenziali.role}">...</td>
-        </tr>
-        <tr>
-<!--             <td>Registered at: </td>
-            <td th:text="${user.creationTimestamp}">...</td>
-        </tr>
-        <tr>
-            <td>Last Update at:</td>
-            <td th:text="${user.lastUpdateTimestamp}">...</td>
-        </tr> -->
-    </table>
-    <a th:href="@{/aggiornaUtente}"><button type="submit">Aggiorna</button></a> 
-    <h2><a th:href="@{/tornaIndietro}">Torna indietro</a></h2>
+	<h1>Profilo:</h1>
+	<table>
+		<tr>
+			<td>Username</td>
+			<td th:text="${credenziali.username}">...</td>
+		</tr>
+		<tr>
+			<td>Nome</td>
+			<td th:text="${user.name}">...</td>
+		</tr>
+		<tr>
+			<td>Cognome</td>
+			<td th:text="${user.surname}">...</td>
+		</tr>
+		<tr>
+			<td>Ruolo</td>
+			<td th:text="${credenziali.role}">...</td>
+		</tr>
+		<tr>
+	</table>
+	<a th:href="@{/aggiornaUtente}"><button type="submit">Aggiorna</button></a>
+	<h2>
+		<a th:href="@{/tornaIndietro}">Torna indietro</a>
+	</h2>
 </body>
 </html>

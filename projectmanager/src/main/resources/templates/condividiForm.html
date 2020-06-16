@@ -6,20 +6,23 @@
 	<div>
 		<h4>CONDIVISIONE:</h4>
 	</div>
-	<form th:action="@{/condividi(id=${project.id})}" method="POST" th:object="${user}">
-		
+	<form th:action="@{/condividi(id=${project.id})}" method="POST"
+		th:object="${user}">
+
 		<table>
 			<tr>
 				<td>Username:</td>
-				<td><input type="text" th:field="*{username}" placeholder ="inserisci" /></td>
-			</tr>		
+				<td><input type="text" th:field="*{username}"
+					placeholder="inserisci" /></td>
+			</tr>
 			<tr>
 				<td><button type="submit">Invio</button></td>
 			</tr>
 		</table>
 
 	</form>
-	<a th:href="@{/progetto}"><button type="submit">Torna indietro</button></a>
+	<a th:href="@{/progetto}"><button type="submit">Torna
+			indietro</button></a>
 
 
 </body>
