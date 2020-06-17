@@ -1,5 +1,7 @@
 package it.uniroma3.siw.projectmanager.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.projectmanager.controller.session.SessionData;
+import it.uniroma3.siw.projectmanager.model.Credenziali;
 import it.uniroma3.siw.projectmanager.model.Project;
 import it.uniroma3.siw.projectmanager.model.Task;
 import it.uniroma3.siw.projectmanager.model.User;
+import it.uniroma3.siw.projectmanager.service.CredenzialiService;
 import it.uniroma3.siw.projectmanager.service.ProjectService;
 import it.uniroma3.siw.projectmanager.service.TaskService;
 import it.uniroma3.siw.projectmanager.service.UserService;
@@ -34,6 +38,9 @@ public class TaskController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private CredenzialiService credenzialiService;
 
 	@Autowired
 	SessionData sessionData;
@@ -114,23 +121,23 @@ public class TaskController {
 		return "task.html";
 	}
 
-	@GetMapping(value = "/condividiTask")
-	public String condividiTask(Model model, @ModelAttribute("task") Task task, @ModelAttribute("id1") Long id1,
-			@ModelAttribute("id2") Long id2) {
+	@GetMapping(value = "/condividiTask/{id1}/{id2}")
+	public String condividiTask(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 
 		model.addAttribute("project", projectService.ottieniProgetto(id1));
 		model.addAttribute("task", taskService.ottieniTask(id2));
-		model.addAttribute("user", new User());
-		return "condividiTaskForm";
+		List<Credenziali> tuttiCredenziali = this.credenzialiService.getTuttiCredenziali();
+		model.addAttribute("listaCredenziali", tuttiCredenziali);
+		return "condividiTask";
 	}
 
 	@PostMapping(value = "/condividiT")
-	public String condividiT(Model model, @ModelAttribute("user") User user, @ModelAttribute("id1") Long id1,
-			@ModelAttribute("id2") Long id2) {
+	public String condividiT(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
+			@ModelAttribute("id3") Long id3) {
 
 		Project project = projectService.ottieniProgetto(id1);
 		Task task = taskService.ottieniTask(id2);
-		taskService.aggiungiMembro(task, userService.ottieniUtentePerUsername(user.getUsername()));
+		taskService.aggiungiMembro(task, userService.ottieniUtentePerId(id3));
 		taskService.salvaTask(task);
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", taskService.ottieniTask(project));

@@ -1,5 +1,7 @@
 package it.uniroma3.siw.projectmanager.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.projectmanager.controller.session.SessionData;
+import it.uniroma3.siw.projectmanager.model.Credenziali;
 import it.uniroma3.siw.projectmanager.model.Project;
 import it.uniroma3.siw.projectmanager.model.User;
+import it.uniroma3.siw.projectmanager.service.CredenzialiService;
 import it.uniroma3.siw.projectmanager.service.ProjectService;
 import it.uniroma3.siw.projectmanager.service.TaskService;
 import it.uniroma3.siw.projectmanager.service.UserService;
@@ -35,6 +39,9 @@ public class ProjectController {
 
 	@Autowired
 	private ProjectValidator projectValidator;
+
+	@Autowired
+	private CredenzialiService credenzialiService;
 
 	@Autowired
 	SessionData sessionData;
@@ -57,7 +64,7 @@ public class ProjectController {
 		return "formProgetto.html";
 	}
 
-	@PostMapping(value = "/salvaProgetto") 
+	@PostMapping(value = "/salvaProgetto")
 	public String salvaProgetto(@Valid @ModelAttribute("project") Project project, Model model,
 			BindingResult projectBindingResult) {
 
@@ -107,20 +114,21 @@ public class ProjectController {
 	}
 
 	@GetMapping(value = "/condividiProgetto/{id}")
-	public String condividiProgetto(Model model, @ModelAttribute("id") Long id) {
+	public String condividiP(Model model, @ModelAttribute("id") Long id) {
 
 		model.addAttribute("project", projectService.ottieniProgetto(id));
-		model.addAttribute("user", new User());
-		return "condividiForm.html";
+		List<Credenziali> tuttiCredenziali = this.credenzialiService.getTuttiCredenziali();
+		model.addAttribute("listaCredenziali", tuttiCredenziali);
+		return "condividiProgetto";
 	}
 
 	@PostMapping(value = "/condividi")
-	public String condividi(Model model, @ModelAttribute("user") User user, @ModelAttribute("id") Long id) {
+	public String condividi(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 
-		Project project = projectService.ottieniProgetto(id);
+		Project project = projectService.ottieniProgetto(id1);
 		User loggedUser = sessionData.getLoggedUser();
 		model.addAttribute("project", project);
-		projectService.condiviProgetto(project, userService.ottieniUtentePerUsername(user.getUsername()));
+		projectService.condiviProgetto(project, userService.ottieniUtentePerId(id2));
 		projectService.salvaProgetto(project);
 		model.addAttribute("projects", projectService.ottieniProgettiProprietari(loggedUser));
 		return "redirect:/progetto";

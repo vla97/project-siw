@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thumeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ProjectManager</title>
+</head>
+<body>
+	<h1>Tutti utenti</h1>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Username</th>
+					<th>Nome</th>
+					<th>Cognome</th>
+
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="credenziali:${listaCredenziali}">
+					<td th:text="${credenziali.username}"></td>
+					<td th:text="${credenziali.user.name}"></td>
+					<td th:text="${credenziali.user.surname}"></td>
+					<td>
+						<form method="POST"
+							th:Action="@{/condividi(id1=${project.id},id2=${credenziali.user.id})}">
+							<button type="submit" value="invia">Condividi</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br> <br> <a href="/progetto"><button type="submit">Torna
+				indietro</button></a>
+	</div>
+</body>
+
+</html>
