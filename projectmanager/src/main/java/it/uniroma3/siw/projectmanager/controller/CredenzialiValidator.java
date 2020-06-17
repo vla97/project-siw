@@ -14,7 +14,7 @@ public class CredenzialiValidator implements Validator {
 
 	@Autowired
 	CredenzialiService credenzialiService;
-
+  
 	final Integer MAX_PU_LENGTH = 20;
 	final Integer MIN_PU_LENGTH = 3;
 
