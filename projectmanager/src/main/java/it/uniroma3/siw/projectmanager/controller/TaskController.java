@@ -63,7 +63,7 @@ public class TaskController {
 		return "formTask.html";
 	}
 
-	@PostMapping(value = "/salvaTask")
+	@PostMapping(value = "/salvaTask/{id}")
 	public String aggiungiTask(@ModelAttribute("id") Long id, @Valid @ModelAttribute("task") Task task,
 			BindingResult taskBindingResult, Model model) {
 
@@ -107,7 +107,7 @@ public class TaskController {
 		return "aggiornaTask.html";
 	}
 
-	@PostMapping(value = "/aggiorna")
+	@PostMapping(value = "/aggiorna/{id}/{id1}")
 	public String aggiorna(Model model, @ModelAttribute("id") Long id, @ModelAttribute("id1") Long id1,
 			@RequestParam("nome") String nNome, @RequestParam("descrizione") String nDescrizione) {
 
@@ -131,7 +131,7 @@ public class TaskController {
 		return "condividiTask";
 	}
 
-	@PostMapping(value = "/condividiT")
+	@PostMapping(value = "/condividiT/{id1}/{id2}/{id3}")
 	public String condividiT(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
 			@ModelAttribute("id3") Long id3) {
 
@@ -152,7 +152,7 @@ public class TaskController {
 		return "formCommento";
 	}
 
-	@PostMapping(value = "/aggiungiCommento")
+	@PostMapping(value = "/aggiungiCommento/{id1}/{id2}")
 	public String aggiungiCommenta(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
 			@RequestParam("commento") String commento) {
 

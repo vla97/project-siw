@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thumeleaf.org">
+<link rel="stylesheet" type="text/css" href="main.css">
 <head>
 <meta charset="UTF-8">
 <title>ProjectManager</title>
@@ -25,14 +26,14 @@
 					<td th:text="${credenziali.user.surname}"></td>
 					<td>
 						<form method="POST"
-							th:Action="@{/condividiT(id1=${project.id},id2=${task.id},id3=${credenziali.user.id})}">
+							th:Action="@{/condividiT/{id1}/{id2}/{id3}(id1=${project.id},id2=${task.id},id3=${credenziali.user.id})}">
 							<button type="submit" value="invia">Condividi</button>
 						</form>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<br> <br> <a href="/progetto"><button type="submit">Torna
+		<br> <br> <a th:href="@{/gestisciTask/{id}(id=${project.id})}"><button type="submit">Torna
 				indietro</button></a>
 	</div>
 </body>

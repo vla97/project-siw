@@ -85,7 +85,7 @@ public class ProjectController {
 		return "redirect:/progetto";
 	}
 
-	@GetMapping(value = "/aggiornaProgetto")
+	@GetMapping(value = "/aggiornaProgetto/{id}")
 	public String aggiornaProgetto(@ModelAttribute("id") Long id, Model model) {
 
 		Project project = projectService.ottieniProgetto(id);
@@ -134,7 +134,7 @@ public class ProjectController {
 		return "redirect:/progetto";
 	}
 
-	@GetMapping(value = "/visualizzaDettagli")
+	@GetMapping(value = "/visualizzaDettagli/{id}")
 	public String visualizzaDettagli(Model model, @ModelAttribute("id") Long id) {
 
 		User loggedUser = sessionData.getLoggedUser();

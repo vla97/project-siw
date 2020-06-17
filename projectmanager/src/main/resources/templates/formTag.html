@@ -6,7 +6,7 @@
 	<div>
 		<h4>TAG</h4>
 	</div>
-	<form th:action="@{/aggiungi(id1=${project.id},id2=${task.id})}"
+	<form th:action="@{/aggiungi/{id1}/{id2}(id1=${project.id},id2=${task.id})}"
 		method="POST" th:object="${tag}">
 
 		<table>

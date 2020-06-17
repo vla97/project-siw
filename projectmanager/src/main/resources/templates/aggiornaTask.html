@@ -6,7 +6,7 @@
 	<div>
 		<h4>Aggiornamento</h4>
 	</div>
-	<form th:action="@{/aggiorna(id=${task.id},id1=${project.id})}"
+	<form th:action="@{/aggiorna/{id}/{id1}(id=${task.id},id1=${project.id})}"
 		method="POST" th:object="${task}">
 
 		<table>

@@ -6,7 +6,7 @@
 	<div>
 		<h4>TASK</h4>
 	</div>
-	<form id="registerTaskForm" th:action="@{/salvaTask(id=${project.id})}"
+	<form id="registerTaskForm" th:action="@{/salvaTask/{id}(id=${project.id})}"
 		method="POST" th:object="${task}">
 
 		<table>

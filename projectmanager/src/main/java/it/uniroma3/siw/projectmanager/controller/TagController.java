@@ -49,7 +49,7 @@ public class TagController {
 		return "formTag.html";
 	}
 
-	@PostMapping(value = "/aggiungi")
+	@PostMapping(value = "/aggiungi/{id1}/{id2}")
 	public String aggiungi(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
 			@Valid @ModelAttribute("tag") Tag tag, BindingResult tagBindingResult) {
 
@@ -78,7 +78,7 @@ public class TagController {
 		return "tag.html";
 	}
 
-	@GetMapping(value = "/aggiungiTagProgetto")
+	@GetMapping(value = "/aggiungiTagProgetto/{id}")
 	public String aggiungiTagProgetto(Model model, @ModelAttribute("id") Long id) {
 
 		Project project = projectService.ottieniProgetto(id);
@@ -87,7 +87,7 @@ public class TagController {
 		return "formTagProgetto.html";
 	}
 
-	@PostMapping(value = "/aggiungiTagP")
+	@PostMapping(value = "/aggiungiTagP/{id}")
 	public String aggiungiTagP(Model model, @ModelAttribute("id") Long id, @ModelAttribute("tag") Tag tag,
 			BindingResult tagBindingResult) {
 
