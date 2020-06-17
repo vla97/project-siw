@@ -40,7 +40,7 @@ public class MainController {
 	@GetMapping(value = { "/home" })
 	public String home(Model model) {
 		User user = sessionData.getLoggedUser();
-		model.addAttribute("user", user);
+		model.addAttribute("user", user); 
 		return "home";
 	}
 

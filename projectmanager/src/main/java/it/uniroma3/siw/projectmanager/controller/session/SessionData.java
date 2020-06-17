@@ -36,11 +36,9 @@ public class SessionData {
 	private void update() {
 		UserDetails loggedUserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
-		this.credenziali = this.credenzialiRepository.findByUsername(loggedUserDetails.getUsername()).get(); // can
-																												// never
-																												// be
-																												// absent
-		// this.credenziali.setPassword("[PROTECTED]");
+		this.credenziali = this.credenzialiRepository.findByUsername(loggedUserDetails.getUsername()).get();
+
+		this.credenziali.setPassword("[PROTECTED]");
 		this.user = this.credenziali.getUser();
 	}
 
@@ -50,7 +48,7 @@ public class SessionData {
 
 	public void clear() {
 		this.credenziali = null;
-		this.user = null;
+		this.user = null; 
 	}
 
 }

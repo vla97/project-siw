@@ -16,12 +16,13 @@ import it.uniroma3.siw.projectmanager.repository.CredenzialiRepository;
 
 @Service
 public class CredenzialiService {
-
+ 
 	@Autowired
 	protected PasswordEncoder passwordEncoder;
 
 	@Autowired
 	protected CredenzialiRepository credenzialiRepository;
+	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 

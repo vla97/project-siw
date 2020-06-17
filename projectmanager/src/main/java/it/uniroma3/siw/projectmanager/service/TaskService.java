@@ -17,11 +17,9 @@ import it.uniroma3.siw.projectmanager.repository.TaskRepository;
 
 @Service
 public class TaskService {
+	
 	@Autowired
 	private TaskRepository taskRepository;
-
-	@Autowired
-	private UserService userService;
 
 	@Transactional
 	public Task ottieniTask(Long id) {

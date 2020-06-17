@@ -19,18 +19,17 @@ import static it.uniroma3.siw.projectmanager.model.Credenziali.ADMIN_ROLE;
 @Component
 public class CustomizeAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		// set our response to OK status
 		response.setStatus(HttpServletResponse.SC_OK);
 
 		boolean admin = false;
 
-		logger.info("AT onAuthenticationSuccess(...) function!");
-
+		
+ 
 		for (GrantedAuthority auth : authentication.getAuthorities()) {
 			if (ADMIN_ROLE.equals(auth.getAuthority())) {
 				admin = true;

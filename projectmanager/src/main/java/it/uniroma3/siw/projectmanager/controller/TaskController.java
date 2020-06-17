@@ -47,7 +47,7 @@ public class TaskController {
 		return "task";
 	}
 
-	@GetMapping(value = "/aggiungiTask")
+	@GetMapping(value = "/aggiungiTask/{id}")
 	public String aggiungiTask(Model model, @ModelAttribute("id") Long id) {
 
 		Project project = projectService.ottieniProgetto(id);
@@ -63,7 +63,7 @@ public class TaskController {
 		Project project = projectService.ottieniProgetto(id);
 		taskValidator.validate(task, taskBindingResult);
 		if (!taskBindingResult.hasErrors()) {
-			// model.addAttribute("tasks", taskService.ottieniTask(project));
+
 			task.setProject(project);
 			taskService.salvaTask(task);
 			model.addAttribute("project", project);
@@ -73,8 +73,8 @@ public class TaskController {
 		}
 		projectService.salvaProgetto(project);
 		model.addAttribute("tasks", taskService.ottieniTask(project));
-		// return "formTask.html";
-		return "redirect:/aggiungiTask?id=" + project.getId();
+
+		return "redirect:/aggiungiTask/" + project.getId();
 	}
 
 	@GetMapping(value = "/eliminaTask")

@@ -20,7 +20,7 @@ public class CredenzialiValidator implements Validator {
 
 	@Override
 	public void validate(Object o, Errors errors) {
-		Credenziali credenziali = (Credenziali) o;
+		Credenziali credenziali = (Credenziali) o; 
 		String username = credenziali.getUsername().trim();
 		String password = credenziali.getPassword().trim();
 

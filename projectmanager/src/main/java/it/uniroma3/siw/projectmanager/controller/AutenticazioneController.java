@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -25,7 +27,7 @@ public class AutenticazioneController {
 	CredenzialiService credenzialiService;
 
 	@Autowired
-	UserValidator userValidator; 
+	UserValidator userValidator;
 
 	@Autowired
 	CredenzialiValidator credenzialiValidator;
@@ -33,14 +35,14 @@ public class AutenticazioneController {
 	@Autowired
 	private SessionData sessionData;
 
-	@RequestMapping(value = { "/users/register" }, method = RequestMethod.GET)
-	public String showRegisterForm(Model model) {
+	@GetMapping(value = { "/users/register" })
+	public String showRegisterForm(Model model) { 
 		model.addAttribute("userForm", new User());
 		model.addAttribute("credenzialiForm", new Credenziali());
 		return "registerUser";
 	}
 
-	@RequestMapping(value = { "/users/register" }, method = RequestMethod.POST)
+	@PostMapping(value = { "/users/register" })
 	public String registerUser(@Valid @ModelAttribute("userForm") User user, BindingResult userBindingResult,
 			@Valid @ModelAttribute("credenzialiForm") Credenziali credenziali, BindingResult credenzialiBindingResult,
 			Model model) {
@@ -55,18 +57,18 @@ public class AutenticazioneController {
 		return "registerUser";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(HttpServletRequest httpServletRequest, Model model) {
-        if(httpServletRequest.isUserInRole(ADMIN_ROLE)) {
-            return "admin";
-        } else if(httpServletRequest.isUserInRole(DEFAULT_ROLE)) {
-            return "home";
-        } else {
-            return "login";
-        }
-    }
+	@GetMapping(value = "/login")
+	public String loginPage(HttpServletRequest httpServletRequest, Model model) {
+		if (httpServletRequest.isUserInRole(ADMIN_ROLE)) {
+			return "admin";
+		} else if (httpServletRequest.isUserInRole(DEFAULT_ROLE)) {
+			return "home";
+		} else {
+			return "login";
+		}
+	}
 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@GetMapping(value = "/logout")
 	public String logout(Model model) {
 		this.sessionData.clear();
 		return "index";

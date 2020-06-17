@@ -57,7 +57,7 @@ public class ProjectController {
 		return "formProgetto.html";
 	}
 
-	@PostMapping(value = "/salvaProgetto")
+	@PostMapping(value = "/salvaProgetto") 
 	public String salvaProgetto(@Valid @ModelAttribute("project") Project project, Model model,
 			BindingResult projectBindingResult) {
 

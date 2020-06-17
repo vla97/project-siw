@@ -33,11 +33,10 @@ public class AutConfigurazione extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
 				.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE).anyRequest().authenticated()
 				.and().formLogin().loginPage("/login").loginProcessingUrl("/login")
-				// .defaultSuccessUrl(customizeAuthenticationSuccessHandler)
 				.successHandler(customizeAuthenticationSuccessHandler).and().logout().logoutUrl("/logout")
 				.clearAuthentication(true).permitAll().logoutSuccessUrl("/index").invalidateHttpSession(true);
 
-	}
+	} 
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {

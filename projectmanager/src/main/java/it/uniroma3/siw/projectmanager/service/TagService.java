@@ -16,6 +16,7 @@ import it.uniroma3.siw.projectmanager.repository.TagRepository;
 
 @Service
 public class TagService {
+
 	@Autowired
 	TagRepository tagRepository;
 

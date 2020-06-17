@@ -5,7 +5,7 @@
 <title>ProjectManager</title>
 </head>
 <body>
-	<h1>Register new User</h1>
+	<h1>Registrazione:</h1>
 	<form id="registerUserForm" th:action="@{/users/register}"
 		method="POST">
 
@@ -27,14 +27,14 @@
 					th:errors="${credenzialiForm.password}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
-				<td><label for="nameInput">Name</label>
+				<td><label for="nameInput">Nome</label>
 				<td><input id="nameInput" type="text" placeholder="NAME"
 					required th:field="${userForm.name}" /></td>
 				<td th:if="${#fields.hasErrors('userForm.name')}"
 					th:errors="${userForm.name}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
-				<td><label for="surnameInput">Surname</label>
+				<td><label for="surnameInput">Cognome</label>
 				<td><input id="surnameInput" type="text" placeholder="SURNAME"
 					required th:field="${userForm.surname}" /></td>
 				<td th:if="${#fields.hasErrors('userForm.surname')}"
@@ -42,7 +42,7 @@
 			</tr>
 			<tr>
 				<td>
-					<button type="submit">Register</button>
+					<button type="submit">Registra</button>
 				</td>
 			</tr>
 		</table>
