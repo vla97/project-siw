@@ -8,18 +8,6 @@ th {
   color: white;
 }
 
-body {
-  background-image: url(/static/download.jpg);
-}
-
-/*h2.serif {
-  font-family: "Times New Roman", Times, serif;
-}*/
-
-h2.monospace {
-  font-family: "Lucida Console", Courier, monospace;
-}
-
 tr:nth-child(even) {background-color: #f2f2f2;}
 
 tr:hover {background-color: #f5f5f5;}
