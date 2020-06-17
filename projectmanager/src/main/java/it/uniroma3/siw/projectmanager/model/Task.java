@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -36,11 +38,11 @@ public class Task {
 	@Column
 	private LocalDateTime dataCreazione;
 
-	@Column
-	private String commento;
-
 	@ManyToMany
 	private List<Tag> tagAssociati;
+	
+	@OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+	private List<Commento> commenti; 
 
 	@ManyToOne
 	private Project project;
@@ -51,11 +53,11 @@ public class Task {
 		this.tagAssociati = new ArrayList<>();
 	}
 
-	public Task(String nome, String descrizione, String commento) {
+	public Task(String nome, String descrizione) {
 		this();
 		this.nome = nome;
 		this.descrizione = descrizione;
-		this.commento = commento;
+		
 
 	}
 
@@ -98,14 +100,6 @@ public class Task {
 		this.dataCreazione = dataCreazione;
 	}
 
-	public String getCommento() {
-		return commento;
-	}
-
-	public void setCommento(String commento) {
-		this.commento = commento;
-	}
-
 	public List<Tag> getTagAssociati() {
 		return tagAssociati;
 	}
@@ -133,6 +127,14 @@ public class Task {
 	public void setProject(Project project) {
 		this.project = project;
 	}
+	
+	public List<Commento> getCommenti() {
+		return commenti;
+	}
+
+	public void setCommenti(List<Commento> commenti) {
+		this.commenti = commenti;
+	}
 
 	public List<User> getMembers() {
 		return members;
@@ -144,6 +146,10 @@ public class Task {
 
 	public void addMember(User user) {
 		this.members.add(user);
+	}
+	
+	public void addCommento(Commento commento) {
+		this.commenti.add(commento);
 	}
 
 	// HASHCODE
@@ -191,7 +197,7 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return nome + " - " + descrizione + " - " + commento + " - " + project + " - " + isCompleto;
+		return nome + " - " + descrizione + " - " + commenti + " - " + project + " - " + isCompleto;
 	}
 
 }

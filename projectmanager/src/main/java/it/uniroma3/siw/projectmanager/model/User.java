@@ -33,9 +33,6 @@ public class User {
 	@Column(unique = true, nullable = false, length = 16)
 	private String username;
 
-	@Column(nullable = false, length = 16)
-	private String password;
-
 	@Column(updatable = false, nullable = false)
 	private LocalDateTime dataCreazione;
 
@@ -52,10 +49,9 @@ public class User {
 		this.visibleProjects = new ArrayList<>();
 	}
 
-	public User(String username, String password, String name, String surname) {
+	public User(String username, String name, String surname) {
 		this();
 		this.username = username;
-		this.password = password;
 		this.name = name;
 		this.surname = surname;
 	}
@@ -97,14 +93,6 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public LocalDateTime getDataCreazione() {

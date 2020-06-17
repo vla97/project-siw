@@ -76,7 +76,7 @@ public class TaskController {
 			model.addAttribute("project", project);
 			model.addAttribute("tasks", taskService.ottieniTask(project));
 			projectService.salvaProgetto(project);
-			return "task";
+			return "redirect:/gestisciTask/{id}";
 		}
 		projectService.salvaProgetto(project);
 		model.addAttribute("tasks", taskService.ottieniTask(project));
@@ -144,26 +144,26 @@ public class TaskController {
 		return "task";
 	}
 
-	@GetMapping(value = "/commentaTask/{id1}/{id2}")
-	public String commenta(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
-
-		model.addAttribute("project", projectService.ottieniProgetto(id1));
-		model.addAttribute("task", taskService.ottieniTask(id2));
-		return "formCommento";
-	}
-
-	@PostMapping(value = "/aggiungiCommento/{id1}/{id2}")
-	public String aggiungiCommenta(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
-			@RequestParam("commento") String commento) {
-
-		Project project = projectService.ottieniProgetto(id1);
-		Task task = taskService.ottieniTask(id2);
-		task.setCommento(commento);
-		taskService.salvaTask(task);
-		model.addAttribute("project", project);
-		model.addAttribute("tasks", taskService.ottieniTask(project));
-		return "dettagliProgetto";
-	}
+	/*
+	 * @GetMapping(value = "/commentaTask/{id1}/{id2}") public String commenta(Model
+	 * model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
+	 * 
+	 * model.addAttribute("project", projectService.ottieniProgetto(id1));
+	 * model.addAttribute("task", taskService.ottieniTask(id2)); return
+	 * "formCommento"; }
+	 * 
+	 * @PostMapping(value = "/aggiungiCommento/{id1}/{id2}") public String
+	 * aggiungiCommenta(Model model, @ModelAttribute("id1") Long
+	 * id1, @ModelAttribute("id2") Long id2,
+	 * 
+	 * @RequestParam("commento") String commento) {
+	 * 
+	 * Project project = projectService.ottieniProgetto(id1); Task task =
+	 * taskService.ottieniTask(id2); task.setCommento(commento);
+	 * taskService.salvaTask(task); model.addAttribute("project", project);
+	 * model.addAttribute("tasks", taskService.ottieniTask(project)); return
+	 * "dettagliProgetto"; }
+	 */
 
 	@PostMapping(value = "/setStato")
 	public String setStato(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {

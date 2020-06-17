@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.projectmanager.model.Commento;
 import it.uniroma3.siw.projectmanager.model.Project;
 import it.uniroma3.siw.projectmanager.model.Tag;
 import it.uniroma3.siw.projectmanager.model.Task;
@@ -77,8 +78,8 @@ public class TaskService {
 	}
 
 	@Transactional
-	public void aggiungiCommento(Task task, String commento) {
-		task.setCommento(commento);
+	public void aggiungiCommento(Task task, Commento commento) {
+		task.addCommento(commento);
 		taskRepository.save(task);
 
 	}

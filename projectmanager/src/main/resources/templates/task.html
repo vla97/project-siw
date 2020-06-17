@@ -27,7 +27,7 @@
 			<tr th:each="task : ${tasks}">
 				<td th:text="${task.nome}">...</td>
 				<td th:text="${task.descrizione}">...</td>
-				<td th:text="${task.commento}">...</td> &emsp;&emsp;
+				<td th:text="${task.commenti}">...</td> &emsp;&emsp;
 
 				<td>
 					<form th:action="@{/setStato(id1=${project.id},id2=${task.id})}"

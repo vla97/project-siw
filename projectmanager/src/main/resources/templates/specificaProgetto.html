@@ -15,7 +15,7 @@
 				<th>Proprietario</th>
 				<th>Membri</th>
 				<th>Tag</th>
-				<th>Tasks</th>
+				<th th:each="task : ${tasks}">Tasks</th>
 				
 			
 
@@ -29,7 +29,7 @@
 				<td th:text="${project.members}"></td>
 				<td th:text="${project.tagProgetti}"></td>
 				<td th:each="task : ${tasks}">
-				<span th:text="|${task.nome} ${task.descrizione} ${task.commento} ${task.isCompleto}|"></span></td>
+				<span th:text="|${task.nome} ${task.descrizione} ${task.commenti} ${task.isCompleto}|"></span></td>
 			
 
 		</tr>

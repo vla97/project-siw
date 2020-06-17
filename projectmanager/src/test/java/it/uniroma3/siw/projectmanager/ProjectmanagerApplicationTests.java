@@ -61,7 +61,7 @@ class ProjectmanagerApplicationTests {
 	@Test
   void test() {
     //creazione due utenti
-    User u1 = new User("and98","and98","Andrea","Moscato");
+    User u1 = new User("and98","Andrea","Moscato");
     Credenziali c1 = new Credenziali("and98","and98");
     c1.setUser(u1);
     
@@ -70,7 +70,7 @@ class ProjectmanagerApplicationTests {
     assertEquals(u1.getId().longValue(), 2L);
     assertEquals(c1.getUser().getName(), "Andrea");
     
-    User u2 = new User("vla98","vla98","Vladyslav","Petriv");
+    User u2 = new User("vla98","Vladyslav","Petriv");
     Credenziali c2 = new Credenziali("vla98","vla98");
     c2.setUser(u2);
     c2=credenzialiService.saveCredenziali(c2);
@@ -103,14 +103,14 @@ class ProjectmanagerApplicationTests {
     assertEquals(p1Membri.size(), 1);
     assertEquals(p1Membri.get(0), u2);
     
-    Task t1 = new Task("task1", "verde", "uno");
+    Task t1 = new Task("task1", "verde");
     
     t1.setProject(p1);
     t1 = taskService.salvaTask(t1);
     assertEquals(t1.getProject(), p1);
     assertEquals(t1.getNome(), "task1");
     
-    Task t2 = new Task("task2", "blu", "due");
+    Task t2 = new Task("task2", "blu");
     t2.setProject(p1);
     taskService.salvaTask(t2);
     taskService.cancellaTask(t1);
@@ -119,7 +119,7 @@ class ProjectmanagerApplicationTests {
     assertEquals(tasks.get(0), t2);
     
  
-    Task t2Update = new Task("task2Update", "blue", "due");
+    Task t2Update = new Task("task2Update", "blue");
     t2Update.setId(t2.getId());
     t2Update = taskService.salvaTask(t2Update);
     assertEquals(t2Update.getNome(), "task2Update");

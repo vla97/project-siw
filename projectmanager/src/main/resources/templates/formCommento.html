@@ -8,7 +8,7 @@
 	</div>
 	<form
 		th:action="@{/aggiungiCommento/{id1}/{id2}(id1=${project.id}, id2=${task.id})}"
-		method="POST" th:object="${task}">
+		method="POST" th:object="${commento}">
 
 		<table>
 
@@ -16,8 +16,8 @@
 			<tr>
 
 				<td>Commento:</td>
-				<td><input type="text" th:field="*{commento}"
-					placeholder="inserisci" value="*{commento}" /></td>
+				<td><input type="text" th:field="*{testo}"
+					placeholder="inserisci" value="*{testo}" /></td>
 
 			</tr>
 			<tr>
