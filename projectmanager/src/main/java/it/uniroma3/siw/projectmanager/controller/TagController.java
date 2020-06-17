@@ -38,7 +38,7 @@ public class TagController {
 	@Autowired
 	SessionData sessionData;
 
-	@GetMapping(value = "/aggiungiTag")
+	@GetMapping(value = "/aggiungiTag/{id1}/{id2}")
 	public String aggiungiTag(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 
 		Project project = projectService.ottieniProgetto(id1);
@@ -67,7 +67,7 @@ public class TagController {
 		return "formTag";
 	}
 
-	@GetMapping(value = "/visualizzaTag")
+	@GetMapping(value = "/visualizzaTag/{id1}/{id2}")
 	public String visTag(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2,
 			@ModelAttribute("tag") Tag tag) {
 

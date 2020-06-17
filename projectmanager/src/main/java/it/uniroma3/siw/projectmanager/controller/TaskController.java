@@ -84,7 +84,7 @@ public class TaskController {
 		return "redirect:/aggiungiTask/" + project.getId();
 	}
 
-	@GetMapping(value = "/eliminaTask")
+	@GetMapping(value = "/eliminaTask/{id1}/{id2}")
 	public String aggiungiTask(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 
 		Project project = projectService.ottieniProgetto(id1);
@@ -97,7 +97,7 @@ public class TaskController {
 		return "task.html";
 	}
 
-	@GetMapping(value = "/aggiornaTask")
+	@GetMapping(value = "/aggiornaTask/{id1}/{id2}")
 	public String aggiornaTask(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 
 		Project project = projectService.ottieniProgetto(id1);
@@ -144,7 +144,7 @@ public class TaskController {
 		return "task";
 	}
 
-	@GetMapping(value = "/commentaTask")
+	@GetMapping(value = "/commentaTask/{id1}/{id2}")
 	public String commenta(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 
 		model.addAttribute("project", projectService.ottieniProgetto(id1));
