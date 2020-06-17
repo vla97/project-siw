@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" href="main.css">
+<link th:href="@{/main.css}" rel="stylesheet" />
 
 <head>
 <title>Progetti</title>
@@ -23,15 +23,13 @@
 		</thead>
 		<tbody>
 			<tr th:each="project : ${projects}">
-				<td th:text="${project.name}"></td>
+				<td><a th:href="@{/visualizzaProgetto/{id}(id=${project.id})}"><span style="color:green" th:text="${project.name}"></span></a></td>
 				<td th:text="${project.owner}"></td>
 				<td th:text="${project.members}"></td>
 				<td><a th:href="@{/eliminaProgetto(id=${project.id})}"><button
 							type="submit">Elimina</button></a> <a
 					th:href="@{/aggiornaProgetto/{id}(id=${project.id})}"><button
-							type="submit">Aggiorna</button></a> <a
-					th:href="@{/visualizzaProgetto/{id}(id=${project.id})}"><button
-							type="submit">Visualizza</button></a> <a
+							type="submit">Aggiorna</button></a>  <a
 					th:href="@{/condividiProgetto/{id}(id=${project.id})}"><button
 							type="submit">Condividi</button></a> <a
 					th:href="@{/gestisciTask/{id}(id=${project.id})}"><button
@@ -59,16 +57,14 @@
 		</thead>
 		<tbody>
 			<tr th:each="project : ${projectsVisi}">
-				<td th:text="${project.name}"></td>
+				<td><a th:href="@{/visualizzaDettagli/{id}(id=${project.id})}"><span style="color:green" th:text="${project.name}"></span></a></td>
 				<td th:text="${project.owner}"></td>
 				<td th:text="${project.members}"></td>
-				<td><a th:href="@{/visualizzaDettagli/{id}(id=${project.id})}"><button
-							type="submit">Visualizza</button></a></td>
 			</tr>
 		</tbody>
 	</table>
 	<h2>
-		<a th:href="@{/tornaIndietro}">Torna indietro</a>
+		<a style="color:green" th:href="@{/tornaIndietro}">Torna indietro</a>
 	</h2>
 </body>
 </html>

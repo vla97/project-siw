@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/main.css}" rel="stylesheet" />
 
 <head>
 <title>Scheda Progetto</title>
@@ -7,19 +8,33 @@
 
 <body>
 	<h1>Scheda progetto:</h1>
+	<table>
+	<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Proprietario</th>
+				<th>Membri</th>
+				<th>Tag</th>
+				<th>Tasks</th>
+				
+			
 
+			</tr>
+		</thead>
+	<tbody>
 
-	<ul th:object=${project}>
-		NOME:
-		<li th:text="*{name}"></li> PROPRIETARIO:
-		<li th:text="*{owner}"></li> MEMBRI:
-		<li th:text="*{members}"></li> TAG:
-		<li th:text="*{tagProgetti}"></li> TASKS:
-		<li th:each="task : ${tasks}"><span
-			th:text="|${task.nome} ${task.descrizione} ${task.commento} ${task.isCompleto}|"></span></li>
+		<tr>
+				<td th:text="${project.name}"></td>
+				<td th:text="${project.owner}"></td>
+				<td th:text="${project.members}"></td>
+				<td th:text="${project.tagProgetti}"></td>
+				<td th:each="task : ${tasks}">
+				<span th:text="|${task.nome} ${task.descrizione} ${task.commento} ${task.isCompleto}|"></span></td>
+			
 
-
-	</ul>
+		</tr>
+	</tbody>
+	</table>
 	<a th:href="@{/progetto}"><button type="submit">home</button></a>
 
 

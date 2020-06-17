@@ -8,6 +8,10 @@ th {
   color: white;
 }
 
+body {
+  background-image: url(/static/download.jpg);
+}
+
 /*h2.serif {
   font-family: "Times New Roman", Times, serif;
 }*/
