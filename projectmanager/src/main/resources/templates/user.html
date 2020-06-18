@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thymeleaf.org">
+	<link th:href="@{/main.css}" rel="stylesheet" />
 <head>
 <title>ProjectManager</title>
 </head>
@@ -28,7 +29,7 @@
 	</table>
 	<a th:href="@{/aggiornaUtente}"><button type="submit">Aggiorna</button></a>
 	<h2>
-		<a th:href="@{/tornaIndietro}">Torna indietro</a>
+		<a th:href="@{/tornaIndietro}"><button type="submit">Torna indietro</button></a>
 	</h2>
 </body>
 </html>

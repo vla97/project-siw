@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thumeleaf.org">
+	<link th:href="@{/main.css}" rel="stylesheet" />
 <head>
 <meta charset="UTF-8">
 <title>ProjectManager</title>
@@ -8,13 +9,13 @@
 <body>
 	<h1 th:text="'Benvenuto ' + ${user.name} + '!'"></h1>
 	<h4>
-		<a style="color:green" href="/progetto">Workspace</a>
+		<a href="/progetto"><button type="submit">Workspace</button></a>
 	</h4>
 	<h4>
-		<a style="color:green" href="/users/me">Profilo</a>
+		<a href="/users/me"><button type="submit">Profilo</button></a>
 	</h4>
 	<h4>
-		<a style="color:green" th:href="@{/logout}">Logout</a>
+		<a th:href="@{/logout}"><button type="submit">Logout</button></a>
 	</h4>
 </body>
 
