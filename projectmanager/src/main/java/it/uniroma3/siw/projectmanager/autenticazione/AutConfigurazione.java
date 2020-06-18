@@ -30,6 +30,7 @@ public class AutConfigurazione extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/", "/index", "/login", "/users/register").permitAll()
 				.antMatchers(HttpMethod.POST, "/login", "/users/register").permitAll()
+				.antMatchers(HttpMethod.GET, "/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
 				.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE).anyRequest().authenticated()
 				.and().formLogin().loginPage("/login").loginProcessingUrl("/login")
