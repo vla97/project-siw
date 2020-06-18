@@ -138,8 +138,11 @@ public class TaskController {
 
 		Project project = projectService.ottieniProgetto(id1);
 		Task task = taskService.ottieniTask(id2);
-		taskService.aggiungiMembro(task, userService.ottieniUtentePerId(id3));
-		taskService.salvaTask(task);
+		if (task.hasMember(userService.ottieniUtentePerId(id3)))
+			task.removeMember(userService.ottieniUtentePerId(id3));
+		else
+			taskService.aggiungiMembro(task, userService.ottieniUtentePerId(id3));
+			taskService.salvaTask(task);
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", taskService.ottieniTask(project));
 		return "task";

@@ -147,6 +147,13 @@ public class Task {
 	public void addMember(User user) {
 		this.members.add(user);
 	}
+	public void removeMember(User user) {
+		this.members.remove(user);
+	}
+	
+	public boolean hasMember(User user) {
+		return members.contains(user);
+	}
 	
 	public void addCommento(Commento commento) {
 		this.commenti.add(commento);
