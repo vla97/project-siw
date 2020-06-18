@@ -4,9 +4,9 @@
 <link th:href="@{/main.css}" rel="stylesheet" />
 
 <body>
-	<div>
-		<h4>INSERISCI I DATI DEL PROGETTO:</h4>
-	</div>
+	<header>
+		<h2>PROGETTO</h2>
+	</header>
 	<form id="registerProjectForm" th:action="@{/salvaProgetto}"
 		method="POST" th:object="${project}">
 

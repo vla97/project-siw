@@ -2,16 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{/main.css}" rel="stylesheet" />
 <body>
-	<div>
-		<h4>TASK</h4>
-	</div>
-	<a th:href="@{/aggiungiTask/{id}(id=${project.id})}"><button
-		type="submit">Crea task</button></a>
-	<br>
-	<br>
-	<br>
-	<br>
+	<header>
+		<h1>TASK</h1>
+	</header>
 
+	<div class="topnav">
+		<a th:href="@{/aggiungiTask/{id}(id=${project.id})}">Crea task</a> <a
+			th:href="@{/progetto}">Torna indietro</a>
+	</div>
+
+	<h2>Task</h2>
 	<table>
 		<thead>
 			<tr>
@@ -29,18 +29,20 @@
 				<td th:text="${task.nome}">...</td>
 				<td th:text="${task.descrizione}">...</td>
 				<td th:text="${task.commenti}">...</td>
-				<td th:text="${task.isCompleto}">...</td> 
+				<td th:text="${task.isCompleto}">...</td>
 
-			
+
 
 
 				<td>
 					<form th:action="@{/setStato(id1=${project.id},id2=${task.id})}"
 						method="POST">
-						<input type="checkbox" th:name="checkbox" onclick="submit();" th:checked="${flag}">
+						<input type="checkbox" th:name="checkbox" onclick="submit();"
+							th:checked="${flag}">
 
 
-					</form><a
+					</form>
+					<a
 					th:href="@{/eliminaTask/{id1}/{id2}(id1=${project.id},id2=${task.id})}"><button
 							type="submit">Elimina</button></a> <a
 					th:href="@{/aggiornaTask/{id1}/{id2}(id1=${project.id},id2=${task.id})}"><button
@@ -50,17 +52,12 @@
 					th:href="@{/visualizzaTag/{id1}/{id2}(id1=${project.id},id2=${task.id})}"><button
 							type="submit">Tag</button></a> <a
 					th:href="@{/aggiungiTag/{id1}/{id2}(id1=${project.id},id2=${task.id})}"><button
-							type="submit">Aggiungi Tag</button></a></td>
+							type="submit">Aggiungi Tag</button></a>
+				</td>
 
 
 			</tr>
 	</table>
-	<br>
-	<br>
-	<br>
-	<br>
-	<a th:href="@{/progetto}"><button type="submit">Torna
-			indietro</button></a>
 
 
 </body>

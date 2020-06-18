@@ -8,63 +8,79 @@
 
 </head>
 <body>
-	<a href="creaProgetto"><button type="submit">Crea progetto</button></a>
+	<header>
+		<h1>WORKSPACE</h1>
+	</header>
+	<div class="topnav">
+		<a href="creaProgetto">Crea progetto</a>
+		<a th:href="@{/tornaIndietro}">Torna indietro</a>
+	</div>
 
-	<h2>Progetti</h2>
-	<table>
-		<thead>
-			<tr>
-				<th>Nome progetto</th>
-				<th>Proprietario</th>
-				<th>Membri</th>
-				<th>Operazioni</th>
+	<div class="row">
+		<div class="column">
 
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="project : ${projects}">
-				<td><a th:href="@{/visualizzaProgetto/{id}(id=${project.id})}"><span style="color:green" th:text="${project.name}"></span></a></td>
-				<td th:text="${project.owner}"></td>
-				<td th:text="${project.members}"></td>
-				<td><a th:href="@{/eliminaProgetto(id=${project.id})}"><button
-							type="submit">Elimina</button></a> <a
-					th:href="@{/aggiornaProgetto/{id}(id=${project.id})}"><button
-							type="submit">Aggiorna</button></a>  <a
-					th:href="@{/condividiProgetto/{id}(id=${project.id})}"><button
-							type="submit">Condividi</button></a> <a
-					th:href="@{/gestisciTask/{id}(id=${project.id})}"><button
-							type="submit">Gestisci Task</button></a> <a
-					th:href="@{/aggiungiTagProgetto/{id}(id=${project.id})}"><button 
-							type="submit">Aggiungi Tag</button></a></td>
-			</tr>
-		</tbody>
 
-	</table>
+			<h2>Progetti</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Proprietario</th>
+						<th>Membri</th>
+						<th>Operazioni</th>
 
-	<br>
-	<br>
-	<br>
-	<br>
-	<h2>Progetti visibili</h2>
-	<table>
-		<thead>
-			<tr>
-				<th>Nome progetto</th>
-				<th>Proprietario</th>
-				<th>Membri</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="project : ${projects}">
+						<td><a
+							th:href="@{/visualizzaProgetto/{id}(id=${project.id})}"><span
+								style="color: green" th:text="${project.name}"></span></a></td>
+						<td th:text="${project.owner}"></td>
+						<td th:text="${project.members}"></td>
+						<td><a th:href="@{/eliminaProgetto(id=${project.id})}"><button
+									type="submit">Elimina</button></a> <a
+							th:href="@{/aggiornaProgetto/{id}(id=${project.id})}"><button
+									type="submit">Aggiorna</button></a> <a
+							th:href="@{/condividiProgetto/{id}(id=${project.id})}"><button
+									type="submit">Condividi</button></a> <a
+							th:href="@{/gestisciTask/{id}(id=${project.id})}"><button
+									type="submit">Gestisci Task</button></a> <a
+							th:href="@{/aggiungiTagProgetto/{id}(id=${project.id})}"><button
+									type="submit">Aggiungi Tag</button></a></td>
+					</tr>
+				</tbody>
 
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="project : ${projectsVisi}">
-				<td><a th:href="@{/visualizzaDettagli/{id}(id=${project.id})}"><span style="color:green" th:text="${project.name}"></span></a></td>
-				<td th:text="${project.owner}"></td>
-				<td th:text="${project.members}"></td>
-			</tr>
-		</tbody>
-	</table>
+			</table>
+			</div>
+
+		<div class="column">
+			<h2>Progetti visibili</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Proprietario</th>
+						<th>Membri</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="project : ${projectsVisi}">
+						<td><a
+							th:href="@{/visualizzaDettagli/{id}(id=${project.id})}"><span
+								style="color: green" th:text="${project.name}"></span></a></td>
+						<td th:text="${project.owner}"></td>
+						<td th:text="${project.members}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 	<h2>
-		<a th:href="@{/tornaIndietro}"><button type="submit">Torna indietro</button></a>
+
+		
 	</h2>
+	
 </body>
 </html>
