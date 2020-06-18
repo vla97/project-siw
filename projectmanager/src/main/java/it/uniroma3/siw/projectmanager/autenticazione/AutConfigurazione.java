@@ -37,7 +37,7 @@ public class AutConfigurazione extends WebSecurityConfigurerAdapter {
 				.successHandler(customizeAuthenticationSuccessHandler).and().logout().logoutUrl("/logout")
 				.clearAuthentication(true).permitAll().logoutSuccessUrl("/index").invalidateHttpSession(true);
 
-	} 
+	}
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
