@@ -26,6 +26,9 @@ public class Commento {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Task task;
 	
+	@ManyToOne
+	private User user;
+	
 	public Commento() {
 		
 	}
@@ -81,9 +84,19 @@ public class Commento {
 	}
 
 
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 	@Override
 	public String toString() {
-		return testo  ;
+		return user + ": " + testo ;
 	}
 
 

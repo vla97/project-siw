@@ -10,13 +10,13 @@
 
 
 	<ul th:object=${project}>
-		NOME:
-		<li th:text="*{name}"></li> PROPRIETARIO:
-		<li th:text="*{owner}"></li> MEMBRI:
-		<li th:text="*{members}"></li> TASKS:
-		<li th:each="task : ${tasks}"><span
-			th:text="|${task.nome} ${task.descrizione} ${task.commenti}|"></span>
-			<a th:href="@{/commentaTask/{id1}/{id2}(id1=${project.id}, id2=${task.id})}"><button
+		NOME: <li th:text="*{name}"></li>
+		PROPRIETARIO: <li th:text="*{owner}"></li> 
+		MEMBRI:<li th:text="*{members}"></li>
+		TASKS:<li th:each="task : ${tasks}"><span
+			th:text="|${task.nome} ${task.descrizione} ${task.commenti} ${task.isCompleto}|"></span>
+			<a
+			th:href="@{/commentaTask/{id1}/{id2}(id1=${project.id}, id2=${task.id})}"><button
 					type="submit">Commenta Task</button></a></li>
 
 

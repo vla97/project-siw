@@ -22,9 +22,7 @@ public class CredenzialiService {
 
 	@Autowired
 	protected CredenzialiRepository credenzialiRepository;
-	
-	@Autowired
-	private BCryptPasswordEncoder encoder;
+
 
 	@Transactional
 	public Credenziali getCredenziali(Long id) {

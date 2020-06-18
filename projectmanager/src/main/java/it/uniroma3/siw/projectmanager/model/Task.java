@@ -197,7 +197,7 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return nome + " - " + descrizione + " - " + commenti + " - " + project + " - " + isCompleto;
+		return nome + " - " + descrizione + " - " + commenti + " - " + isCompleto;
 	}
 
 }

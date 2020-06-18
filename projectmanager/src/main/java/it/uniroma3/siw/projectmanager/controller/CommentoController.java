@@ -12,6 +12,7 @@ import it.uniroma3.siw.projectmanager.controller.session.SessionData;
 import it.uniroma3.siw.projectmanager.model.Commento;
 import it.uniroma3.siw.projectmanager.model.Project;
 import it.uniroma3.siw.projectmanager.model.Task;
+import it.uniroma3.siw.projectmanager.model.User;
 import it.uniroma3.siw.projectmanager.repository.CommentoRepository;
 import it.uniroma3.siw.projectmanager.service.CommentoService;
 import it.uniroma3.siw.projectmanager.service.ProjectService;
@@ -48,8 +49,10 @@ public class CommentoController {
 			@ModelAttribute("commento") Commento commento) {
 
 		Project project = projectService.ottieniProgetto(id1);
+		User loggedUser = sessionData.getLoggedUser();
 		Task task = taskService.ottieniTask(id2);
 		commento.setTask(task);
+		commento.setUser(loggedUser);
 		taskService.aggiungiCommento(task, commento);
 		
 		

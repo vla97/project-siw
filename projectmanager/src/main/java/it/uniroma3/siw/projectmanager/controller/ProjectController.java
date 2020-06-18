@@ -126,11 +126,9 @@ public class ProjectController {
 	public String condividi(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 
 		Project project = projectService.ottieniProgetto(id1);
-		User loggedUser = sessionData.getLoggedUser();
 		model.addAttribute("project", project);
 		projectService.condiviProgetto(project, userService.ottieniUtentePerId(id2));
 		projectService.salvaProgetto(project);
-		model.addAttribute("projects", projectService.ottieniProgettiProprietari(loggedUser));
 		return "redirect:/progetto";
 	}
 
