@@ -124,9 +124,10 @@ public class TaskController {
 	@GetMapping(value = "/condividiTask/{id1}/{id2}")
 	public String condividiTask(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 
+		User loggedUser = sessionData.getLoggedUser();
 		model.addAttribute("project", projectService.ottieniProgetto(id1));
 		model.addAttribute("task", taskService.ottieniTask(id2));
-		List<Credenziali> tuttiCredenziali = this.credenzialiService.getTuttiCredenziali();
+		List<Credenziali> tuttiCredenziali = this.credenzialiService.getTuttiCredenzialiTranneUser(loggedUser);
 		model.addAttribute("listaCredenziali", tuttiCredenziali);
 		return "condividiTask";
 	}

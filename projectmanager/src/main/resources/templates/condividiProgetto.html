@@ -15,6 +15,7 @@
 					<th>Username</th>
 					<th>Nome</th>
 					<th>Cognome</th>
+					<th>Visibilità</th>
 
 				</tr>
 			</thead>
@@ -24,10 +25,10 @@
 					<td th:text="${credenziali.username}"></td>
 					<td th:text="${credenziali.user.name}"></td>
 					<td th:text="${credenziali.user.surname}"></td>
+					<td th:text="${credenziali.user.visibleProjects}"></td>
 					<td>
-						<form method="POST"
-							th:Action="@{/condividi(id1=${project.id},id2=${credenziali.user.id})}">
-							<button type="submit" value="invia">Condividi</button>
+						<form method="POST" th:Action="@{/condividi(id1=${project.id},id2=${credenziali.user.id})}">
+							<button type="submit" value="invia">Condividi/Rimuovi</button>
 						</form>
 					</td>
 				</tr>

@@ -29,7 +29,7 @@ public class Project {
 
 	@Column(updatable = false, nullable = false)
 	private LocalDateTime dataCreazione;
-
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User owner;
 
@@ -113,6 +113,15 @@ public class Project {
 	public void addMember(User user) {
 		this.members.add(user);
 	}
+	
+	public void removeMember(User user) {
+		this.members.remove(user);
+	}
+	
+	public boolean hasMember(User user) {
+		return members.contains(user);
+			
+	}
 
 	public void removeTask(Task task) {
 		this.tasks.remove(task);
@@ -167,8 +176,7 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project [id=" + id + ", name=" + name + ", dataCreazione=" + dataCreazione + ", owner=" + owner
-				+ ", members=" + members + ", tagProgetti=" + tagProgetti + ", tasks=" + tasks + "]";
+		return name;
 	}
 
 }

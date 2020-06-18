@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.projectmanager.model.Credenziali;
+import it.uniroma3.siw.projectmanager.model.User;
 import it.uniroma3.siw.projectmanager.repository.CredenzialiRepository;
 
 @Service
@@ -48,6 +49,17 @@ public class CredenzialiService {
 		Iterable<Credenziali> itera = this.credenzialiRepository.findAll();
 		List<Credenziali> lista = new ArrayList<>();
 		for (Credenziali c : itera) {
+			lista.add(c);
+		}
+		return lista;
+	}
+	
+	@Transactional
+	public List<Credenziali> getTuttiCredenzialiTranneUser(User loggedUser) {
+		Iterable<Credenziali> itera = this.credenzialiRepository.findAll();
+		List<Credenziali> lista = new ArrayList<>();
+		for (Credenziali c : itera)
+			if(!c.getUsername().equals(loggedUser.getUsername())){
 			lista.add(c);
 		}
 		return lista;

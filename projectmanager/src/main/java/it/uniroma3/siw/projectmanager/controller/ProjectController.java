@@ -116,8 +116,9 @@ public class ProjectController {
 	@GetMapping(value = "/condividiProgetto/{id}")
 	public String condividiP(Model model, @ModelAttribute("id") Long id) {
 
+		User loggedUser = sessionData.getLoggedUser();
 		model.addAttribute("project", projectService.ottieniProgetto(id));
-		List<Credenziali> tuttiCredenziali = this.credenzialiService.getTuttiCredenziali();
+		List<Credenziali> tuttiCredenziali = this.credenzialiService.getTuttiCredenzialiTranneUser(loggedUser);
 		model.addAttribute("listaCredenziali", tuttiCredenziali);
 		return "condividiProgetto";
 	}
@@ -126,10 +127,15 @@ public class ProjectController {
 	public String condividi(Model model, @ModelAttribute("id1") Long id1, @ModelAttribute("id2") Long id2) {
 
 		Project project = projectService.ottieniProgetto(id1);
+		if (project.hasMember(userService.ottieniUtentePerId(id2)))
+			project.removeMember(userService.ottieniUtentePerId(id2));
+
+		else
+			projectService.condiviProgetto(project, userService.ottieniUtentePerId(id2));
+
 		model.addAttribute("project", project);
-		projectService.condiviProgetto(project, userService.ottieniUtentePerId(id2));
 		projectService.salvaProgetto(project);
-		return "redirect:/progetto";
+		return "redirect:/condividiProgetto/" + project.getId();
 	}
 
 	@GetMapping(value = "/visualizzaDettagli/{id}")

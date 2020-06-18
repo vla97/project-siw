@@ -33,7 +33,7 @@ public class Task {
 	private List<User> members;
 
 	@Column
-	private Boolean isCompleto = false;
+	private String isCompleto = "Non completo";
 
 	@Column
 	private LocalDateTime dataCreazione;
@@ -108,12 +108,12 @@ public class Task {
 		this.tagAssociati = tagAssociati;
 	}
 
-	public Boolean getIsCompleto() {
+	public String getIsCompleto() {
 		return isCompleto;
 	}
 
-	public void setIsCompleto() {
-		this.isCompleto = true;
+	public void setIsCompleto(String isCompleto) {
+		this.isCompleto = isCompleto;
 	}
 
 	public void aggiungiTag(Tag tag) {

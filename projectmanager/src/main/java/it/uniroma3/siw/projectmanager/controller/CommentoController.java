@@ -54,10 +54,9 @@ public class CommentoController {
 		commento.setTask(task);
 		commento.setUser(loggedUser);
 		taskService.aggiungiCommento(task, commento);
-		
-		
+	
 		model.addAttribute("project", project);
-		model.addAttribute("tasks", taskService.ottieniTask(project));
+		model.addAttribute("tasks", taskService.ottieniTaskCondiviso(project, loggedUser));
 		
 		return "dettagliProgetto";
 	}

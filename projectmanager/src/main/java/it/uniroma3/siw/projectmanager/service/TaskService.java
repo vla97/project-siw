@@ -65,8 +65,8 @@ public class TaskService {
 	}
 
 	@Transactional
-	public boolean setTaskCompleto(Task task) {
-		task.setIsCompleto();
+	public String setTaskCompleto(Task task) {
+		task.setIsCompleto("Completo");
 		this.taskRepository.save(task);
 		return task.getIsCompleto();
 	}
